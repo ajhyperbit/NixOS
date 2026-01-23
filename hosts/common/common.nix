@@ -50,6 +50,7 @@ in
       #"modprobe.blacklist=sp5100_tco" #watchdog for AMD
       #"modprobe.blacklist=iTCO_wdt" #watchdog for Intel
       "nohibernate"
+      #"mitigations=off"
     ];
     tmp.cleanOnBoot = lib.mkDefault true;
     #supportedFilesystems = ["ntfs"];
