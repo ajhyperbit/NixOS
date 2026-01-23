@@ -104,7 +104,7 @@ hostname=$(uname -n)
 #hash=$(git rev-parse --short HEAD) #Works to get the hash, but doesn't indicate if it is dirty
 
 #Pulled from https://github.com/NixOS/nixpkgs/blob/66aa98b29099c636622a9d9c18370f13701716f6/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh#L596
-last_tag=$(git describe --tags)
+last_tag=$(git describe --tags --always)
 hash=$(git rev-parse --short HEAD)
 
 if [[ $(git status --short) != '' ]]; then
