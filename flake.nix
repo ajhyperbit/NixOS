@@ -81,6 +81,7 @@
       ...
     }:
     let
+      system = "x86_64-linux"; # Remove later
       host = "nixos";
       laptop-host = "nixtop";
       nix-wsl = "nix-wsl";
