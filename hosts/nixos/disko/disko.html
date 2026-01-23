@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name = "color-scheme" content = "light dark"/>
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Disko options</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+</head>
+<body>
+<h1 id="disko-options">Disko options</h1>
+<h2 id="module.args">_module.args</h2>
+<p>Additional arguments passed to each module in addition to ones like
+<code>lib</code>, <code>config</code>, and <code>pkgs</code>,
+<code>modulesPath</code>.</p>
+<p>This option is also available to all submodules. Submodules do not
+inherit args from their parent module, nor do they provide args to their
+parent module or sibling submodules. The sole exception to this is the
+argument <code>name</code> which is provided by parent modules to a
+submodule and contains the attribute name the submodule is bound to, or
+a unique generated name if it is not bound to an attribute.</p>
+<p>Some arguments are already passed by default, of which the following
+<em>cannot</em> be changed with this option:</p>
+<ul>
+<li><p><code>lib</code>: The nixpkgs library.</p></li>
+<li><p><code>config</code>: The results of all options after merging the
+values from all modules together.</p></li>
+<li><p><code>options</code>: The options declared in all
+modules.</p></li>
+<li><p><code>specialArgs</code>: The <code>specialArgs</code> argument
+passed to <code>evalModules</code>.</p></li>
+<li><p>All attributes of <code>specialArgs</code></p>
+<p>Whereas option values can generally depend on other option values
+thanks to laziness, this does not apply to <code>imports</code>, which
+must be computed statically before anything else.</p>
+<p>For this reason, callers of the module system can provide
+<code>specialArgs</code> which are available during import
+resolution.</p>
+<p>For NixOS, <code>specialArgs</code> includes
+<code>modulesPath</code>, which allows you to import extra modules from
+the nixpkgs package tree without having to somehow make the module aware
+of the location of the <code>nixpkgs</code> or NixOS directories.</p>
+<pre><code>{ modulesPath, ... }: {
+  imports = [
+    (modulesPath + &quot;/profiles/minimal.nix&quot;)
+  ];
+}</code></pre></li>
+</ul>
+<p>For NixOS, the default value for this option includes at least this
+argument:</p>
+<ul>
+<li><code>pkgs</code>: The nixpkgs package set according to the
+<code>nixpkgs.pkgs</code> option.</li>
+</ul>
+<p><em>Type:</em> lazy attribute set of raw value</p>
+<p><em>Declared by:</em> - <a
+href="https://github.com/NixOS/nixpkgs/blob//lib/modules.nix">&lt;nixpkgs/lib/modules.nix&gt;</a></p>
+<h2 id="disko.devices">disko.devices</h2>
+<p>The devices to set up</p>
+<p><em>Type:</em> submodule</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<h2 id="disko.devices.disk">disko.devices.disk</h2>
+<p>Block device</p>
+<p><em>Type:</em> attribute set of (submodule)</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<h2
+id="disko.devices.disk.name.content">disko.devices.disk.&lt;name&gt;.content</h2>
+<p>The type of device</p>
+<p><em>Type:</em> null or (one of
+btrfs,filesystem,gpt,luks,lvm_pv,mdraid,swap,table,zfs)</p>
+<p><em>Default:</em> <code>null</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix</a></p>
+<h2
+id="disko.devices.disk.name.device">disko.devices.disk.&lt;name&gt;.device</h2>
+<p>Device path</p>
+<p><em>Type:</em> An absolute path</p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix</a></p>
+<h2
+id="disko.devices.disk.name.imagename">disko.devices.disk.&lt;name&gt;.imageName</h2>
+<p>name of the image when disko images are created is used as an
+argument to “qemu-img create …”</p>
+<p><em>Type:</em> string</p>
+<p><em>Default:</em> <code>"‹name›"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix</a></p>
+<h2
+id="disko.devices.disk.name.imagesize">disko.devices.disk.&lt;name&gt;.imageSize</h2>
+<p>size of the image when disko images are created is used as an
+argument to “qemu-img create …”</p>
+<p><em>Type:</em> string matching the pattern [0-9]+[KMGTP]?</p>
+<p><em>Default:</em> <code>"2G"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix</a></p>
+<h2
+id="disko.devices.disk.name.name">disko.devices.disk.&lt;name&gt;.name</h2>
+<p>Device name</p>
+<p><em>Type:</em> string</p>
+<p><em>Default:</em> <code>"‹name›"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/disk.nix</a></p>
+<h2
+id="disko.devices.disk.name.postcreatehook">disko.devices.disk.&lt;name&gt;.postCreateHook</h2>
+<p>shell commands to run after create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.disk.name.postmounthook">disko.devices.disk.&lt;name&gt;.postMountHook</h2>
+<p>shell commands to run after mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.disk.name.postunmounthook">disko.devices.disk.&lt;name&gt;.postUnmountHook</h2>
+<p>shell commands to run after unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.disk.name.precreatehook">disko.devices.disk.&lt;name&gt;.preCreateHook</h2>
+<p>shell commands to run before create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.disk.name.premounthook">disko.devices.disk.&lt;name&gt;.preMountHook</h2>
+<p>shell commands to run before mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.disk.name.preunmounthook">disko.devices.disk.&lt;name&gt;.preUnmountHook</h2>
+<p>shell commands to run before unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2 id="disko.devices.lvm_vg">disko.devices.lvm_vg</h2>
+<p>LVM VG device</p>
+<p><em>Type:</em> attribute set of (submodule)</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs">disko.devices.lvm_vg.&lt;name&gt;.lvs</h2>
+<p>LVS for the volume group</p>
+<p><em>Type:</em> attribute set of (submodule)</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs.name.content">disko.devices.lvm_vg.&lt;name&gt;.lvs.&lt;name&gt;.content</h2>
+<p>The type of partition</p>
+<p><em>Type:</em> null or (one of
+btrfs,filesystem,luks,lvm_pv,mdraid,swap,zfs)</p>
+<p><em>Default:</em> <code>null</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs.name.extraargs">disko.devices.lvm_vg.&lt;name&gt;.lvs.&lt;name&gt;.extraArgs</h2>
+<p>Extra arguments</p>
+<p><em>Type:</em> list of string</p>
+<p><em>Default:</em> <code>[ ]</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs.name.lvm_type">disko.devices.lvm_vg.&lt;name&gt;.lvs.&lt;name&gt;.lvm_type</h2>
+<p>LVM type</p>
+<p><em>Type:</em> null or one of “mirror”, “raid0”, “raid1”, “raid4”,
+“raid5”, “raid6”, “thin-pool”, “thinlv”</p>
+<p><em>Default:</em> <code>null</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs.name.name">disko.devices.lvm_vg.&lt;name&gt;.lvs.&lt;name&gt;.name</h2>
+<p>Name of the logical volume</p>
+<p><em>Type:</em> string</p>
+<p><em>Default:</em> <code>"‹name›"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs.name.pool">disko.devices.lvm_vg.&lt;name&gt;.lvs.&lt;name&gt;.pool</h2>
+<p>Name of pool LV that this LV belongs to</p>
+<p><em>Type:</em> null or string</p>
+<p><em>Default:</em> <code>null</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs.name.priority">disko.devices.lvm_vg.&lt;name&gt;.lvs.&lt;name&gt;.priority</h2>
+<p>Priority of the logical volume, smaller values are created first</p>
+<p><em>Type:</em> signed integer</p>
+<p><em>Default:</em></p>
+<pre><code>if (lib.hasInfix &quot;100%&quot; lv.config.size) then 9001 else 1000
+</code></pre>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.lvs.name.size">disko.devices.lvm_vg.&lt;name&gt;.lvs.&lt;name&gt;.size</h2>
+<p>Size of the logical volume</p>
+<p><em>Type:</em> string</p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.name">disko.devices.lvm_vg.&lt;name&gt;.name</h2>
+<p>Name of the volume group</p>
+<p><em>Type:</em> string</p>
+<p><em>Default:</em> <code>"‹name›"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/lvm_vg.nix</a></p>
+<h2
+id="disko.devices.lvm_vg.name.postcreatehook">disko.devices.lvm_vg.&lt;name&gt;.postCreateHook</h2>
+<p>shell commands to run after create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.lvm_vg.name.postmounthook">disko.devices.lvm_vg.&lt;name&gt;.postMountHook</h2>
+<p>shell commands to run after mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.lvm_vg.name.postunmounthook">disko.devices.lvm_vg.&lt;name&gt;.postUnmountHook</h2>
+<p>shell commands to run after unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.lvm_vg.name.precreatehook">disko.devices.lvm_vg.&lt;name&gt;.preCreateHook</h2>
+<p>shell commands to run before create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.lvm_vg.name.premounthook">disko.devices.lvm_vg.&lt;name&gt;.preMountHook</h2>
+<p>shell commands to run before mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.lvm_vg.name.preunmounthook">disko.devices.lvm_vg.&lt;name&gt;.preUnmountHook</h2>
+<p>shell commands to run before unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2 id="disko.devices.mdadm">disko.devices.mdadm</h2>
+<p>mdadm device</p>
+<p><em>Type:</em> attribute set of (submodule)</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<h2
+id="disko.devices.mdadm.name.content">disko.devices.mdadm.&lt;name&gt;.content</h2>
+<p>The type of device</p>
+<p><em>Type:</em> null or (one of
+btrfs,filesystem,gpt,luks,lvm_pv,mdraid,swap,table,zfs)</p>
+<p><em>Default:</em> <code>null</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix</a></p>
+<h2
+id="disko.devices.mdadm.name.level">disko.devices.mdadm.&lt;name&gt;.level</h2>
+<p>mdadm level</p>
+<p><em>Type:</em> signed integer</p>
+<p><em>Default:</em> <code>1</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix</a></p>
+<h2
+id="disko.devices.mdadm.name.metadata">disko.devices.mdadm.&lt;name&gt;.metadata</h2>
+<p>Metadata</p>
+<p><em>Type:</em> one of “1”, “1.0”, “1.1”, “1.2”, “default”, “ddf”,
+“imsm”</p>
+<p><em>Default:</em> <code>"default"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix</a></p>
+<h2
+id="disko.devices.mdadm.name.name">disko.devices.mdadm.&lt;name&gt;.name</h2>
+<p>Name</p>
+<p><em>Type:</em> string</p>
+<p><em>Default:</em> <code>"‹name›"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/mdadm.nix</a></p>
+<h2
+id="disko.devices.mdadm.name.postcreatehook">disko.devices.mdadm.&lt;name&gt;.postCreateHook</h2>
+<p>shell commands to run after create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.mdadm.name.postmounthook">disko.devices.mdadm.&lt;name&gt;.postMountHook</h2>
+<p>shell commands to run after mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.mdadm.name.postunmounthook">disko.devices.mdadm.&lt;name&gt;.postUnmountHook</h2>
+<p>shell commands to run after unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.mdadm.name.precreatehook">disko.devices.mdadm.&lt;name&gt;.preCreateHook</h2>
+<p>shell commands to run before create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.mdadm.name.premounthook">disko.devices.mdadm.&lt;name&gt;.preMountHook</h2>
+<p>shell commands to run before mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.mdadm.name.preunmounthook">disko.devices.mdadm.&lt;name&gt;.preUnmountHook</h2>
+<p>shell commands to run before unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2 id="disko.devices.nodev">disko.devices.nodev</h2>
+<p>A non-block device</p>
+<p><em>Type:</em> attribute set of (submodule)</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<h2
+id="disko.devices.nodev.name.device">disko.devices.nodev.&lt;name&gt;.device</h2>
+<p>Device to use</p>
+<p><em>Type:</em> string</p>
+<p><em>Default:</em> <code>"none"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix</a></p>
+<h2
+id="disko.devices.nodev.name.fstype">disko.devices.nodev.&lt;name&gt;.fsType</h2>
+<p>File system type</p>
+<p><em>Type:</em> string</p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix</a></p>
+<h2
+id="disko.devices.nodev.name.mountoptions">disko.devices.nodev.&lt;name&gt;.mountOptions</h2>
+<p>Options to pass to mount</p>
+<p><em>Type:</em> list of string</p>
+<p><em>Default:</em></p>
+<pre><code>[
+  &quot;defaults&quot;
+]</code></pre>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix</a></p>
+<h2
+id="disko.devices.nodev.name.mountpoint">disko.devices.nodev.&lt;name&gt;.mountpoint</h2>
+<p>Location to mount the file system at</p>
+<p><em>Type:</em> null or (An absolute path)</p>
+<p><em>Default:</em> <code>"‹name›"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/nodev.nix</a></p>
+<h2
+id="disko.devices.nodev.name.postcreatehook">disko.devices.nodev.&lt;name&gt;.postCreateHook</h2>
+<p>shell commands to run after create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.nodev.name.postmounthook">disko.devices.nodev.&lt;name&gt;.postMountHook</h2>
+<p>shell commands to run after mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.nodev.name.postunmounthook">disko.devices.nodev.&lt;name&gt;.postUnmountHook</h2>
+<p>shell commands to run after unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.nodev.name.precreatehook">disko.devices.nodev.&lt;name&gt;.preCreateHook</h2>
+<p>shell commands to run before create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.nodev.name.premounthook">disko.devices.nodev.&lt;name&gt;.preMountHook</h2>
+<p>shell commands to run before mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.nodev.name.preunmounthook">disko.devices.nodev.&lt;name&gt;.preUnmountHook</h2>
+<p>shell commands to run before unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2 id="disko.devices.zpool">disko.devices.zpool</h2>
+<p>ZFS pool device</p>
+<p><em>Type:</em> attribute set of (submodule)</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<h2
+id="disko.devices.zpool.name.datasets">disko.devices.zpool.&lt;name&gt;.datasets</h2>
+<p>List of datasets to define</p>
+<p><em>Type:</em> attribute set of (one of zfs_fs,zfs_volume)</p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix</a></p>
+<h2
+id="disko.devices.zpool.name.mode">disko.devices.zpool.&lt;name&gt;.mode</h2>
+<p>Mode of the ZFS pool</p>
+<p><em>Type:</em> one of “”, “mirror”, “raidz”, “raidz1”, “raidz2”,
+“raidz3” or attribute set of (one of topology)</p>
+<p><em>Default:</em> <code>""</code></p>
+<p><em>Example:</em></p>
+<pre><code>{
+  mode = {
+    topology = {
+      log = [
+        {
+          members = [
+            &quot;ssd&quot;
+          ];
+        }
+      ];
+      type = &quot;topology&quot;;
+      vdev = [
+        {
+          members = [
+            &quot;/dev/disk/by-id/wwn-0x5000c500af8b2a14&quot;
+          ];
+        }
+      ];
+    };
+  };
+}</code></pre>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix</a></p>
+<h2
+id="disko.devices.zpool.name.mountoptions">disko.devices.zpool.&lt;name&gt;.mountOptions</h2>
+<p>Options to pass to mount</p>
+<p><em>Type:</em> list of string</p>
+<p><em>Default:</em></p>
+<pre><code>[
+  &quot;defaults&quot;
+]</code></pre>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix</a></p>
+<h2
+id="disko.devices.zpool.name.mountpoint">disko.devices.zpool.&lt;name&gt;.mountpoint</h2>
+<p>The mountpoint of the pool</p>
+<p><em>Type:</em> null or (An absolute path)</p>
+<p><em>Default:</em> <code>null</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix</a></p>
+<h2
+id="disko.devices.zpool.name.name">disko.devices.zpool.&lt;name&gt;.name</h2>
+<p>Name of the ZFS pool</p>
+<p><em>Type:</em> string</p>
+<p><em>Default:</em> <code>"‹name›"</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix</a></p>
+<h2
+id="disko.devices.zpool.name.options">disko.devices.zpool.&lt;name&gt;.options</h2>
+<p>Options for the ZFS pool</p>
+<p><em>Type:</em> attribute set of string</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix</a></p>
+<h2
+id="disko.devices.zpool.name.postcreatehook">disko.devices.zpool.&lt;name&gt;.postCreateHook</h2>
+<p>shell commands to run after create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.zpool.name.postmounthook">disko.devices.zpool.&lt;name&gt;.postMountHook</h2>
+<p>shell commands to run after mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.zpool.name.postunmounthook">disko.devices.zpool.&lt;name&gt;.postUnmountHook</h2>
+<p>shell commands to run after unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.zpool.name.precreatehook">disko.devices.zpool.&lt;name&gt;.preCreateHook</h2>
+<p>shell commands to run before create</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.zpool.name.premounthook">disko.devices.zpool.&lt;name&gt;.preMountHook</h2>
+<p>shell commands to run before mount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.zpool.name.preunmounthook">disko.devices.zpool.&lt;name&gt;.preUnmountHook</h2>
+<p>shell commands to run before unmount</p>
+<p><em>Type:</em> strings concatenated with “\n”</p>
+<p><em>Default:</em> <code>""</code></p>
+<h2
+id="disko.devices.zpool.name.rootfsoptions">disko.devices.zpool.&lt;name&gt;.rootFsOptions</h2>
+<p>Options for the root filesystem</p>
+<p><em>Type:</em> attribute set of string</p>
+<p><em>Default:</em> <code>{ }</code></p>
+<p><em>Declared by:</em> - <a
+href="file:///nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix">/nix/store/gc1qan8m1wn4fva351bmp5c528ds55ls-source/lib/types/zpool.nix</a></p>
+</body>
+</html>

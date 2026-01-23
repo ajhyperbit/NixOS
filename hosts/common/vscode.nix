@@ -1,0 +1,61 @@
+{
+  self,
+  pkgs,
+  ...
+}:
+{
+
+}
+#VSCode extensions installed
+#arrterian.nix-env-selector
+#bbenoist.nix
+#exodiusstudios.comment-anchors
+#formulahendry.code-runner
+#george-alisson.html-preview-vscode
+#github.remotehub
+#github.vscode-github-actions
+#github.vscode-pull-request-github
+#gruntfuggly.todo-tree
+#jnoortheen.nix-ide
+#kamadorueda.alejandra
+#mhutchie.git-graph
+#mk12.better-git-line-blame
+#mkhl.direnv
+#ms-dotnettools.csdevkit
+#ms-dotnettools.csharp
+#ms-dotnettools.vscode-dotnet-runtime
+#ms-python.debugpy
+#ms-python.python
+#ms-python.vscode-pylance
+#ms-vscode-remote.remote-containers
+#ms-vscode-remote.remote-ssh
+#ms-vscode-remote.remote-ssh-edit
+#ms-vscode-remote.remote-wsl
+#ms-vscode-remote.vscode-remote-extensionpack
+#ms-vscode.azure-repos
+#ms-vscode.cmake-tools
+#ms-vscode.cpptools
+#ms-vscode.cpptools-extension-pack
+#ms-vscode.cpptools-themes
+#ms-vscode.remote-explorer
+#ms-vscode.remote-repositories
+#ms-vscode.remote-server
+#pinage404.nix-extension-pack
+#tomoki1207.pdf
+#VSCodium extensions installed
+#arrterian.nix-env-selector
+#exodiusstudios.comment-anchors
+#formulahendry.code-runner
+#github.vscode-github-actions
+#gruntfuggly.todo-tree
+#jeanp413.open-remote-ssh
+#jnoortheen.nix-ide
+#kamadorueda.alejandra
+#mhutchie.git-graph
+#mk12.better-git-line-blame
+#mkhl.direnv
+#ms-dotnettools.vscode-dotnet-runtime
+#ms-python.debugpy
+#ms-python.python
+#pinage404.nix-extension-pack
+#tomoki1207.pdf

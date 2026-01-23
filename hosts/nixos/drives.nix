@@ -1,0 +1,65 @@
+{
+  config,
+  pkgs,
+  host,
+  username,
+  options,
+  lib,
+  inputs,
+  system,
+  ...
+}:
+{
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/7435c3ee-ec8c-4653-943d-f00a3f50e5a5";
+    fsType = "ext4";
+    #  options = [ "noatime" ];
+  };
+
+  #fileSystems."/home" = {
+  #  device = "/";
+  #  options = [ "relatime" ];
+  #};
+
+  fileSystems."/run/media/ajhyperbit/SATA_SSD" = {
+    device = "/dev/disk/by-uuid/c879995c-386a-42c2-bc3b-8d02a03c61de";
+    fsType = "ext4";
+    options = [
+      # If you don't have this options attribute, it'll default to "defaults"
+      # boot options for fstab. Search up fstab mount options you can use
+      "users" # Allows any user to mount and unmount
+      "nofail" # Prevent system from failing if this drive doesn't mount
+      "exec" # Permit execution of binaries and other executable files
+    ];
+  };
+
+  systemd.tmpfiles.rules = [
+    # Type Path                                  Mode UID    GID Age Argument
+    "d     /run/media/ajhyperbit/SATA_SSD/ollama 0755 ollama 100 -   -"
+  ];
+
+  fileSystems."/run/media/ajhyperbit/DATA" = {
+    device = "/dev/disk/by-uuid/f8b6d208-2efc-447c-9251-7e1aa2d1d29b";
+    fsType = "ext4";
+    options = [
+      # If you don't have this options attribute, it'll default to "defaults"
+      # boot options for fstab. Search up fstab mount options you can use
+      "users" # Allows any user to mount and unmount
+      "nofail" # Prevent system from failing if this drive doesn't mount
+      "exec" # Permit execution of binaries and other executable files
+      #"auto" #Mount the filesystem automatically
+    ];
+  };
+
+  #fileSystems."/run/media/ajhyperbit/Archive" = {
+  #  device = "/dev/disk/by-uuid/4fd45309-e0dc-4124-8c19-36c011aad8eb";
+  #  label = "Archive";
+  #  fsType = "btrfs";
+  #  options = [
+  #    "users" # Allows any user to mount and unmount
+  #    "nofail" # Prevent system from failing if this drive doesn't mount
+  #    "exec" # Permit execution of binaries and other executable files
+  #    "noauto" #Do not mount the filesystem automatically
+  #  ];
+  #};
+}
