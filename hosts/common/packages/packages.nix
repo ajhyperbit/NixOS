@@ -43,7 +43,7 @@
     xdg-utils
     xdg-desktop-portal-gtk
     fastfetch
-    (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
+    (mpv.override { scripts = [ mpvScripts.mpris ]; }) # with tray
 
     #Games
     #gamescope
@@ -62,7 +62,7 @@
     wine-wayland
     winetricks
     protontricks
-    (bottles.override {removeWarningPopup = true;})
+    (bottles.override { removeWarningPopup = true; })
     gsmartcontrol
 
     #System tools
@@ -202,6 +202,8 @@
     wlogout
     yad
     yt-dlp
+    greetd
+    tuigreet
 
     (pkgs.hyprland.override {
       # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
@@ -227,7 +229,7 @@
     meson
     waybar
     (pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
     }))
     #eww
     dunst
