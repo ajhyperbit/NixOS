@@ -325,7 +325,7 @@ in
       settings = {
         default_session = {
           user = username;
-          command = "${pkgs.tuigreet}/bin/tuigreet --time -w 120 --remember-session "; # start Hyprland with a TUI login manager
+          command = "${pkgs.tuigreet}/bin/tuigreet --time -w 120 --remember-session"; # start Hyprland with a TUI login manager
         };
       };
     };
