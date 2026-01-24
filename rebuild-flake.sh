@@ -34,8 +34,11 @@ user=$LOGNAME
 #LINK - https://unix.stackexchange.com/questions/479102/how-can-i-filter-read-only-file-systems-out-of-df-output#:~:text=df%20%2D%2Doutput%3Dpcent%2Ctarget%20%24(mount%20%2Dt%20ext4%20%7C%20grep%20rw%20%7C%20cut%20%2Dd%22%20%22%20%2Df1)
 storage=$(df --output=pcent,target $(mount -t ext4 | grep rw | cut -d" " -f1) | head -n -1)
 
+path=$(pwd)
 
-#printf "$host\t $reswitch \t $args \t $user\n\n"
+if [ $path != /home/$user/NixOS-Hyprland ]; then
+	pushd ~/NixOS-Hyprland
+fi
 
 if [ -z "$host" ] || [ -z "$reswitch" ]; then
     printf "Usage: $0 <host> <rebuild method>\n"
@@ -134,5 +137,9 @@ fi
 #choose "n" "Do you want to run the nix garbage collector? [(Y)es/(N)o/(Q)uit] (Default: No): " "nix-collect-garbage -d &> nix-collect-garbage.log"
 
 #choose "n" "Do you want to trim generations? [(Y)es/(N)o/(Q)uit] (Default: No): " "source ~/NixOS-Hyprland/trim-generations.sh"
+
+if [ $path != /home/$user/NixOS-Hyprland ]; then
+	popd
+fi
 
 exit 0;
