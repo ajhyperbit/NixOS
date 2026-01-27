@@ -321,30 +321,30 @@ in
     hypridle.enable = true;
 
     greetd = {
-      enable = lib.mkDefault false;
-      useTextGreeter = true;
+      enable = true;
+      #useTextGreeter = true;
       settings = {
         default_session = {
           user = username;
           #tuigreet command
-          #command = ''
-          #  ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland" --power-reboot 'sudo systemctl kexec'
-          #'';
+          command = ''
+            ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland" --power-reboot 'sudo systemctl kexec'
+          '';
           #sysc-greet command
-          command = lib.mkForce "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland -- -c /etc/greetd/hyprland-greeter-config.conf";
+          #command = lib.mkForce "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland -- -c /etc/greetd/hyprland-greeter-config.conf";
         };
       };
     };
 
-    sysc-greet = {
-      enable = true;
-      compositor = "hyprland"; # or "hyprland" or "sway"
-      # Optional: Set initial session for auto-login
-      settings.initial_session = {
-        command = "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland";
-        user = "${username}";
-      };
-    };
+    #sysc-greet = {
+    #enable = true;
+    #compositor = "hyprland"; # or "hyprland" or "sway"
+    # Optional: Set initial session for auto-login
+    #settings.initial_session = {
+    #  command = "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland";
+    #  user = "${username}";
+    #};
+    #};
 
     smartd = {
       enable = false;

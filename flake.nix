@@ -173,7 +173,7 @@
             stylix.nixosModules.stylix
             disko.nixosModules.disko
             nix-index-database.nixosModules.nix-index
-            sysc-greet.nixosModules.default
+            #sysc-greet.nixosModules.default
 
             {
               environment.systemPackages = [
