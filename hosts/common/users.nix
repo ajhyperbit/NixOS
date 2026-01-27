@@ -42,7 +42,7 @@ in
       enableCompletion = true;
       ohMyZsh = {
         enable = true;
-        plugins = [ "git" ];
+        #plugins = [ "git" ];
         theme = "xiong-chiamiov-plus";
       };
 
