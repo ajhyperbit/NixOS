@@ -321,7 +321,7 @@ in
     hypridle.enable = true;
 
     greetd = {
-      enable = true;
+      enable = lib.mkDefault false;
       useTextGreeter = true;
       settings = {
         default_session = {
@@ -330,6 +330,16 @@ in
             ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland" --power-reboot 'sudo systemctl kexec'
           '';
         };
+      };
+    };
+
+    sysc-greet = {
+      enable = true;
+      compositor = "hyprland"; # or "hyprland" or "sway"
+      # Optional: Set initial session for auto-login
+      settings.initial_session = {
+        command = "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland";
+        user = "${username}";
       };
     };
 

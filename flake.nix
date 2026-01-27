@@ -60,6 +60,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
+
+    sysc-greet = {
+      url = "github:Nomadcxx/sysc-greet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -78,6 +83,7 @@
       nix-vscode-extensions,
       nixpkgs-d49b5ff,
       nix-index-database,
+      sysc-greet,
       ...
     }:
     let
@@ -167,6 +173,7 @@
             stylix.nixosModules.stylix
             disko.nixosModules.disko
             nix-index-database.nixosModules.nix-index
+            sysc-greet.nixosModules.default
 
             {
               environment.systemPackages = [
