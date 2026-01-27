@@ -27,6 +27,7 @@
     wget
     curl
     psmisc
+    socat
     #google-chrome
     chromium
     # System Packages
