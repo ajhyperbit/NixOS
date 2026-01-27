@@ -26,6 +26,7 @@
     strace
     wget
     curl
+    psmisc
     #google-chrome
     chromium
     # System Packages
