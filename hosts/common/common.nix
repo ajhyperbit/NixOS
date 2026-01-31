@@ -379,6 +379,51 @@ in
     samba = {
       enable = true;
       openFirewall = true;
+      settings = {
+        global = {
+          "workgroup" = "WORKGROUP";
+          "server string" = "AJ-NixOS-PC";
+          "netbios name" = "AJ-NixOS-PC";
+          "invalid users" = [
+            "root"
+          ];
+          "passwd program" = "/run/wrappers/bin/passwd %u";
+          security = "user";
+        };
+        #public = {
+        #  browseable = "yes";
+        #  comment = "Public samba share.";
+        #  "guest ok" = "yes";
+        #  path = "";
+        #  "read only" = "yes";
+        #};
+        ajhyperbit = {
+          "valid users" = "ajhyperbit";
+          path = "/home/ajhyperbit";
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "no";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "ajhyperbit";
+          "force group" = "users";
+        };
+        media = {
+          "valid users" = "ajhyperbit";
+          path = "/run/media/ajhyperbit";
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "no";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "ajhyperbit";
+          "force group" = "users";
+        };
+      };
+    };
+    samba-wsdd = {
+      enable = true;
+      openFirewall = true;
     };
 
     saned.enable = true;
