@@ -303,7 +303,7 @@
 
     testdisk # Data recovery utilities
 
-    nixfmt-rfc-style # Official formatter for Nix code
+    nixfmt # Official formatter for Nix code
 
     disko # Declarative disk partitioning and formatting using nix
 
