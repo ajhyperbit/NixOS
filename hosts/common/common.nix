@@ -484,11 +484,11 @@ in
     thunar.enable = true;
     thunar.plugins = with pkgs; [
       xfce4-exo
-      xfce.mousepad
-      xfce.thunar-archive-plugin
-      xfce.thunar-volman
-      xfce.thunar-media-tags-plugin
-      xfce.tumbler
+      mousepad
+      thunar-archive-plugin
+      thunar-volman
+      thunar-media-tags-plugin
+      tumbler
       ffmpegthumbnailer
       webp-pixbuf-loader
       poppler
