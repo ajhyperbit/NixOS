@@ -178,6 +178,7 @@
             {
               environment.systemPackages = [
                 pkgs-d49b5ff.google-chrome
+                pkgs-d49b5ff.open-webui
               ];
             }
 
