@@ -3,7 +3,8 @@
   pkgs,
   options,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     clinfo
   ];
@@ -14,13 +15,17 @@
     ollama = {
       enable = true;
       home = "/run/media/ajhyperbit/SATA_SSD/ollama";
+      #Run without GPU
       package = pkgs.ollama;
+      #Run with GPU
+      #package = pkgs.ollama-rocm;
       user = "ollama";
       group = "users";
       #acceleration = "rocm";
       rocmOverrideGfx = "12.0.1";
       #This graphics target is supported
       #So this option should not be needed
+      syncModels = true;
       loadModels = [
         "mistral:7b"
         "deepseek-r1:8b"
@@ -32,6 +37,8 @@
         "qwen3:8b"
         "llama3.2:3b"
         "nomic-embed-text:latest"
+        "translategemma:4b"
+        "translategemma:12b"
       ];
     };
     open-webui = {
@@ -40,9 +47,16 @@
         ANONYMIZED_TELEMETRY = "False";
         DO_NOT_TRACK = "True";
         SCARF_NO_ANALYTICS = "True";
-        WEBUI_AUTH = "False";
+        #WEBUI_AUTH = "False";
+        OLLAMA_VULKAN = "1";
       };
     };
+  };
+
+  users.users.ollama = {
+    extraGroups = [
+      "render"
+    ];
   };
 
   hardware = {

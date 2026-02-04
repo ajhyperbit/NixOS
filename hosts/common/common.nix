@@ -474,7 +474,12 @@ in
     #waybar.enable = true; #has some kind of race condition when used in the Hyprland UWSM env
     hyprlock.enable = true;
     firefox.enable = true;
-    git.enable = true;
+    git = {
+      enable = true;
+      lfs = {
+        enable = true;
+      };
+    };
 
     zsh = {
       enable = true;
@@ -556,7 +561,6 @@ in
       args = [
         "--rt"
         "--expose-wayland"
-        "--mangoapp"
       ];
     };
 
