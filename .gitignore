@@ -2,3 +2,5 @@ nix-flake-check.log
 *.log
 error.*
 logs
+nixos-hyprland.code-workspace
+*.code-workspace
