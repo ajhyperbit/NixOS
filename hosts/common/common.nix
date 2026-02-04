@@ -170,6 +170,11 @@ in
           printf "$location\n"
         fi
       }
+
+      # Only set GPG_TTY for SSH sessions
+      if [[ -n "$SSH_TTY" ]]; then
+        export GPG_TTY=$(tty)
+      fi
     '';
 
     shellAliases = {
