@@ -603,6 +603,10 @@ in
     usbtop.enable = true;
     tmux = {
       enable = true;
+      extraConfig = ''
+        set -g update-environment "GPG_TTY SSH_TTY"
+        set-hook -g client-attached 'run-shell "gpg-connect-agent updatestartuptty /bye"'
+      '';
     };
   };
 
