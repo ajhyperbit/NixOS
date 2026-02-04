@@ -596,6 +596,9 @@ in
       };
     };
     usbtop.enable = true;
+    tmux = {
+      enable = true;
+    };
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
