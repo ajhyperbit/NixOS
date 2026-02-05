@@ -16,9 +16,9 @@
       enable = true;
       home = "/run/media/ajhyperbit/SATA_SSD/ollama";
       #Run without GPU
-      package = pkgs.ollama;
+      #package = pkgs.ollama;
       #Run with GPU
-      #package = pkgs.ollama-rocm;
+      package = pkgs.ollama-rocm;
       user = "ollama";
       group = "users";
       rocmOverrideGfx = "12.0.1";
@@ -47,7 +47,7 @@
         DO_NOT_TRACK = "True";
         SCARF_NO_ANALYTICS = "True";
         #WEBUI_AUTH = "False";
-        OLLAMA_VULKAN = "1";
+        #OLLAMA_VULKAN = "1";
       };
     };
   };
