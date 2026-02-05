@@ -15,6 +15,7 @@
 }:
 let
   inherit (import ./variables.nix) keyboardLayout;
+  nhArgs = "--keep-since 14d --keep 5 --optimise";
 in
 {
   imports = [
@@ -177,13 +178,14 @@ in
       fi
     '';
 
-    shellAliases = {
+    shellAliases = rec {
       ll = "ls -l";
       soft-reboot = "systemctl kexec";
       sr = "systemctl kexec";
       google-chrome = "google-chrome-stable";
       fl = "findlink";
       rebuild = "/home/${username}/NixOS-Hyprland/rebuild-flake.sh";
+      clean = "nh clean all ${nhArgs}";
     };
   };
 
@@ -510,7 +512,7 @@ in
       enable = true;
       clean = {
         enable = true;
-        extraArgs = "--keep-since 14d --keep 5 --optimise";
+        extraArgs = nhArgs;
         dates = "weekly";
       };
       flake = "/home/ajhyperbit/NixOS-Hyprland";
