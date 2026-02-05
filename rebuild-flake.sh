@@ -43,7 +43,7 @@ fi
 if [ -z "$host" ] || [ -z "$reswitch" ]; then
     printf "Usage: $0 <host> <rebuild method>\n"
     printf "  <host>: 'nixos' or 'nixtop'\n"
-    printf "  <rebuild method>: 'switch', 'boot', 'test', 'build', or 'dry-activate'\n"
+    printf "  <rebuild method>: 'switch', 'boot', 'test', or 'build'\n"
     printf "For more help, use -h or --help\n"
     exit 3;
 fi
@@ -84,7 +84,10 @@ printf "NixOS Rebuilding...\n"
 # Rebuild, output simplified errors, log trackebacks
 #sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1) || grep -P -n "(?|(\/home\/"$user"\/NixOS-Hyprland\/([a-zA-Z]+)\.nix)|(hosts\/([a-zA-Z]+)\/([a-zA-Z]+).nix))" nixos-switch.log | sed 's/:[[:blank:]]*/: /'
 set -o pipefail
-if command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
+if command -v nh >/dev/null 2>&1; then
+    sudo -v
+    nh os "$reswitch" -H "$host" |& tee nixos-switch.log
+elif command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
     sudo -v
     sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json 
 else
