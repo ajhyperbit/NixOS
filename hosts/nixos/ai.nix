@@ -59,6 +59,17 @@
     ];
   };
 
+  systemd.services.gfxrace = {
+    before = [ "ollama.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.coreutils}/bin/sleep 60";
+    };
+    wantedBy = [ "multi-user.target" ];
+    restartIfChanged = false;
+  };
+
   hardware = {
     graphics = {
       extraPackages = with pkgs; [
