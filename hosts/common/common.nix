@@ -513,7 +513,7 @@ in
       clean = {
         enable = true;
         extraArgs = nhArgs;
-        dates = "weekly";
+        dates = "monthly";
       };
       flake = "/home/ajhyperbit/NixOS-Hyprland";
     };
