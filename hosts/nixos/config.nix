@@ -160,6 +160,7 @@
           "directory mask" = "0755";
           "force user" = "ajhyperbit";
           "force group" = "users";
+          "acl allow execute always" = "yes";
         };
       };
     };
