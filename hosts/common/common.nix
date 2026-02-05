@@ -332,7 +332,7 @@ in
         default_session = {
           user = username;
           command = ''
-            ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland" --power-reboot 'sudo systemctl kexec'
+            ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/start-hyprland" --power-reboot 'sudo systemctl kexec'
           '';
         };
       };
