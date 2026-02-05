@@ -327,16 +327,13 @@ in
 
     greetd = {
       enable = true;
-      #useTextGreeter = true;
+      useTextGreeter = true;
       settings = {
         default_session = {
           user = username;
-          #tuigreet command
           command = ''
             ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland" --power-reboot 'sudo systemctl kexec'
           '';
-          #sysc-greet command
-          #command = lib.mkForce "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/Hyprland -- -c /etc/greetd/hyprland-greeter-config.conf";
         };
       };
     };
