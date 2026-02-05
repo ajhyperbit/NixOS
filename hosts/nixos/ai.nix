@@ -63,7 +63,7 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = "${pkgs.coreutils}/bin/sleep 60";
+      ExecStart = "${pkgs.coreutils}/bin/sleep 10";
     };
     wantedBy = [ "multi-user.target" ];
     restartIfChanged = false;
