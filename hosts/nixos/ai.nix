@@ -21,7 +21,6 @@
       #package = pkgs.ollama-rocm;
       user = "ollama";
       group = "users";
-      #acceleration = "rocm";
       rocmOverrideGfx = "12.0.1";
       #This graphics target is supported
       #So this option should not be needed
