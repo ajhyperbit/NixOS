@@ -126,14 +126,18 @@
           ];
           "passwd program" = "/run/wrappers/bin/passwd %u";
           security = "user";
+
+          "min protocol" = "SMB3";
+          "aio read size" = 1048576;
+          "aio write size" = 1048576;
+          "write cache size" = 1048576;
+          "strict locking" = "no";
+          "use sendfile" = "yes";
+          "oplocks" = "yes";
+          "level2 oplocks" = "yes";
+          "mangled names" = "no";
         };
-        #public = {
-        #  browseable = "yes";
-        #  comment = "Public samba share.";
-        #  "guest ok" = "yes";
-        #  path = "";
-        #  "read only" = "yes";
-        #};
+
         ajhyperbit = {
           "valid users" = "ajhyperbit";
           path = "/home/ajhyperbit";
@@ -145,6 +149,7 @@
           "force user" = "ajhyperbit";
           "force group" = "users";
         };
+
         media = {
           "valid users" = "ajhyperbit";
           path = "/run/media/ajhyperbit";
@@ -158,6 +163,7 @@
         };
       };
     };
+
     samba-wsdd = {
       enable = true;
       openFirewall = true;
