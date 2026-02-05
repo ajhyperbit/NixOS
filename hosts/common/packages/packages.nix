@@ -304,6 +304,7 @@
     testdisk # Data recovery utilities
 
     nixfmt # Official formatter for Nix code
+    shfmt # Shell script formatter
 
     disko # Declarative disk partitioning and formatting using nix
 
