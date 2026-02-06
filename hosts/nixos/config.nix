@@ -130,11 +130,10 @@
           "min protocol" = "SMB3";
           "aio read size" = 1048576;
           "aio write size" = 1048576;
-          "write cache size" = 1048576;
           "strict locking" = "no";
           "use sendfile" = "yes";
-          "oplocks" = "yes";
-          "level2 oplocks" = "yes";
+          "oplocks" = "no";
+          "level2 oplocks" = "no";
           "mangled names" = "no";
         };
 
