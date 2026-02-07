@@ -50,7 +50,11 @@ in
       syntaxHighlighting.enable = true;
 
       promptInit = ''
-        fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
+        if [[ -n "$SSH_TTY" ]]; then
+          fastfetch -c "$HOME/.config/fastfetch/config-compact-ssh.jsonc"
+        else
+          fastfetch -c "$HOME/.config/fastfetch/config-compact.jsonc"
+        fi
 
         source <(fzf --zsh);
         HISTFILE=~/.zsh_history;
