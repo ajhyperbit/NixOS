@@ -385,6 +385,7 @@
 
     mesa-demos
 
+    chafa
     enlightenment.terminology
   ];
   #    ++ [
