@@ -384,6 +384,8 @@
     v4l-utils
 
     mesa-demos
+
+    enlightenment.terminology
   ];
   #    ++ [
   #      python-packages
