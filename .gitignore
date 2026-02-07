@@ -4,3 +4,4 @@ error.*
 logs
 nixos-hyprland.code-workspace
 *.code-workspace
+images/**
