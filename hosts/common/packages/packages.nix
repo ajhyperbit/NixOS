@@ -386,7 +386,6 @@
     mesa-demos
 
     chafa
-    enlightenment.terminology
   ];
   #    ++ [
   #      python-packages
