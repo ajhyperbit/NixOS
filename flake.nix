@@ -41,11 +41,6 @@
 
     nix-alien.url = "github:thiagokokada/nix-alien";
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,7 +69,6 @@
       nixos-hardware,
       fw-fanctrl,
       nix-alien,
-      nixos-generators,
       disko,
       nix4vscode,
       nix-vscode-extensions,
@@ -113,25 +107,7 @@
       };
     in
     {
-      nixosModules.myFormats =
-        { config, ... }:
-        {
-          imports = [
-            nixos-generators.nixosModules.all-formats
-          ];
-
-          nixpkgs.hostPlatform = "x86_64-linux";
-        };
-
       nixosConfigurations = {
-        nixosModules.myFormats =
-          { config, ... }:
-          {
-            imports = [
-              nixos-generators.nixosModules.all-formats
-            ];
-          };
-
         #ANCHOR Main Desktop
         "${host}" = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
