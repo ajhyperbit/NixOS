@@ -12,9 +12,6 @@
   ...
 }:
 {
-  imports = [
-  ];
-
   # BOOT related stuff
   boot = {
     #kernelPackages = pkgs.linuxPackages_latest; # Kernel
