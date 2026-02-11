@@ -9,9 +9,13 @@
   inputs,
   system,
   stateVersion-host,
+  modulesPath,
   ...
 }:
 {
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
   # BOOT related stuff
   boot = {
     #kernelPackages = pkgs.linuxPackages_latest; # Kernel
@@ -21,6 +25,7 @@
     ];
 
     kernelModules = [
+      "kvm-amd"
       "vfio_virqfd"
       "vfio_pci"
       "vfio_iommu_type1"
@@ -32,18 +37,21 @@
 
     initrd = {
       availableKernelModules = [
+        "nvme"
         "xhci_pci"
         "ahci"
-        "nvme"
-        "usb_storage"
         "usbhid"
+        "usb_storage"
         "sd_mod"
+        "sr_mod"
       ];
       kernelModules = [ ];
     };
+    extraModulePackages = [ ];
   };
 
   networking = {
+    useDHCP = lib.mkDefault true;
     hostName = "${host}";
     interfaces.enp6s0.wakeOnLan.enable = true;
     firewall = {
@@ -218,6 +226,7 @@
     };
   };
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   # Microcode
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
