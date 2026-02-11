@@ -57,18 +57,18 @@
     "d     /run/media/ajhyperbit/SATA_SSD/ollama 0755 ollama 100 -   -"
   ];
 
-  fileSystems."/run/media/ajhyperbit/DATA" = {
-    device = "/dev/disk/by-uuid/f8b6d208-2efc-447c-9251-7e1aa2d1d29b";
-    fsType = "ext4";
-    options = [
-      # If you don't have this options attribute, it'll default to "defaults"
-      # boot options for fstab. Search up fstab mount options you can use
-      "users" # Allows any user to mount and unmount
-      "nofail" # Prevent system from failing if this drive doesn't mount
-      "exec" # Permit execution of binaries and other executable files
-      #"auto" #Mount the filesystem automatically
-    ];
-  };
+  # fileSystems."/run/media/ajhyperbit/DATA" = {
+  #   device = "/dev/disk/by-uuid/f8b6d208-2efc-447c-9251-7e1aa2d1d29b";
+  #   fsType = "ext4";
+  #   options = [
+  #     # If you don't have this options attribute, it'll default to "defaults"
+  #     # boot options for fstab. Search up fstab mount options you can use
+  #     "users" # Allows any user to mount and unmount
+  #     "nofail" # Prevent system from failing if this drive doesn't mount
+  #     "exec" # Permit execution of binaries and other executable files
+  #     #"auto" #Mount the filesystem automatically
+  #   ];
+  # };
 
   #fileSystems."/run/media/ajhyperbit/Archive" = {
   #  device = "/dev/disk/by-uuid/4fd45309-e0dc-4124-8c19-36c011aad8eb";

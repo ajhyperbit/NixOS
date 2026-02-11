@@ -121,6 +121,8 @@
             ./hosts/${host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
             ./hosts/${host}/drives.nix
+            #./hosts/${host}/nixos/disko/disks.nix
+            ./hosts/${host}/disko/DATA.nix
             ./hosts/${host}/input.nix
             ./hosts/${host}/${host}-hm.nix
             ./hosts/common/common.nix
