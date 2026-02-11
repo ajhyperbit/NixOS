@@ -16,9 +16,6 @@
 #  );
 #in
 {
-  imports = [
-    ./ardunio.nix
-  ];
   environment.systemPackages = with pkgs; [
     lsof
     neovim

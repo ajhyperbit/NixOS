@@ -161,6 +161,7 @@
             ./hosts/common/audio.nix
             ./hosts/common/temp-fixes.nix
             ./hosts/common/desktop-entries/default-apps.nix
+            #./hosts/common/packages/ardunio.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
