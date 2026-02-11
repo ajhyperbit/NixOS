@@ -4,7 +4,6 @@
   pkgs,
   options,
   lib,
-  pkgs-d49b5ff,
   ...
 }:
 #let
@@ -30,7 +29,6 @@
     # System Packages
     #baobab # Disk usage analyzer
     btrfs-progs
-    clang
     duf
     eza
     ffmpeg
