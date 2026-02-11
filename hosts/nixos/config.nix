@@ -165,6 +165,19 @@
           "force group" = "users";
           "acl allow execute always" = "yes";
         };
+
+        mnt = {
+          "valid users" = "ajhyperbit";
+          path = "/mnt";
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "no";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "ajhyperbit";
+          "force group" = "users";
+          "acl allow execute always" = "yes";
+        };
       };
     };
 
