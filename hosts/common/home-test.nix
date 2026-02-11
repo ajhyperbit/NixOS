@@ -32,7 +32,6 @@
   options,
   username,
   lib,
-  stateVersion-hm,
   ...
 }:
 {
@@ -46,7 +45,7 @@
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
     ];
-    stateVersion = lib.mkDefault "${stateVersion-hm}";
+    stateVersion = lib.mkDefault "24.05";
   };
 
   home.file = {

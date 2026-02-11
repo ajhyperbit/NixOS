@@ -87,11 +87,6 @@
       home = "/home/ajhyperbit";
       cursor_size = 32;
       cursor_theme = "BreezeX-RosePine";
-      stateVersion-host = "23.11";
-      stateVersion-hm = "24.05";
-      stateVersion-host-iso = "25.05";
-      stateVersion-host-wsl = "24.11";
-      stateVersion-nixtop = "25.11";
 
       pkgs = import nixpkgs {
         inherit system;
@@ -120,8 +115,6 @@
             inherit self;
             inherit cursor_size;
             inherit cursor_theme;
-            inherit stateVersion-host;
-            inherit stateVersion-hm;
           };
           modules = [
             ./hosts/${host}/config.nix
@@ -177,8 +170,6 @@
             inherit laptop-host;
             inherit home;
             inherit self;
-            inherit stateVersion-nixtop;
-            inherit stateVersion-hm;
           };
           modules = [
             ./hosts/${laptop-host}/config.nix
@@ -201,7 +192,6 @@
                 inherit system;
                 inherit self;
                 inherit username;
-                inherit stateVersion-hm;
               };
               home-manager.backupFileExtension = "backup";
             }

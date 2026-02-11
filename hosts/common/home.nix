@@ -6,7 +6,6 @@
   lib,
   inputs,
   system,
-  stateVersion-hm,
   cursor_theme,
   cursor_size,
   ...
@@ -19,7 +18,7 @@
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
     ];
-    stateVersion = lib.mkDefault "${stateVersion-hm}";
+    stateVersion = lib.mkDefault "24.05";
   };
 
   #LINK - https://discourse.nixos.org/t/how-to-manage-dotfiles-with-home-manager/30576

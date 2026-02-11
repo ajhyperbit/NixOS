@@ -6,7 +6,6 @@
   username,
   cursor_size,
   cursor_theme,
-  stateVersion-hm,
   ...
 }:
 {
@@ -25,7 +24,6 @@
       cursor_size
       cursor_theme
       username
-      stateVersion-hm
       ;
   };
   home-manager.backupFileExtension = "backup";
