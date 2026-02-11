@@ -151,7 +151,6 @@
             ./hosts/${host}/config.nix
             ./hosts/${host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
-            ./hosts/${host}/hardware.nix
             ./hosts/${host}/drives.nix
             ./hosts/${host}/input.nix
             ./hosts/${host}/${host}-hm.nix

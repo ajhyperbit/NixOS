@@ -16,6 +16,25 @@
     #  options = [ "noatime" ];
   };
 
+  fileSystems."/bin" = {
+    device = "/usr/bin";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/8BFE-691B";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/5b448087-dd9e-4631-9c8c-39851229c1b6"; }
+  ];
+
   #fileSystems."/home" = {
   #  device = "/";
   #  options = [ "relatime" ];
