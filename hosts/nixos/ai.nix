@@ -58,6 +58,7 @@
     ];
   };
 
+  # Temp fix for: "https://github.com/NixOS/nixpkgs/issues/487054"
   systemd.services.gfxrace = {
     before = [ "ollama.service" ];
     serviceConfig = {
