@@ -12,9 +12,6 @@
   ...
 }:
 {
-  imports = [
-    #./desktop-entries/steam.nix
-  ];
   fonts.fontconfig.enable = true;
 
   home = {
