@@ -186,7 +186,7 @@ in
       fl = "findlink";
       rebuild = "/home/${username}/NixOS-Hyprland/rebuild-flake.sh";
       clean = "nh clean all ${nhArgs}";
-      llsblk = "lsblk -o NAME,KNAME,SIZE,TYPE,MOUNTPOINT,SERIAL";
+      llsblk = "lsblk -o NAME,FSTYPE,KNAME,SIZE,TYPE,MOUNTPOINT,SERIAL,UUID";
     };
   };
 
