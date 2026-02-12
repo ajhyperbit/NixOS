@@ -2,8 +2,8 @@
 {
   boot.loader.systemd-boot.extraEntries = {
     "00-Gen-715.conf" = ''
-    title NixOS Gen-715
-    sort-key nixos
+		title Pinned NixOS Generation 715
+		sort-key 00-pin-nixos
     version Generation 715 NixOS Yarara 26.05.20260204.bf922a5 (Linux 6.18.7-zen1), built on 2026-02-08
     linux /EFI/nixos/nbivb3yljdc1v46zd90mgqrvn6awc216-linux-zen-6.18.7-bzImage.efi
     initrd /EFI/nixos/d8p55g9yh4818kjiy712qq9bmd1n1jr8-initrd-linux-zen-6.18.7-initrd.efi
