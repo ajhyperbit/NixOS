@@ -19,18 +19,20 @@ in
                 type = "btrfs";
                 extraArgs = [ "-f" ];
                 subvolumes = {
-                  "/DATA" = { };
-                  "/DATA/active" = {
+                  "/mnt/DATA" = { };
+                  "/mnt/DATA/active" = {
                     mountpoint = "/DATA";
                     mountOptions = [
                       "compress=zstd"
+                      "users"
                       "nofail"
                     ];
                   };
-                  "/DATA/.snapshots" = {
+                  "/mnt/DATA/.snapshots" = {
                     mountpoint = "/DATA/.snapshots";
                     mountOptions = [
                       "compress=zstd"
+                      "users"
                       "nofail"
                     ];
                   };
