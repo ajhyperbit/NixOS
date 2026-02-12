@@ -42,5 +42,41 @@ in
         };
       };
     };
+    disk = {
+      ${disk5} = {
+        type = "disk";
+        device = "${disk5}";
+        content = {
+          type = "gpt";
+          partitions = {
+            DATA = {
+              label = "Archive";
+              size = "100%";
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ];
+                subvolumes = {
+                  "/mnt/Archive" = { };
+                  "/Archive/rootfs" = {
+                    mountpoint = "/Archive";
+                    mountOptions = [
+                      "compress=zstd"
+                      "nofail"
+                    ];
+                  };
+                  "/Archive/.snapshots" = {
+                    mountpoint = "/Archive/.snapshots";
+                    mountOptions = [
+                      "compress=zstd"
+                      "nofail"
+                    ];
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
   };
 }
