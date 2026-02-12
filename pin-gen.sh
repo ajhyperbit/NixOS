@@ -52,4 +52,8 @@ $(echo "$conf" | sed 's/^/    /')
 }
 EOF
 
+git add "Gen-$GEN.nix"
+
+git commit -m "Pin generaton $GEN"
+
 exit 0
