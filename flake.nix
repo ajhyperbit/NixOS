@@ -132,6 +132,7 @@
             ./hosts/common/desktop-entries/default-apps.nix
             ./hosts/common/startup.nix
             #./hosts/common/packages/ardunio.nix
+            ./hosts/pinned-gens/Gen-715.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
