@@ -12,6 +12,18 @@ let
 in
 {
 
+  systemd.tmpfiles.settings = {
+    "ollamaConfig" = {
+      "/run/media/ajhyperbit/SATA_SSD/ollama" = {
+        d = {
+          group = "users";
+          mode = "0755";
+          user = "ollama";
+        };
+      };
+    };
+  };
+
   systemd.tmpfiles.rules = [
     # Type Path                                  Mode UID    GID Age Argument
     "d     /run/media/ajhyperbit/SATA_SSD/ollama 0755 ollama 100 -   -"
@@ -21,7 +33,7 @@ in
     disk = {
       ${disk1} = {
         device = "${disk1}";
-        #type = "disk";
+        type = "disk";
         content = {
           type = "gpt";
           partitions = {
@@ -38,7 +50,7 @@ in
             };
             swap = {
               label = "swap";
-              size = "32G"; # SWAP
+              size = "72G"; # SWAP
               content = {
                 type = "swap";
                 resumeDevice = true;
@@ -52,13 +64,8 @@ in
                 type = "btrfs";
                 extraArgs = [ "-f" ];
                 subvolumes = {
-                  "/root" = {
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/root/active" = {
+                  "/root" = { };
+                  "/root/rootfs" = {
                     mountpoint = "/";
                     mountOptions = [
                       "compress=zstd"
@@ -74,33 +81,6 @@ in
                   };
                   "/nix" = {
                     mountpoint = "/nix";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/var_local" = {
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/var_local/active" = {
-                    mountpoint = "/var/local";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/var_local/snapshots" = {
-                    mountpoint = "/var/local/.snapshots";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/var_log" = {
-                    mountpoint = "/var/log";
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
@@ -128,11 +108,7 @@ in
                 type = "btrfs";
                 extraArgs = [ "-f" ];
                 subvolumes = {
-                  "/home" = {
-                    mountOptions = [
-                      "compress=zstd"
-                    ];
-                  };
+                  "/home" = { };
                   "/home/active" = {
                     mountpoint = "/home";
                     mountOptions = [
@@ -163,23 +139,23 @@ in
             DATA = {
               label = "DATA";
               size = "100%";
-
               content = {
                 type = "btrfs";
                 extraArgs = [ "-f" ];
-
                 subvolumes = {
-                  "/DATA" = {
+                  "/mnt/DATA" = { };
+                  "/DATA/rootfs" = {
                     mountpoint = "/DATA";
                     mountOptions = [
                       "compress=zstd"
+                      "nofail"
                     ];
                   };
-
                   "/DATA/.snapshots" = {
                     mountpoint = "/DATA/.snapshots";
                     mountOptions = [
                       "compress=zstd"
+                      "nofail"
                     ];
                   };
                 };
