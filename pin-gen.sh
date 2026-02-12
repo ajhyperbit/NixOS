@@ -1,10 +1,36 @@
 #!/usr/bin/env bash
 
+choose () {
+    local default="$1"
+    local prompt="$2"
+    local answer
+
+    read -p "$prompt" answer
+    [ -z "$answer" ] && answer="$default"
+
+    case "$answer" in
+        [yY1] ) #printf "answered yes!\n"
+            eval "git add 'Gen-$GEN.nix'"
+			eval "git commit -m 'Pin generaton $GEN'"
+            ;;
+        [nN0] ) printf "Ok.\n"
+            ;;
+        [qQ]  ) printf "Exiting....\n"
+            exit 1;
+            ;;   
+        *     ) printf "%b" "Unexpected answer '$answer'!\n" >&2
+            exit 1;
+            ;;
+    esac
+}
+
 GEN=$1
 DIR1=$2
 
 if [ -z "$GEN" ]; then
-  printf "Usage: $0 <generation> <directory (optional)>\n"
+  printf "Usage: $0 <generation> <directory>\n"
+  printf "Generation: the generation's number you want to pin\n"
+  printf "Directory: where you want the Gen-GEN#.nix file to go.\n"
   exit 1
 fi
 
@@ -38,22 +64,25 @@ if [ $path != $DIR1 ]; then
 	pushd $DIR1
 fi
 
-conf=$(sudo tail -6 "/boot/loader/entries/nixos-generation-$GEN.conf")
+conf=$(sudo tail -5 "/boot/loader/entries/nixos-generation-$GEN.conf")
 
 cat << EOF > Gen-$GEN.nix
 { ... }:
 {
   boot.loader.systemd-boot.extraEntries = {
     "00-Gen-$GEN.conf" = ''
-    title NixOS Gen-$GEN
+		title Pinned NixOS Generation $GEN
+		sort-key 00-pin-nixos
 $(echo "$conf" | sed 's/^/    /')
     '';
   };
 }
 EOF
 
-git add "Gen-$GEN.nix"
-
-git commit -m "Pin generaton $GEN"
+choose "n" "Do you want to git commit the created Gen-$GEN.nix file? [(Y)es/(N)o] (Default: No): "
 
 exit 0
+
+#Links with value or ideas worth considering:
+#https://www.reddit.com/r/NixOS/comments/1n7sjmv/comment/ncaed7n/
+#https://www.reddit.com/r/NixOS/comments/1n7sjmv/comment/nca7hyd/
