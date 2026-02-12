@@ -130,6 +130,7 @@
             ./hosts/common/fonts.nix
             ./hosts/common/audio.nix
             ./hosts/common/desktop-entries/default-apps.nix
+            ./hosts/common/startup.nix
             #./hosts/common/packages/ardunio.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd

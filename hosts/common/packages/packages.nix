@@ -252,6 +252,7 @@
 
     #Polkit agent
     polkit
+    hyprpolkitagent
 
     hyprcursor # requires unstable channel
 
