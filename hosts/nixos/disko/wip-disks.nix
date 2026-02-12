@@ -26,6 +26,7 @@ in
                       "compress=zstd"
                       "users"
                       "nofail"
+                      "exec"
                     ];
                   };
                   "/mnt/DATA/.snapshots" = {
@@ -34,6 +35,7 @@ in
                       "compress=zstd"
                       "users"
                       "nofail"
+                      "noatime"
                     ];
                   };
                 };
