@@ -57,15 +57,16 @@ in
                 type = "swap";
                 resumeDevice = true;
               };
-            };
+            }; # I probably don't need a swap this massive.
             root = {
               label = "rootfs";
               name = "btrfs";
               size = "100%";
               content = {
-                type = "btrfs";
+                type = "btrfs"; # Am I sure I want my boot drive to be btrfs?
                 extraArgs = [ "-f" ];
                 subvolumes = {
+                  # This whole subvolume thing is probably wrong.
                   "/root" = { };
                   "/root/rootfs" = {
                     mountpoint = "/";
@@ -107,9 +108,10 @@ in
               name = "home";
               size = "100%";
               content = {
-                type = "btrfs";
+                type = "btrfs"; # Same question as earlier with btrfs
                 extraArgs = [ "-f" ];
                 subvolumes = {
+                  # Also probably wrong.
                   "/home" = { };
                   "/home/active" = {
                     mountpoint = "/home";
@@ -142,9 +144,10 @@ in
               label = "DATA";
               size = "100%";
               content = {
-                type = "btrfs";
+                type = "btrfs"; # This might actually have value in being btrfs
                 extraArgs = [ "-f" ];
                 subvolumes = {
+                  # This is almost certainly wrong.
                   "/mnt/DATA" = { };
                   "/DATA/rootfs" = {
                     mountpoint = "/DATA";
