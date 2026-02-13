@@ -63,6 +63,7 @@
     gsmartcontrol
 
     #System tools
+    parted
     gparted
     putty
     htop
