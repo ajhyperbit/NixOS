@@ -383,8 +383,6 @@
     mesa-demos
 
     chafa
-
-    libfaketime
   ];
   #    ++ [
   #      python-packages
