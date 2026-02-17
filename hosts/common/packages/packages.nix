@@ -331,7 +331,7 @@
     rar
     unar
     arj
-    commons-Compress
+    commons-compress
 
     rose-pine-cursor
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
