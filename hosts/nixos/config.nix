@@ -17,7 +17,7 @@
   ];
   # BOOT related stuff
   boot = {
-    #kernelPackages = pkgs.linuxPackages_latest; # Kernel
+    kernelPackages = pkgs.linuxPackages_lqx; # Kernel
 
     kernelParams = [
       "amd_iommu=on"
