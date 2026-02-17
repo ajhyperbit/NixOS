@@ -211,7 +211,7 @@
     })
 
     #Hyperland  #https://www.youtube.com/watch?v=61wGzIv12Ds
-    xorg.xlsclients # Check if running with xwayland
+    xlsclients # Check if running with xwayland
     #Terminals
     kitty
     #Alternatives
@@ -331,7 +331,7 @@
     rar
     unar
     arj
-    commonsCompress
+    commons-Compress
 
     rose-pine-cursor
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -352,7 +352,7 @@
 
     #Possible fix for some cursor weirdness within wayland
     xsettingsd
-    xorg.xrdb
+    xrdb
 
     #Mouse customization stuff
     libratbag
