@@ -159,6 +159,7 @@ in
     QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
     QT_QPA_PLATFORM = "wayland;xcb";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    QT_STYLE_OVERRIDE = "Breeze-Dark";
   };
 
   environment = {
@@ -621,11 +622,11 @@ in
       xdgOpenUsePortal = true;
     };
   };
-  #qt = {
-  #  enable = true;
-  #  style = "breeze";
-  #  platformTheme = "kde";
-  #};
+  qt = {
+   enable = true;
+   #style = "breeze";
+   platformTheme = "qt5ct";
+  };
 
   security = {
     sudo = {
