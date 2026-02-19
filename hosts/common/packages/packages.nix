@@ -89,6 +89,7 @@
     lm_sensors
     netdata
     lshw
+    impression
     #Printing
     #cups-filters
     #cups-printers
