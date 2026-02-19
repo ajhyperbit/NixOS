@@ -88,6 +88,7 @@
     kdePackages.ark
     lm_sensors
     netdata
+    lshw
     #Printing
     #cups-filters
     #cups-printers
