@@ -79,10 +79,6 @@
     let
       system = "x86_64-linux"; # Remove later
       host = "nixos";
-      laptop-host = "nixtop";
-      nix-wsl = "nix-wsl";
-      iso = "iso";
-      nixserver = "nixserver";
       username = "ajhyperbit";
       home = "/home/ajhyperbit";
       cursor_size = 32;
@@ -104,7 +100,7 @@
     {
       nixosConfigurations = {
         #ANCHOR Main Desktop
-        "${host}" = nixpkgs.lib.nixosSystem rec {
+        "nixos" = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           specialArgs = {
             inherit system;
@@ -117,14 +113,14 @@
             inherit cursor_theme;
           };
           modules = [
-            ./hosts/${host}/config.nix
-            ./hosts/${host}/ai.nix
-            ./hosts/${host}/gpg-agent.nix
-            ./hosts/${host}/drives.nix
-            #./hosts/${host}/nixos/disko/disks.nix
-            #./hosts/${host}/disko/wip-disks.nix
-            ./hosts/${host}/input.nix
-            ./hosts/${host}/${host}-hm.nix
+            ./hosts/nixos/config.nix
+            ./hosts/nixos/ai.nix
+            ./hosts/nixos/gpg-agent.nix
+            ./hosts/nixos/drives.nix
+            #./hosts/nixos/nixos/disko/disks.nix
+            #./hosts/nixos/disko/wip-disks.nix
+            ./hosts/nixos/input.nix
+            ./hosts/nixos/nixos-hm.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix
@@ -164,8 +160,68 @@
             )
           ];
         };
+        "nix2" = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+            inherit username;
+            inherit host;
+            inherit home;
+            inherit self;
+            inherit cursor_size;
+            inherit cursor_theme;
+          };
+          modules = [
+            ./hosts/nixos2/config.nix
+            ./hosts/nixos2/ai.nix
+            ./hosts/nixos2/gpg-agent.nix
+            ./hosts/nixos2/drives.nix
+            #./hosts/nixos2/disko/disks.nix
+            #./hosts/nixos2/disko/wip-disks.nix
+            ./hosts/nixos2/disko/WD-Disk.nix
+            ./hosts/nixos2/input.nix
+            ./hosts/nixos2/nixos-hm.nix
+            ./hosts/common/common.nix
+            ./hosts/common/users.nix
+            ./hosts/common/fonts.nix
+            ./hosts/common/audio.nix
+            ./hosts/common/desktop-entries/default-apps.nix
+            ./hosts/common/startup.nix
+            #./hosts/common/packages/ardunio.nix
+            home-manager.nixosModules.home-manager
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-cpu-amd-pstate
+            nixos-hardware.nixosModules.common-cpu-amd-zenpower
+            nixos-hardware.nixosModules.common-pc-ssd
+            stylix.nixosModules.stylix
+            disko.nixosModules.disko
+            nix-index-database.nixosModules.nix-index
+
+            {
+              environment.systemPackages = [
+                pkgs-d49b5ff.google-chrome
+                pkgs-d49b5ff.open-webui
+              ];
+            }
+
+            (
+              {
+                self,
+                system,
+                ...
+              }:
+              {
+                environment.systemPackages =
+                  with self.inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}; [
+                    nix-alien
+                  ];
+              }
+            )
+          ];
+        };
         #Framework13
-        "${laptop-host}" = nixpkgs.lib.nixosSystem rec {
+        "nixtop" = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           specialArgs = {
             inherit system;
@@ -176,8 +232,8 @@
             inherit self;
           };
           modules = [
-            ./hosts/${laptop-host}/config.nix
-            ./hosts/${laptop-host}/hardware.nix
+            ./hosts/nixtop/config.nix
+            ./hosts/nixtop/hardware.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
             nixos-hardware.nixosModules.framework-7040-amd
@@ -188,7 +244,7 @@
               home-manager.users.ajhyperbit = {
                 imports = [
                   ./hosts/common/home.nix
-                  ./hosts/${laptop-host}/home.nix
+                  ./hosts/nixtop/home.nix
                 ];
               };
               home-manager.extraSpecialArgs = {
