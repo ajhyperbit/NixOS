@@ -623,9 +623,9 @@ in
     };
   };
   qt = {
-   enable = true;
-   #style = "breeze";
-   platformTheme = "qt5ct";
+    enable = true;
+    #style = "breeze";
+    platformTheme = "qt5ct";
   };
 
   security = {
@@ -644,6 +644,14 @@ in
             }
             {
               command = "/run/current-system/sw/bin/systemctl kexec";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/sudo modprobe cec";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/sudo modprobe -r cec";
               options = [ "NOPASSWD" ];
             }
           ];
