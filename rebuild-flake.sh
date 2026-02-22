@@ -26,18 +26,18 @@ fi
 host=${1:-}
 reswitch=${2:-}
 # Capture all arguments into a variable for use with nixos-rebuild
-args=${@:3}  # Capture arguments starting from the 3rd argument
+#args=${@:3}  # Capture arguments starting from the 3rd argument
 user=$LOGNAME 
 #if [ -z "$user" ] then
 #user=$(logname)
 #fi
 #LINK - https://unix.stackexchange.com/questions/479102/how-can-i-filter-read-only-file-systems-out-of-df-output#:~:text=df%20%2D%2Doutput%3Dpcent%2Ctarget%20%24(mount%20%2Dt%20ext4%20%7C%20grep%20rw%20%7C%20cut%20%2Dd%22%20%22%20%2Df1)
-storage=$(df --output=pcent,target $(mount -t ext4 | grep rw | cut -d" " -f1) | head -n -1)
+#storage=$(df --output=pcent,target $(mount -t ext4 | grep rw | cut -d" " -f1) | head -n -1)
 
 path=$(pwd)
 
-if [ $path != /home/$user/NixOS-Hyprland ]; then
-	pushd ~/NixOS-Hyprland
+if [ "$path" != /home/$user/NixOS-Hyprland ]; then
+	pushd ~/NixOS-Hyprland || exit
 fi
 
 if [ -z "$host" ] || [ -z "$reswitch" ]; then
@@ -117,7 +117,7 @@ if [[ $(git status --short) != '' ]]; then
   dirty='-dirty'
 fi
 
-if [ $last_tag != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
+if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
     git tag Gen-$hostname-$current_tag-$hash$dirty
     
     printf "Last tag: "$last_tag"\n"
@@ -142,7 +142,7 @@ fi
 #choose "n" "Do you want to trim generations? [(Y)es/(N)o/(Q)uit] (Default: No): " "source ~/NixOS-Hyprland/trim-generations.sh"
 
 if [ $path != /home/$user/NixOS-Hyprland ]; then
-	popd
+	popd || exit
 fi
 
 exit 0;
