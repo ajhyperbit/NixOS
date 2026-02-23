@@ -2,6 +2,7 @@
   config,
   pkgs,
   options,
+  pkgs-d49b5ff,
   ...
 }:
 {
@@ -49,6 +50,7 @@
         #WEBUI_AUTH = "False";
         #OLLAMA_VULKAN = "1";
       };
+      package = pkgs-d49b5ff.open-webui;
     };
   };
 

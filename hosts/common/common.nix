@@ -538,7 +538,7 @@ in
     };
 
     thunderbird = {
-      enable = true;
+      enable = false;
       preferencesStatus = "user";
     };
 

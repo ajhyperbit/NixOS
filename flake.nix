@@ -116,6 +116,7 @@
             inherit self;
             inherit cursor_size;
             inherit cursor_theme;
+            inherit pkgs-d49b5ff;
           };
           modules = [
             ./hosts/${host}/config.nix
@@ -146,7 +147,7 @@
             {
               environment.systemPackages = [
                 pkgs-d49b5ff.google-chrome
-                pkgs-d49b5ff.open-webui
+                #pkgs-d49b5ff.open-webui
               ];
             }
 

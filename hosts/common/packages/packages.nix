@@ -15,6 +15,10 @@
 #  );
 #in
 {
+  imports = [
+    ./package-overlays/proton-ge-overlays/proton-ge-overlay.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     lsof
     neovim
