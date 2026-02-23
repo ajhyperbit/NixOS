@@ -34,18 +34,18 @@ user=$LOGNAME
 #LINK - https://unix.stackexchange.com/questions/479102/how-can-i-filter-read-only-file-systems-out-of-df-output#:~:text=df%20%2D%2Doutput%3Dpcent%2Ctarget%20%24(mount%20%2Dt%20ext4%20%7C%20grep%20rw%20%7C%20cut%20%2Dd%22%20%22%20%2Df1)
 #storage=$(df --output=pcent,target $(mount -t ext4 | grep rw | cut -d" " -f1) | head -n -1)
 
-path=$(pwd)
-
-if [ "$path" != /home/$user/NixOS-Hyprland ]; then
-	pushd ~/NixOS-Hyprland || exit
-fi
-
 if [ -z "$host" ] || [ -z "$reswitch" ]; then
     printf "Usage: $0 <host> <rebuild method>\n"
     printf "  <host>: 'nixos' or 'nixtop'\n"
     printf "  <rebuild method>: 'switch', 'boot', 'test', or 'build'\n"
     printf "For more help, use -h or --help\n"
     exit 3;
+fi
+
+path=$(pwd)
+
+if [ "$path" != /home/$user/NixOS-Hyprland ]; then
+	pushd ~/NixOS-Hyprland || exit
 fi
 
 #Code block for choices
@@ -89,9 +89,11 @@ if command -v nh >/dev/null 2>&1; then
     nh os "$reswitch" -H "$host" |& tee nixos-switch.log
 elif command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
     sudo -v
-    sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json 
+    sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
 else
-    sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" 2>&1 | tee nixos-switch.log
+	sudo nix-shell -p nix-output-monitor.out expect.out --run "unbuffer nixos-rebuild $reswitch --upgrade --show-trace --flake .#$host --log-format internal-json |& nom --json"
+	#Old command
+    #sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" 2>&1 | tee nixos-switch.log
 fi
 
 #REVIEW - Testing required
