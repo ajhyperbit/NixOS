@@ -1,33 +1,33 @@
 #!/usr/bin/env bash
 
 ## Usage
-usage () {
-    printf "Usage:\t $0 <host> <rebuild method>\n\n"
-    printf "host:\t Current valid host names are \"nixos\" or \"nixtop.\"\n"
-    printf "rebuild method:\t Rebuild methods are either switch, boot, test, build, or dry-activate.\n"
-    printf "Arguments put after the ones listed above will be used as arguments for nixos-rebuild command.\n\n"
-    printf "More details on rebuild methods here: https://nixos.wiki/wiki/Nixos-rebuild\n"
+usage() {
+	printf "Usage:\t %s <host> <rebuild method>\n\n" "$0"
+	printf "host:\t Current valid host names are \"nixos\" or \"nixtop.\"\n"
+	printf "rebuild method:\t Rebuild methods are either switch, boot, test, build, or dry-activate.\n"
+	printf "Arguments put after the ones listed above will be used as arguments for nixos-rebuild command.\n\n"
+	printf "More details on rebuild methods here: https://nixos.wiki/wiki/Nixos-rebuild\n"
 }
 
-if [ $# -eq 1 ]; then      # if help requested
-    if [ $1 = "-h" ]; then
-         usage
-         exit 1;
-    fi
-    if [ $1 = "--help" ]; then
-         usage
-         exit 1;
-    fi
-    printf "Don't recognize your option exiting...\n\n"
-    usage
-    exit 2;
+if [ $# -eq 1 ]; then # if help requested
+	if [ "$1" = "-h" ]; then
+		usage
+		exit 1
+	fi
+	if [ "$1" = "--help" ]; then
+		usage
+		exit 1
+	fi
+	printf "Don't recognize your option exiting...\n\n"
+	usage
+	exit 2
 fi
 
 host=${1:-}
 reswitch=${2:-}
 # Capture all arguments into a variable for use with nixos-rebuild
 #args=${@:3}  # Capture arguments starting from the 3rd argument
-user=$LOGNAME 
+user=$LOGNAME
 #if [ -z "$user" ] then
 #user=$(logname)
 #fi
@@ -35,46 +35,50 @@ user=$LOGNAME
 #storage=$(df --output=pcent,target $(mount -t ext4 | grep rw | cut -d" " -f1) | head -n -1)
 
 if [ -z "$host" ] || [ -z "$reswitch" ]; then
-    printf "Usage: $0 <host> <rebuild method>\n"
-    printf "  <host>: 'nixos' or 'nixtop'\n"
-    printf "  <rebuild method>: 'switch', 'boot', 'test', or 'build'\n"
-    printf "For more help, use -h or --help\n"
-    exit 3;
+	printf "Usage: %s <host> <rebuild method>\n" "$0"
+	printf "  <host>: 'nixos' or 'nixtop'\n"
+	printf "  <rebuild method>: 'switch', 'boot', 'test', or 'build'\n"
+	printf "For more help, use -h or --help\n"
+	exit 3
 fi
 
 path=$(pwd)
 
-if [ "$path" != /home/$user/NixOS-Hyprland ]; then
+if [ "$path" != /home/"$user"/NixOS-Hyprland ]; then
 	pushd ~/NixOS-Hyprland || exit
 fi
 
 #Code block for choices
-choose () {
-    local default="$1"
-    local prompt="$2"
-    local answer
-    local command="$3"
+choose() {
+	local default="$1"
+	local prompt="$2"
+	local answer
+	local command="$3"
 
-    read -p "$prompt" answer
-    [ -z "$answer" ] && answer="$default"
+	# shellcheck disable=SC2162
+	read -p "$prompt" answer
+	[ -z "$answer" ] && answer="$default"
 
-    case "$answer" in
-        [yY1] ) #printf "answered yes!\n"
-            eval "$command"
-            ;;
-        [nN0] ) printf "Ok.\n"
-            ;;
-        [qQ]  ) printf "Exiting....\n"
-            exit 5;
-            ;;
-        #REVIEW - Requires Testing
-        #[sS]  ) printf "Running as sudo...\n"
-        #    eval "sudo $command"
-        #    ;;    
-        *     ) printf "%b" "Unexpected answer '$answer'!\n" >&2
-            exit 3;
-            ;;
-    esac
+	case "$answer" in
+	[yY1]) #printf "answered yes!\n"
+		eval "$command"
+		;;
+	[nN0])
+		printf "Ok.\n"
+		;;
+	[qQ])
+		printf "Exiting....\n"
+		exit 5
+		;;
+	#REVIEW - Requires Testing
+	#[sS]  ) printf "Running as sudo...\n"
+	#    eval "sudo $command"
+	#    ;;
+	*)
+		printf "%b" "Unexpected answer '$answer'!\n" >&2
+		exit 3
+		;;
+	esac
 }
 
 choose "n" "Do you want to update flake.lock? [(Y)es/(N)o] (Default: No): " "source ~/NixOS-Hyprland/update-flake.sh"
@@ -85,15 +89,15 @@ printf "NixOS Rebuilding...\n"
 #sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1) || grep -P -n "(?|(\/home\/"$user"\/NixOS-Hyprland\/([a-zA-Z]+)\.nix)|(hosts\/([a-zA-Z]+)\/([a-zA-Z]+).nix))" nixos-switch.log | sed 's/:[[:blank:]]*/: /'
 set -o pipefail
 if command -v nh >/dev/null 2>&1; then
-    sudo -v
-    nh os "$reswitch" -H "$host" |& tee nixos-switch.log
+	sudo -v
+	nh os "$reswitch" -H "$host" |& tee nixos-switch.log
 elif command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
-    sudo -v
-    sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
+	sudo -v
+	sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
 else
 	sudo nix-shell -p nix-output-monitor.out expect.out --run "unbuffer nixos-rebuild $reswitch --upgrade --show-trace --flake .#$host --log-format internal-json |& nom --json"
 	#Old command
-    #sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" 2>&1 | tee nixos-switch.log
+	#sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" 2>&1 | tee nixos-switch.log
 fi
 
 #REVIEW - Testing required
@@ -116,15 +120,18 @@ last_tag=$(git describe --tags --always)
 hash=$(git rev-parse --short HEAD)
 
 if [[ $(git status --short) != '' ]]; then
-  dirty='-dirty'
+	dirty='-dirty'
 fi
 
 if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
-    git tag Gen-$hostname-$current_tag-$hash$dirty
-    
-    printf "Last tag: "$last_tag"\n"
+	# shellcheck disable=SC2086
+	git tag Gen-$hostname-$current_tag-$hash$dirty
 
-    choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
+	printf "Last tag: %s\n" "$last_tag"
+
+	# shellcheck disable=SC2027
+	# shellcheck disable=SC2086
+	choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
 fi
 
 #REVIEW - Testing required
@@ -143,8 +150,8 @@ fi
 
 #choose "n" "Do you want to trim generations? [(Y)es/(N)o/(Q)uit] (Default: No): " "source ~/NixOS-Hyprland/trim-generations.sh"
 
-if [ $path != /home/$user/NixOS-Hyprland ]; then
+if [ "$path" != /home/"$user"/NixOS-Hyprland ]; then
 	popd || exit
 fi
 
-exit 0;
+exit 0
