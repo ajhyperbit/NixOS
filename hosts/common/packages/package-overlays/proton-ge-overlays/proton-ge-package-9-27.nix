@@ -8,7 +8,7 @@
   steamDisplayName ? "GE-Proton",
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "proton-ge-bin";
+  pname = "proton-ge-9-27";
   version = "GE-Proton9-27";
 
   src = fetchzip {
