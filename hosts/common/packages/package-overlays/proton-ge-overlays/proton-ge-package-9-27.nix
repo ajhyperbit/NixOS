@@ -5,7 +5,7 @@
   writeScript,
   # Can be overridden to alter the display name in steam
   # This could be useful if multiple versions should be installed together
-  steamDisplayName ? "GE-Proton",
+  steamDisplayName ? "GE-Proton-9-27",
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "proton-ge-9-27";
