@@ -159,9 +159,11 @@ in
     HYPRCURSOR_THEME = "rose-pine-hyprcursor";
 
     QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
-    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    QT_STYLE_OVERRIDE = "Breeze-Dark";
+    QT_STYLE_OVERRIDE = "Breeze";
+    QT_QPA_PLATFORMTHEME= "qt6ct";
+    GDK_BACKEND = "wayland,x11,";
   };
 
   environment = {
@@ -627,7 +629,6 @@ in
   qt = {
     enable = true;
     #style = "breeze";
-    platformTheme = "qt5ct";
   };
 
   security = {
