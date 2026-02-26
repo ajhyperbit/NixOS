@@ -17,7 +17,6 @@
   ];
   # BOOT related stuff
   boot = {
-    kernelPackages = pkgs.linuxPackages_lqx; # Kernel
 
     kernelParams = [
       "amd_iommu=on"
@@ -188,22 +187,8 @@
   };
 
   environment = {
-    #shellAliases = {
-    #  google-chrome = "google-chrome-stable"
-    #};
-    variables = {
-      #QT_STYLE_OVERRIDE = "breeze";
-      #QT_QPA_PLATFORMTHEME= "qt5ct";
-    };
-
     sessionVariables = {
-      #no_hardware_cursors = "true";
-      #WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
-      #KDE_FULL_SESSION = "true";
-      #QT_QPA_PLATFORM = "wayland;xcb";
-      #QT_QPA_PLATFORMTHEME= "qt5ct";
-      #GDK_BACKEND = "wayland,x11,*";
     };
   };
 
