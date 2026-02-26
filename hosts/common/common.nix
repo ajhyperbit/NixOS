@@ -110,7 +110,6 @@ in
         "https://hyprland.cachix.org"
         "https://nix-community.cachix.org"
         "https://nix-gaming.cachix.org"
-        "https://attic.xuyh0120.win/lantian" #"https://hydra.lantian.pub/jobset/lantian/nix-cachyos-kernel"
       ];
 
       trusted-public-keys = [
