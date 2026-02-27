@@ -39,6 +39,7 @@
         "nomic-embed-text:latest"
         "translategemma:4b"
         "translategemma:12b"
+        "mevatron/diffsense:0.5b"
       ];
     };
     open-webui = {
