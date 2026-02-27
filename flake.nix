@@ -57,7 +57,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
-    #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
   };
 
   outputs =
@@ -66,7 +66,7 @@
       nixpkgs,
       nixpkgs-d49b5ff, # specific pinned nixpkgs version
       nixos-hardware, # hardware-specific modules
-      #nix-cachyos-kernel, # cachyos kernels
+      nix-cachyos-kernel, # cachyos kernels
       home-manager, # home manager
       nix-index-database, # nix index db
       nix-alien, # package overlay/tool (never used as far as I remember)
@@ -136,7 +136,7 @@
             ./hosts/common/startup.nix
             #./hosts/common/packages/ardunio.nix
             ./hosts/pinned-gens/Gen-715.nix
-            #./hosts/nixos/cachyos-kernel.nix
+            ./hosts/nixos/cachyos-kernel.nix
             ./hosts/common/temp-fixes.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
