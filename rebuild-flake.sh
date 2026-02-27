@@ -3,7 +3,7 @@
 ## Usage
 usage() {
 	printf "Usage:\t %s <host> <rebuild method>\n\n" "$0"
-	printf "host:\t Current valid host names are \"nixos\" or \"nixtop.\"\n"
+	printf "host:\t Requires a valid hostname from nixosConfigurations inside flake.nix\n"
 	printf "rebuild method:\t Rebuild methods are either switch, boot, test, build, or dry-activate.\n"
 	printf "Arguments put after the ones listed above will be used as arguments for nixos-rebuild command.\n\n"
 	printf "More details on rebuild methods here: https://nixos.wiki/wiki/Nixos-rebuild\n"
@@ -18,7 +18,7 @@ if [ $# -eq 1 ]; then # if help requested
 		usage
 		exit 1
 	fi
-	printf "Don't recognize your option exiting...\n\n"
+	printf "Don't recognize %s exiting...\n\n" "$1"
 	usage
 	exit 2
 fi
