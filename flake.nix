@@ -61,6 +61,10 @@
       url = "github:xddxdd/nix-cachyos-kernel/release";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lumen = {
+      url = "github:jnsahaj/lumen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -79,6 +83,7 @@
       stylix, # personal configuration overlay
       alejandra, # formatter
       disko, # disk management
+      lumen, # diff viewer, commit message generator, and summerizer of changes using local LLM
       ...
     }:
     let
@@ -141,6 +146,7 @@
             #./hosts/common/packages/ardunio.nix
             ./hosts/nixos/cachyos-kernel.nix
             ./hosts/common/temp-fixes.nix
+            ./hosts/common/overlays.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
