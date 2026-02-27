@@ -139,7 +139,6 @@
             ./hosts/common/desktop-entries/default-apps.nix
             ./hosts/common/startup.nix
             #./hosts/common/packages/ardunio.nix
-            ./hosts/pinned-gens/Gen-715.nix
             ./hosts/nixos/cachyos-kernel.nix
             ./hosts/common/temp-fixes.nix
             home-manager.nixosModules.home-manager
