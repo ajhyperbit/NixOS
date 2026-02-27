@@ -129,9 +129,6 @@ in
   nixpkgs = {
     config = {
       allowUnfree = true;
-
-      overlays = [
-      ];
     };
   };
 
