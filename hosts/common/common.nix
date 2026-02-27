@@ -604,7 +604,7 @@ in
     };
     virtualbox = {
       host = {
-        enable = true;
+        enable = false;
         addNetworkInterface = true;
         enableExtensionPack = true;
       };
