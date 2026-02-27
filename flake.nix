@@ -57,7 +57,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -118,6 +121,7 @@
             inherit cursor_size;
             inherit cursor_theme;
             inherit pkgs-d49b5ff;
+            inherit nix-cachyos-kernel;
           };
           modules = [
             ./hosts/${host}/config.nix

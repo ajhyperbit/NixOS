@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, nix-cachyos-kernel, ... }:
 {
-  nixpkgs.overlay = [ nix-cachyos-kernel.overlays.pinned ]; # Force usage of binary cache if possible.
+  nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ]; # Force usage of binary cache if possible.
 
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
