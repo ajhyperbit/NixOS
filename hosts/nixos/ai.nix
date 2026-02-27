@@ -60,18 +60,6 @@
     ];
   };
 
-  # Temp fix for: "https://github.com/NixOS/nixpkgs/issues/487054"
-  systemd.services.gfxrace = {
-    before = [ "ollama.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${pkgs.coreutils}/bin/sleep 10";
-    };
-    wantedBy = [ "multi-user.target" ];
-    restartIfChanged = false;
-  };
-
   hardware = {
     graphics = {
       extraPackages = with pkgs; [

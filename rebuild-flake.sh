@@ -26,7 +26,7 @@ fi
 host=${1:-}
 reswitch=${2:-}
 # Capture all arguments into a variable for use with nixos-rebuild
-#args=${@:3}  # Capture arguments starting from the 3rd argument
+args=${*:3}  # Capture arguments starting from the 3rd argument
 user=$LOGNAME
 #if [ -z "$user" ] then
 #user=$(logname)
@@ -86,11 +86,15 @@ choose "n" "Do you want to update flake.lock? [(Y)es/(N)o] (Default: No): " "sou
 printf "NixOS Rebuilding...\n"
 
 # Rebuild, output simplified errors, log trackebacks
-#sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1) || grep -P -n "(?|(\/home\/"$user"\/NixOS-Hyprland\/([a-zA-Z]+)\.nix)|(hosts\/([a-zA-Z]+)\/([a-zA-Z]+).nix))" nixos-switch.log | sed 's/:[[:blank:]]*/: /'
 set -o pipefail
 if command -v nh >/dev/null 2>&1; then
-	sudo -v
-	nh os "$reswitch" -H "$host" |& tee nixos-switch.log
+	if [ -z "$args" ]; then
+		sudo -v
+		nh os "$reswitch" -H "$host" |& tee nixos-switch.log
+	else
+		sudo -v
+		nh os "$reswitch" -H "$host" "$args" |& tee nixos-switch.log
+	fi
 elif command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
 	sudo -v
 	sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
@@ -99,15 +103,6 @@ else
 	#Old command
 	#sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" 2>&1 | tee nixos-switch.log
 fi
-
-#REVIEW - Testing required
-#NOTE - If the above command doesn't function correctly, then the if statement below can replace it.
-#if [ -z "args" ]; then
-#sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1) || grep -P -n "(?|(\/home\/"$user"\/NixOS-Hyprland\/([a-zA-Z]+)\.nix)|(hosts\/([a-zA-Z]+)\/([a-zA-Z]+).nix))" nixos-switch.log | sed 's/:[[:blank:]]*/: /'
-#else
-#sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" "$args" &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1) || grep -P -n "(?|(\/home\/"$user"\/NixOS-Hyprland\/([a-zA-Z]+)\.nix)|(hosts\/([a-zA-Z]+)\/([a-zA-Z]+).nix))" nixos-switch.log | sed 's/:[[:blank:]]*/: /'
-#fi
-#REVIEW - Testing required
 
 current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | head -1)
 
