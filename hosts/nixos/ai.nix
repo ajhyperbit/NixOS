@@ -33,6 +33,7 @@
         "dolphin-llama3:8b"
         "qwen2.5:3b"
         "qwen2.5-coder:1.5b"
+        "qwen2.5-coder:3b"
         "qwen2.5-coder:7B"
         "qwen3:8b"
         "llama3.2:3b"
