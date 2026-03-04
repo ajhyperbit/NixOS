@@ -147,6 +147,7 @@
             ./hosts/nixos/cachyos-kernel.nix
             ./hosts/common/temp-fixes.nix
             ./hosts/common/overlays.nix
+            ./hosts/common/virtualization.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
