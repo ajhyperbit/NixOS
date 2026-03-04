@@ -389,6 +389,8 @@
     mesa-demos
 
     chafa
+
+    theclicker
   ];
   #    ++ [
   #      python-packages
