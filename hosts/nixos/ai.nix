@@ -27,19 +27,19 @@
       #So this option should not be needed
       syncModels = true;
       loadModels = [
-        "mistral:7b"
-        "deepseek-r1:8b"
-        "gemma3:4b"
-        "dolphin-llama3:8b"
-        "qwen2.5:3b"
-        "qwen2.5-coder:1.5b"
+        #"mistral:7b"
+        #"deepseek-r1:8b"
+        #"gemma3:4b"
+        #"dolphin-llama3:8b"
+        #"qwen2.5:3b"
+        #"qwen2.5-coder:1.5b"
         "qwen2.5-coder:3b"
-        "qwen2.5-coder:7B"
-        "qwen3:8b"
+        #"qwen2.5-coder:7B"
+        #"qwen3:8b"
         "llama3.2:3b"
         "nomic-embed-text:latest"
-        "translategemma:4b"
-        "translategemma:12b"
+        #"translategemma:4b"
+        #"translategemma:12b"
         "mevatron/diffsense:0.5b"
       ];
     };
