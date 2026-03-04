@@ -109,15 +109,6 @@
     vulkan-validation-layers
     vulkan-tools
 
-    #Windows VM or Filesystem compatiblity
-    qemu
-    exfatprogs
-    #Related to Virtualisation in settings
-    dive # look into docker image layers
-    podman-tui # status of containers in the terminal
-    podman-desktop
-    podman-compose # start group of containers for dev
-
     #Productivity / Video things
     (wrapOBS {
       plugins = with pkgs.obs-studio-plugins; [

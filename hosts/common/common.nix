@@ -395,9 +395,6 @@ in
     extraGroups = [
       "flatpak"
       "disk"
-      "qemu"
-      "kvm"
-      "libvirtd"
       "sshd"
       "networkmanager"
       "wheel"
@@ -407,9 +404,7 @@ in
       "greeter"
       "gamemode"
       "seat"
-      "vboxusers"
       "dialout"
-      "docker"
       "ydotool"
     ];
   };
@@ -570,42 +565,6 @@ in
           gamescope
           mangohud
         ];
-    };
-  };
-
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-      };
-      #https://www.reddit.com/r/NixOS/comments/177wcyi/comment/k4vok4n
-    };
-    spiceUSBRedirection.enable = true;
-
-    # Enable common container config files in /etc/containers
-    containers = {
-      enable = true;
-    };
-    #Podman https://nixos.wiki/wiki/Podman
-    podman = {
-      enable = true;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-      # Make the Podman socket available in place of the Docker socket, so Docker tools can find the Podman socket.
-      dockerSocket.enable = true;
-      # Make the Podman and Docker compatibility API available over the network with TLS client certificate authentication.
-      #networkSocket.enable = true;
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
-    virtualbox = {
-      host = {
-        enable = false;
-        addNetworkInterface = true;
-        enableExtensionPack = true;
-      };
-      #guest.enable = true;
     };
   };
 
