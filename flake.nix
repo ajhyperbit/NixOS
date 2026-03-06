@@ -89,12 +89,8 @@
     let
       system = "x86_64-linux"; # Remove later
       host = "nixos";
-      laptop-host = "nixtop";
-      nix-wsl = "nix-wsl";
-      iso = "iso";
-      nixserver = "nixserver";
       username = "ajhyperbit";
-      home = "/home/ajhyperbit";
+      home = "/home/${username}";
       cursor_size = 32;
       cursor_theme = "BreezeX-RosePine";
 
@@ -164,61 +160,6 @@
               ];
             }
 
-            (
-              {
-                self,
-                system,
-                ...
-              }:
-              {
-                environment.systemPackages =
-                  with self.inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}; [
-                    nix-alien
-                  ];
-              }
-            )
-          ];
-        };
-        #Framework13
-        "${laptop-host}" = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit system;
-            inherit inputs;
-            inherit username;
-            inherit laptop-host;
-            inherit home;
-            inherit self;
-          };
-          modules = [
-            ./hosts/${laptop-host}/config.nix
-            ./hosts/${laptop-host}/hardware.nix
-            ./hosts/common/common.nix
-            ./hosts/common/users.nix
-            nixos-hardware.nixosModules.framework-7040-amd
-            home-manager.nixosModules.home-manager
-            fw-fanctrl.nixosModules.default
-            {
-              home-manager.useUserPackages = true;
-              home-manager.users.ajhyperbit = {
-                imports = [
-                  ./hosts/common/home.nix
-                  ./hosts/${laptop-host}/home.nix
-                ];
-              };
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                inherit system;
-                inherit self;
-                inherit username;
-              };
-              home-manager.backupFileExtension = "backup";
-            }
-            stylix.nixosModules.stylix
-
-            {
-              environment.systemPackages = [ alejandra.defaultPackage.${pkgs.stdenv.hostPlatform.system} ];
-            }
             (
               {
                 self,
