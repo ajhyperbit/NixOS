@@ -1,14 +1,12 @@
 {
-  lib,
-  config,
   ...
 }:
 let
   disk1 = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_500GB_S5H7NS0N583877Z";
   disk2 = "/dev/vda"; # Intentionally left unset for now.
-  disk3 = "/dev/disk/by-id/ata-WDC_WDS200T2B0A_19162B802185";
+  #disk3 = "/dev/disk/by-id/ata-WDC_WDS200T2B0A_19162B802185";
   disk4 = "/dev/disk/by-id/ata-ST2000NE0025-2FL101_ZDS1968N";
-  disk5 = "/dev/disk/by-id/ata-ST6000VN0033-2EE110_ZADBCVNZ";
+  #disk5 = "/dev/disk/by-id/ata-ST6000VN0033-2EE110_ZADBCVNZ";
 in
 {
 

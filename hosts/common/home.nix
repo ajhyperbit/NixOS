@@ -1,11 +1,7 @@
 {
-  config,
   pkgs,
-  options,
   username,
   lib,
-  inputs,
-  system,
   cursor_theme,
   cursor_size,
   ...

@@ -1,4 +1,8 @@
-{ config, lib, pkgs, nix-cachyos-kernel, ... }:
+{
+  pkgs,
+  nix-cachyos-kernel,
+  ...
+}:
 {
   nixpkgs.overlays = [ nix-cachyos-kernel.overlays.pinned ]; # Force usage of binary cache if possible.
 

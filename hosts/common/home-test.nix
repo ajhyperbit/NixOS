@@ -29,7 +29,6 @@
 {
   config,
   pkgs,
-  options,
   username,
   lib,
   ...

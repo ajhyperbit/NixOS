@@ -1,20 +1,15 @@
 # Main default config
 {
-  config,
   pkgs,
-  host,
   username,
   options,
   lib,
   inputs,
-  self,
-  home,
   cursor_theme,
-  cursor_size,
   ...
 }:
 let
-  inherit (import ./variables.nix) keyboardLayout;
+  #inherit (import ./variables.nix) keyboardLayout;
   nhArgs = "--keep-since 14d --keep 5 --optimise";
 in
 {

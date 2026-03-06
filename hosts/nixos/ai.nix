@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  options,
   pkgs-d49b5ff,
   ...
 }:

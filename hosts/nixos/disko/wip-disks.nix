@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 let
   disk4 = "/dev/disk/by-id/ata-ST2000NE0025-2FL101_ZDS1968N";
