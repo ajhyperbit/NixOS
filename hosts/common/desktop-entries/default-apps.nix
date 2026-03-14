@@ -14,6 +14,7 @@
         #https://www.iana.org/assignments/media-types/media-types.xhtml
         "application/pdf" = "google-chrome.desktop";
         "inode/directory" = "thunar.desktop";
+        "text/x-patch" = "kate.desktop";
       };
     };
   };
