@@ -152,7 +152,7 @@ in
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_STYLE_OVERRIDE = "Breeze";
-    QT_QPA_PLATFORMTHEME= "qt6ct";
+    QT_QPA_PLATFORMTHEME = "qt6ct";
     GDK_BACKEND = "wayland,x11,";
   };
 
@@ -663,12 +663,12 @@ in
     services.NetworkManager-wait-online.enable = pkgs.lib.mkForce false;
 
     #Sleep settings
-    sleep.extraConfig = ''
-      AllowSuspend=no
-      AllowHibernation=no
-      AllowHybridSleep=no
-      AllowSuspendThenHibernate=no
-    '';
+    sleep.settings.Sleep = {
+      AllowSuspend = "no";
+      AllowHibernation = "no";
+      AllowHybridSleep = "no";
+      AllowSuspendThenHibernate = "no";
+    };
   };
 
   # zram
