@@ -132,6 +132,7 @@
             #./hosts/${host}/nixos/disko/disks.nix
             #./hosts/${host}/disko/wip-disks.nix
             ./hosts/${host}/input.nix
+            ./hosts/${host}/audio.nix
             ./hosts/${host}/${host}-hm.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
