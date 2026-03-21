@@ -87,21 +87,23 @@ printf "NixOS Rebuilding...\n"
 
 # Rebuild, output simplified errors, log trackebacks
 set -o pipefail
+
+sudo -v
+keepalive() { while true; do sleep 50; sudo -v; done; }
+keepalive &
+KEEPALIVE_PID=$!
+trap 'kill $KEEPALIVE_PID 2>/dev/null' EXIT
+
 if command -v nh >/dev/null 2>&1; then
 	if [ -z "$args" ]; then
-		sudo -v
 		nh os "$reswitch" -H "$host" |& tee nixos-switch.log
 	else
-		sudo -v
 		nh os "$reswitch" -H "$host" "$args" |& tee nixos-switch.log
 	fi
 elif command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
-	sudo -v
 	sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
 else
 	sudo nix-shell -p nix-output-monitor.out expect.out --run "unbuffer nixos-rebuild $reswitch --upgrade --show-trace --flake .#$host --log-format internal-json |& nom --json"
-	#Old command
-	#sudo nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" 2>&1 | tee nixos-switch.log
 fi
 
 current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | head -1)
