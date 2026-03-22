@@ -1,4 +1,4 @@
-{ }:
+{ ... }:
 {
   services.pipewire.wireplumber.extraConfig = {
     "mute-quadcast" = {
