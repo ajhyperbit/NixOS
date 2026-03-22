@@ -5,4 +5,3 @@ logs
 nixos-hyprland.code-workspace
 *.code-workspace
 images/**
-hosts/common/packages/refactor/**
