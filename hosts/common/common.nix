@@ -416,7 +416,7 @@ in
       xwayland.enable = true;
       withUWSM = true;
     };
-    waybar.enable = true; # has some kind of race condition when used in the Hyprland UWSM env
+    #waybar.enable = true; # has some kind of race condition when used in the Hyprland UWSM env
     hyprlock.enable = true;
     firefox.enable = true;
     git = {
