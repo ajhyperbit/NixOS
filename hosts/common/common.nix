@@ -330,7 +330,7 @@ in
         default_session = {
           user = username;
           command = ''
-            ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start -F -- ${pkgs.hyprland}/bin/start-hyprland" --power-reboot 'sudo systemctl kexec'
+            ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop" --power-reboot 'sudo systemctl kexec'
           '';
         };
       };
@@ -416,7 +416,7 @@ in
       xwayland.enable = true;
       withUWSM = true;
     };
-    waybar.enable = true; #has some kind of race condition when used in the Hyprland UWSM env
+    waybar.enable = true; # has some kind of race condition when used in the Hyprland UWSM env
     hyprlock.enable = true;
     firefox.enable = true;
     git = {
