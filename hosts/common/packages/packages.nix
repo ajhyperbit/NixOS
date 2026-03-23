@@ -379,6 +379,8 @@
     chafa
 
     theclicker
+
+    bubblewrap
   ];
   #    ++ [
   #      python-packages
