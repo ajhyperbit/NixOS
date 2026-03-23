@@ -152,7 +152,7 @@ in
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_STYLE_OVERRIDE = "Breeze";
-    QT_QPA_PLATFORMTHEME= "qt6ct";
+    QT_QPA_PLATFORMTHEME = "qt6ct";
     GDK_BACKEND = "wayland,x11,";
   };
 
@@ -165,6 +165,14 @@ in
         if [ -n "$location" ] && [ "$location" != "/home/$origUser" ]; then
           printf "$location\n"
         fi
+      }
+
+      bottles () {
+        steam-run bottles
+      }
+
+      bottles-offline () {
+        steam-run unshare --net --user --map-root-user -- bottles
       }
 
       # Only set GPG_TTY for SSH sessions
