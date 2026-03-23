@@ -381,6 +381,8 @@
     theclicker
 
     bubblewrap
+
+    file
   ];
   #    ++ [
   #      python-packages
