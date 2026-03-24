@@ -25,7 +25,7 @@
     curl
     psmisc
     socat
-    google-chrome
+    #google-chrome
     chromium
     # System Packages
     #baobab # Disk usage analyzer
