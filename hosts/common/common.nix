@@ -48,6 +48,9 @@ in
       "nohibernate"
       #"mitigations=off"
     ];
+
+    kernelModules = [ "ntsync" ];
+
     tmp.cleanOnBoot = lib.mkDefault true;
     #supportedFilesystems = ["ntfs"];
     loader = {
