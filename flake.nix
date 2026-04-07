@@ -154,13 +154,6 @@
             disko.nixosModules.disko
             nix-index-database.nixosModules.nix-index
 
-            {
-              environment.systemPackages = [
-                #pkgs-d49b5ff.google-chrome
-                #pkgs-d49b5ff.open-webui
-              ];
-            }
-
             (
               {
                 self,
