@@ -1,5 +1,6 @@
 {
   lib,
+  username,
   pkgs,
   pkgs-d49b5ff,
   ...
@@ -14,7 +15,7 @@
   services = {
     ollama = {
       enable = true;
-      home = "/run/media/ajhyperbit/SATA_SSD/ollama";
+      home = "/run/media/${username}/SATA_SSD/ollama";
       #Run without GPU
       #package = pkgs.ollama;
       #Run with GPU
@@ -65,7 +66,7 @@
     services.ollama.serviceConfig.UMask = lib.mkForce "0022";
     tmpfiles.settings = {
       "ollamaConfig" = {
-        "/run/media/ajhyperbit/SATA_SSD/ollama" = {
+        "/run/media/${username}/SATA_SSD/ollama" = {
           d = {
             group = "users";
             mode = "0755";

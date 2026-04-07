@@ -1,4 +1,5 @@
 {
+  username,
   ...
 }:
 {
@@ -32,7 +33,7 @@
   #  options = [ "relatime" ];
   #};
 
-  fileSystems."/run/media/ajhyperbit/SATA_SSD" = {
+  fileSystems."/run/media/${username}/SATA_SSD" = {
     device = "/dev/disk/by-uuid/c879995c-386a-42c2-bc3b-8d02a03c61de";
     fsType = "ext4";
     options = [
@@ -46,10 +47,10 @@
 
   # systemd.tmpfiles.rules = [
   #   # Type Path                                  Mode UID    GID Age Argument
-  #   "d     /run/media/ajhyperbit/SATA_SSD/ollama 0755 ollama 100 -   -"
+  #   "d     /run/media/${username}/SATA_SSD/ollama 0755 ollama 100 -   -"
   # ];
 
-  # fileSystems."/run/media/ajhyperbit/DATA" = {
+  # fileSystems."/run/media/${username}/DATA" = {
   #   device = "/dev/disk/by-uuid/f8b6d208-2efc-447c-9251-7e1aa2d1d29b";
   #   fsType = "ext4";
   #   options = [
@@ -62,7 +63,7 @@
   #   ];
   # };
 
-  #fileSystems."/run/media/ajhyperbit/Archive" = {
+  #fileSystems."/run/media/${username}/Archive" = {
   #  device = "/dev/disk/by-uuid/4fd45309-e0dc-4124-8c19-36c011aad8eb";
   #  label = "Archive";
   #  fsType = "btrfs";

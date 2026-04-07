@@ -307,7 +307,7 @@ in
       };
       autoLogin = {
         enable = false;
-        user = "ajhyperbit";
+        user = "${username}";
       };
     };
 
@@ -395,7 +395,7 @@ in
     ratbagd.enable = true;
   };
 
-  users.users.ajhyperbit = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "AJHyperBit";
     extraGroups = [
@@ -467,7 +467,7 @@ in
         extraArgs = nhArgs;
         dates = "monthly";
       };
-      flake = "/home/ajhyperbit/NixOS-Hyprland";
+      flake = "/home/${username}/NixOS-Hyprland";
     };
 
     #KDE window borders fix
@@ -659,7 +659,7 @@ in
 
   #home-manager.useGlobalPkgs = true;
   #home-manager.useUserPackages = true;
-  #home-manager.users.ajhyperbit = { imports = [ ./config/home.nix ];};
+  #home-manager.users.${username} = { imports = [ ./config/home.nix ];};
   #home-manager.extraSpecialArgs = {inherit inputs self username;};
   #home-manager.backupFileExtension = "hm-bak";
 

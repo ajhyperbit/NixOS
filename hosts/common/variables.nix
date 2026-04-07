@@ -5,9 +5,6 @@
   gitUsername = "AJHyperBit";
   gitEmail = "ajhyperbit@gmail.com";
 
-  # Hyprland Settings
-  extraMonitorSettings = "";
-
   # Waybar Settings
   clock24h = true;
 

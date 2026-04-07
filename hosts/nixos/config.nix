@@ -5,6 +5,7 @@
   host,
   lib,
   modulesPath,
+  username,
   ...
 }:
 {
@@ -92,7 +93,7 @@
   ];
 
   lib.mkMerge = {
-    users.users.ajhyperbit = {
+    users.users.${username} = {
       extraGroups = [
         "ddclient"
       ];
@@ -140,40 +141,40 @@
           "mangled names" = "no";
         };
 
-        ajhyperbit = {
-          "valid users" = "ajhyperbit";
-          path = "/home/ajhyperbit";
+        ${username} = {
+          "valid users" = "${username}";
+          path = "/home/${username}";
           browseable = "yes";
           "read only" = "no";
           "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "ajhyperbit";
+          "force user" = "${username}";
           "force group" = "users";
         };
 
         media = {
-          "valid users" = "ajhyperbit";
-          path = "/run/media/ajhyperbit";
+          "valid users" = "${username}";
+          path = "/run/media/${username}";
           browseable = "yes";
           "read only" = "no";
           "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "ajhyperbit";
+          "force user" = "${username}";
           "force group" = "users";
           "acl allow execute always" = "yes";
         };
 
         mnt = {
-          "valid users" = "ajhyperbit";
+          "valid users" = "${username}";
           path = "/mnt";
           browseable = "yes";
           "read only" = "no";
           "guest ok" = "no";
           "create mask" = "0644";
           "directory mask" = "0755";
-          "force user" = "ajhyperbit";
+          "force user" = "${username}";
           "force group" = "users";
           "acl allow execute always" = "yes";
         };

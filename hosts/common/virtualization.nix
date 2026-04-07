@@ -1,5 +1,6 @@
 {
   pkgs,
+  username,
   ...
 }:
 {
@@ -55,9 +56,8 @@
     };
   };
 
-  users.users.ajhyperbit = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "AJHyperBit";
     extraGroups = [
       "qemu"
       "kvm"

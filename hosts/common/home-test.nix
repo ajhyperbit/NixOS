@@ -13,7 +13,7 @@
 #    (import "${home-manager}/nixos")
 #  ];
 #
-#  home-manager.users.ajhyperbit = {
+#  home-manager.users.${username} = {
 #    /* The home.stateVersion option does not have a default and must be set */
 #    home.stateVersion = "${state}";
 #    /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
@@ -23,8 +23,8 @@
 #programs.git = {
 #  package = pkgs.gitFull;
 #  enable = true;
-#  userName = "ajhyperbit";
-#  userEmail = "ajhyperbit@gmail.com"
+#  userName = "${username}";
+#  userEmail = "${username}@gmail.com"
 #};
 {
   config,

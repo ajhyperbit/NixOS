@@ -10,7 +10,7 @@
 }:
 {
   home-manager.useUserPackages = true;
-  home-manager.users.ajhyperbit = {
+  home-manager.users.${username} = {
     imports = [
       ./home.nix
       ../../hosts/${host}/home.nix
