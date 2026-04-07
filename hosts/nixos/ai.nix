@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   pkgs-d49b5ff,
   ...
@@ -60,13 +61,16 @@
     ];
   };
 
-  systemd.tmpfiles.settings = {
-    "ollamaConfig" = {
-      "/run/media/ajhyperbit/SATA_SSD/ollama" = {
-        d = {
-          group = "users";
-          mode = "0755";
-          user = "ollama";
+  systemd = {
+    services.ollama.serviceConfig.UMask = lib.mkForce "0022";
+    tmpfiles.settings = {
+      "ollamaConfig" = {
+        "/run/media/ajhyperbit/SATA_SSD/ollama" = {
+          d = {
+            group = "users";
+            mode = "0755";
+            user = "ollama";
+          };
         };
       };
     };
