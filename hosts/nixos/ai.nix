@@ -60,6 +60,18 @@
     ];
   };
 
+  systemd.tmpfiles.settings = {
+    "ollamaConfig" = {
+      "/run/media/ajhyperbit/SATA_SSD/ollama" = {
+        d = {
+          group = "users";
+          mode = "0755";
+          user = "ollama";
+        };
+      };
+    };
+  };
+
   hardware = {
     graphics = {
       extraPackages = with pkgs; [

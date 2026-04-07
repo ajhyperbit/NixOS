@@ -48,17 +48,6 @@
   #   # Type Path                                  Mode UID    GID Age Argument
   #   "d     /run/media/ajhyperbit/SATA_SSD/ollama 0755 ollama 100 -   -"
   # ];
-  systemd.tmpfiles.settings = {
-    "ollamaConfig" = {
-      "/run/media/ajhyperbit/SATA_SSD/ollama" = {
-        d = {
-          group = "users";
-          mode = "0755";
-          user = "ollama";
-        };
-      };
-    };
-  };
 
   # fileSystems."/run/media/ajhyperbit/DATA" = {
   #   device = "/dev/disk/by-uuid/f8b6d208-2efc-447c-9251-7e1aa2d1d29b";
