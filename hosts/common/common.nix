@@ -166,7 +166,7 @@ in
         location=$(readlink -f "$(command -v $1)")
 
         if [ -n "$location" ] && [ "$location" != "/home/$origUser" ]; then
-          printf "$location\n"
+          printf "%s\n" "$location"
         fi
       }
 
@@ -598,15 +598,15 @@ in
           users = [ "${username}" ];
           commands = [
             {
-              command = "/run/current-system/sw/bin/systemctl poweroff";
+              command = "${pkgs.systemd}/bin/systemctl poweroff";
               options = [ "NOPASSWD" ];
             }
             {
-              command = "/run/current-system/sw/bin/systemctl reboot";
+              command = "${pkgs.systemd}bin/systemctl reboot";
               options = [ "NOPASSWD" ];
             }
             {
-              command = "/run/current-system/sw/bin/systemctl kexec";
+              command = "${pkgs.systemd}bin/systemctl kexec";
               options = [ "NOPASSWD" ];
             }
             {
