@@ -27,6 +27,7 @@
     socat
     google-chrome
     chromium
+    floorp-bin
     # System Packages
     #baobab # Disk usage analyzer
     btrfs-progs
