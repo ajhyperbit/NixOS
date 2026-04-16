@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-d49b5ff.url = "github:nixos/nixpkgs/d49b5ff8f46788770abcb732ac38bfa431ca5d5e";
-    nixpkgs-sliding-commit.url = "github:nixos/nixpkgs/aaca8b07c7ba1c5f4fe6bc9105acca37c8136d87";
+    nixpkgs-sliding-commit.url = "nixpkgs/nixpkgs-unstable";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
