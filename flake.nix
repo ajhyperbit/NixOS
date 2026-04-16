@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-d49b5ff.url = "github:nixos/nixpkgs/d49b5ff8f46788770abcb732ac38bfa431ca5d5e";
+    #Run this command to update this one specifically:
+    #nix flake update nixpkgs-sliding-commit
     nixpkgs-sliding-commit.url = "nixpkgs/nixpkgs-unstable";
 
     nix-index-database = {
