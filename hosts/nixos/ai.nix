@@ -3,6 +3,7 @@
   username,
   pkgs,
   pkgs-d49b5ff,
+  pkgs-sliding,
   ...
 }:
 {
@@ -19,7 +20,7 @@
       #Run without GPU
       #package = pkgs.ollama;
       #Run with GPU
-      package = pkgs.ollama-rocm;
+      package = pkgs-sliding.ollama-rocm;
       user = "ollama";
       group = "users";
       rocmOverrideGfx = "12.0.1";

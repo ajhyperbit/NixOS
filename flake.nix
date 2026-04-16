@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-d49b5ff.url = "github:nixos/nixpkgs/d49b5ff8f46788770abcb732ac38bfa431ca5d5e";
+    nixpkgs-sliding-commit.url = "github:nixos/nixpkgs/aaca8b07c7ba1c5f4fe6bc9105acca37c8136d87";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -72,6 +73,7 @@
       self,
       nixpkgs,
       nixpkgs-d49b5ff, # specific pinned nixpkgs version
+      nixpkgs-sliding-commit,
       nixos-hardware, # hardware-specific modules
       nix-cachyos-kernel, # cachyos kernels
       home-manager, # home manager
@@ -106,6 +108,12 @@
           allowUnfree = true;
         };
       };
+      pkgs-sliding = import nixpkgs-sliding-commit {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
     in
     {
       nixosConfigurations = {
@@ -122,6 +130,7 @@
             inherit cursor_size;
             inherit cursor_theme;
             inherit pkgs-d49b5ff;
+            inherit pkgs-sliding;
             inherit nix-cachyos-kernel;
           };
           modules = [
