@@ -9,6 +9,7 @@
 {
   environment.systemPackages = with pkgs; [
     clinfo
+    rocmPackages.rocm-smi
   ];
 
   nixpkgs.config.rocmSupport = true;
