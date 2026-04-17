@@ -8,6 +8,18 @@
     #nix flake update nixpkgs-sliding-commit
     nixpkgs-sliding-commit.url = "nixpkgs/nixpkgs-unstable";
 
+    flake-compat = {
+      url = "github:NixOS/flake-compat";
+      flake = false;
+    };
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
+    };
+
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +42,11 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    stylix.url = "github:danth/stylix";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
 
     alejandra = {
       url = "github:kamadorueda/alejandra/4.0.0";
@@ -40,9 +56,14 @@
     fw-fanctrl = {
       url = "github:TamtamHero/fw-fanctrl/packaging/nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
     };
 
-    nix-alien.url = "github:thiagokokada/nix-alien";
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+    };
 
     disko = {
       url = "github:nix-community/disko/latest";
@@ -63,6 +84,8 @@
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel/release";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-parts.follows = "flake-parts";
     };
     # lumen = {
     #   url = "github:jnsahaj/lumen";
