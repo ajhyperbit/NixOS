@@ -209,6 +209,7 @@
             inherit system;
             inherit inputs;
             inherit username;
+            inherit host;
             inherit otg-host;
             inherit home;
             inherit self;
@@ -220,13 +221,13 @@
           };
           modules = [
             ./hosts/${otg}/config.nix
-            ./hosts/${otg}/gpg-agent.nix
+            ./hosts/${otg}/ai.nix
+            ./hosts/${host}/gpg-agent.nix
             ./hosts/${otg}/drives.nix
             ./hosts/${otg}/disko/singe-drive-setup.nix
-            ./hosts/${otg}/input.nix
-            ./hosts/${otg}/audio.nix
+            ./hosts/${host}/input.nix
             ./hosts/${otg}/${otg}-hm.nix
-            ./hosts/${otg}/cachyos-kernel.nix
+            ./hosts/${host}/cachyos-kernel.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix

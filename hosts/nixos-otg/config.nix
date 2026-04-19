@@ -5,7 +5,6 @@
   otg-host,
   lib,
   modulesPath,
-  username,
   ...
 }:
 {
