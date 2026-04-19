@@ -163,8 +163,7 @@
             ./hosts/${host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
             ./hosts/${host}/drives.nix
-            #./hosts/${host}/nixos/disko/disks.nix
-            #./hosts/${host}/disko/wip-disks.nix
+            #./hosts/${host}/disko/disks.nix
             ./hosts/${host}/input.nix
             ./hosts/${host}/audio.nix
             ./hosts/${host}/${host}-hm.nix

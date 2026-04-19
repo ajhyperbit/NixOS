@@ -1,32 +1,17 @@
-{
-  ...
-}:
+{ username, ... }:
 let
+  #NVMe SSD 1
   disk1 = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_500GB_S5H7NS0N583877Z";
-  disk2 = "/dev/vda"; # Intentionally left unset for now.
-  #disk3 = "/dev/disk/by-id/ata-WDC_WDS200T2B0A_19162B802185";
+  #NVMe SSD 2
+  disk2 = "/dev/disk/by-id/nvme-WD_BLACK_SN850X_1000GB_25463T800234";
+  #SATA SSD
+  disk3 = "/dev/disk/by-id/ata-WDC_WDS200T2B0A_19162B802185";
+  #DATA disk
   disk4 = "/dev/disk/by-id/ata-ST2000NE0025-2FL101_ZDS1968N";
-  #disk5 = "/dev/disk/by-id/ata-ST6000VN0033-2EE110_ZADBCVNZ";
+  #Archive disk
+  disk5 = "/dev/disk/by-id/ata-ST6000VN0033-2EE110_ZADBCVNZ";
 in
 {
-
-  systemd.tmpfiles.settings = {
-    "ollamaConfig" = {
-      "/run/media/ajhyperbit/SATA_SSD/ollama" = {
-        d = {
-          group = "users";
-          mode = "0755";
-          user = "ollama";
-        };
-      };
-    };
-  };
-
-  systemd.tmpfiles.rules = [
-    # Type Path                                  Mode UID    GID Age Argument
-    "d     /run/media/ajhyperbit/SATA_SSD/ollama 0755 ollama 100 -   -"
-  ];
-
   disko.devices = {
     disk = {
       ${disk1} = {
@@ -50,6 +35,7 @@ in
             };
             swap = {
               label = "swap";
+              name = "swap";
               size = "72G"; # SWAP
               content = {
                 type = "swap";
@@ -58,36 +44,20 @@ in
             }; # I probably don't need a swap this massive.
             root = {
               label = "rootfs";
-              name = "btrfs";
-              size = "100%";
+              name = "rootfs";
+              size = "50%";
               content = {
-                type = "btrfs"; # Am I sure I want my boot drive to be btrfs?
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  # This whole subvolume thing is probably wrong.
-                  "/root" = { };
-                  "/root/rootfs" = {
-                    mountpoint = "/";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/root/snapshots" = {
-                    mountpoint = "/.snapshots";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                };
+                type = "filesystem";
+                format = "ext4";
+              };
+            };
+            nix = {
+              label = "nix";
+              name = "nix";
+              size = "50%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
               };
             };
           };
@@ -106,31 +76,36 @@ in
               name = "home";
               size = "100%";
               content = {
-                type = "btrfs"; # Same question as earlier with btrfs
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  # Also probably wrong.
-                  "/home" = { };
-                  "/home/active" = {
-                    mountpoint = "/home";
-                    mountOptions = [
-                      "compress=zstd"
-                    ];
-                  };
-                  "/home/snapshots" = {
-                    mountpoint = "/home/.snapshots";
-                    mountOptions = [
-                      "compress=zstd"
-                    ];
-                  };
-                };
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/home";
               };
             };
           };
         };
       };
     };
-
+    disk = {
+      ${disk3} = {
+        type = "disk";
+        device = "${disk3}";
+        content = {
+          type = "gpt";
+          partitions = {
+            SATA_SSD = {
+              label = "SATA_SSD";
+              name = "SATA_SSD";
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/run/media/${username}/SATA_SSD";
+              };
+            };
+          };
+        };
+      };
+    };
     disk = {
       ${disk4} = {
         type = "disk";
@@ -142,26 +117,9 @@ in
               label = "DATA";
               size = "100%";
               content = {
-                type = "btrfs"; # This might actually have value in being btrfs
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  # This is almost certainly wrong.
-                  "/mnt/DATA" = { };
-                  "/DATA/rootfs" = {
-                    mountpoint = "/DATA";
-                    mountOptions = [
-                      "compress=zstd"
-                      "nofail"
-                    ];
-                  };
-                  "/DATA/.snapshots" = {
-                    mountpoint = "/DATA/.snapshots";
-                    mountOptions = [
-                      "compress=zstd"
-                      "nofail"
-                    ];
-                  };
-                };
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/run/media/${username}/DATA";
               };
             };
           };

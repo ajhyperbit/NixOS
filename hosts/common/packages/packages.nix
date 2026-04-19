@@ -384,8 +384,6 @@
     bubblewrap
 
     file
-
-    proton-vpn
   ];
   #    ++ [
   #      python-packages

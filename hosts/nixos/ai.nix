@@ -79,6 +79,11 @@
     };
   };
 
+  # systemd.tmpfiles.rules = [
+  #   # Type Path                                  Mode UID    GID Age Argument
+  #   "d     /run/media/ajhyperbit/SATA_SSD/ollama 0755 ollama 100 -   -"
+  # ];
+
   hardware = {
     graphics = {
       extraPackages = with pkgs; [

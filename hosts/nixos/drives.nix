@@ -44,6 +44,18 @@
       "exec" # Permit execution of binaries and other executable files
     ];
   };
+  
+  fileSystems."/run/media/${username}/DATA" = {
+    device = "/dev/disk/by-uuid/5fbf2ab2-4950-467b-ac78-13fbb8bf516b";
+    fsType = "ext4";
+    options = [
+      # If you don't have this options attribute, it'll default to "defaults"
+      # boot options for fstab. Search up fstab mount options you can use
+      "users" # Allows any user to mount and unmount
+      "nofail" # Prevent system from failing if this drive doesn't mount
+      "exec" # Permit execution of binaries and other executable files
+    ];
+  };
 
   # systemd.tmpfiles.rules = [
   #   # Type Path                                  Mode UID    GID Age Argument
