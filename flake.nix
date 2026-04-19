@@ -219,7 +219,7 @@
             ./hosts/${otg-host}/config.nix
             ./hosts/${otg-host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
-            #./hosts/${otg-host}/drives.nix
+            ./hosts/${otg-host}/drives.nix
             ./hosts/${otg-host}/disko/single-drive-setup.nix
             ./hosts/${host}/input.nix
             ./hosts/${otg-host}/${otg-host}-hm.nix
@@ -227,7 +227,7 @@
             ./hosts/${otg-host}/sys-ver.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
-            ./hosts/common/fonts.nix
+            #./hosts/common/fonts.nix
             ./hosts/common/audio.nix
             ./hosts/common/desktop-entries/default-apps.nix
             ./hosts/common/startup.nix
@@ -255,6 +255,64 @@
             )
           ];
         };
+        
+        "${otg-host}-reduced" = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit system;
+            inherit inputs;
+            inherit username;
+            inherit host;
+            inherit otg-host;
+            inherit home;
+            inherit self;
+            inherit cursor_size;
+            inherit cursor_theme;
+            inherit pkgs-d49b5ff;
+            inherit pkgs-sliding;
+            inherit nix-cachyos-kernel;
+          };
+          modules = [
+            ./hosts/${otg-host}/config.nix
+            #./hosts/${otg-host}/ai.nix
+            ./hosts/${host}/gpg-agent.nix
+            #./hosts/${otg-host}/drives.nix
+            ./hosts/${otg-host}/disko/single-drive-setup.nix
+            ./hosts/${host}/input.nix
+            ./hosts/${otg-host}/${otg-host}-hm.nix
+            ./hosts/${host}/cachyos-kernel.nix
+            ./hosts/${otg-host}/sys-ver.nix
+            ./hosts/common/common.nix
+            ./hosts/common/users.nix
+            #./hosts/common/fonts.nix
+            ./hosts/common/audio.nix
+            ./hosts/common/desktop-entries/default-apps.nix
+            ./hosts/common/startup.nix
+            #./hosts/common/packages/ardunio.nix
+            ./hosts/common/temp-fixes.nix
+            # ./hosts/common/overlays.nix
+            ./hosts/common/virtualization.nix
+            home-manager.nixosModules.home-manager
+            nixos-hardware.nixosModules.common-pc-ssd
+            stylix.nixosModules.stylix
+            disko.nixosModules.disko
+            nix-index-database.nixosModules.nix-index
+
+            (
+              {
+                self,
+                ...
+              }:
+              {
+                environment.systemPackages =
+                  with self.inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}; [
+                    nix-alien
+                  ];
+              }
+            )
+          ];
+        };
+
         formatter =
           let
             pkg = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
