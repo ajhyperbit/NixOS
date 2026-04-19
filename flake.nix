@@ -339,19 +339,6 @@
             nixos-hardware.nixosModules.common-pc-ssd
             stylix.nixosModules.stylix
             disko.nixosModules.disko
-
-            (
-              {
-                self,
-                ...
-              }:
-              {
-                environment.systemPackages =
-                  with self.inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}; [
-                    nix-alien
-                  ];
-              }
-            )
           ];
         };
 
