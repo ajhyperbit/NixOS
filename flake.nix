@@ -336,6 +336,7 @@
             ./hosts/${otg-host}/disko/single-drive-setup.nix
             ./hosts/${otg-host}/sys-ver.nix
             ./hosts/common/users.nix
+            ./hosts/common/init.nix
             nixos-hardware.nixosModules.common-pc-ssd
             stylix.nixosModules.stylix
             disko.nixosModules.disko

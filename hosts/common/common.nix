@@ -517,16 +517,11 @@ in
       ];
     };
 
-    #Virtualization (Windows VM) #TODO: move to it's own module (unsure if laptop will ever do some kind of Windows VM stuff, might just RDP/Parsec/VNC into it.)
-    #virt-manager.enable = true;
-
-    #TODO: (Research) Something coding related (VS code talks about it)
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
 
     nix-ld = {
       enable = true;
-      #libraries = pkgs.steam-run.fhsenv.args.multiPkgs pkgs;
     };
 
     thunderbird = {
