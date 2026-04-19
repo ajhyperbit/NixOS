@@ -87,10 +87,6 @@
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
     };
-    # lumen = {
-    #   url = "github:jnsahaj/lumen";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs =
@@ -228,6 +224,7 @@
             ./hosts/${host}/input.nix
             ./hosts/${otg}/${otg}-hm.nix
             ./hosts/${host}/cachyos-kernel.nix
+            ./hosts/${otg}/system-ver.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix

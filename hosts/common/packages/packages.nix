@@ -363,8 +363,6 @@
 
     ydotool
 
-    vintagestory
-
     nix-output-monitor
     expect
 

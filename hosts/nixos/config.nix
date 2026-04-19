@@ -89,7 +89,7 @@
   environment.systemPackages = with pkgs; [
     ddclient
     btop-rocm
-    #davinci-resolve-studio
+    vintagestory
   ];
 
   lib.mkMerge = {
