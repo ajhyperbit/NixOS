@@ -32,9 +32,6 @@
     };
   };
 
-  direnv.enable = true;
-  direnv.nix-direnv.enable = true;
-
   nix-ld = {
     enable = true;
   };
