@@ -72,8 +72,8 @@ in
           type = "gpt";
           partitions = {
             home = {
-              label = "homefs";
-              name = "home";
+              label = "home";
+              name = "homefs";
               size = "100%";
               content = {
                 type = "filesystem";
