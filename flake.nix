@@ -220,7 +220,7 @@
             ./hosts/${otg-host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
             ./hosts/${otg-host}/drives.nix
-            ./hosts/${otg-host}/disko/singe-drive-setup.nix
+            ./hosts/${otg-host}/disko/single-drive-setup.nix
             ./hosts/${host}/input.nix
             ./hosts/${otg-host}/${otg-host}-hm.nix
             ./hosts/${host}/cachyos-kernel.nix
