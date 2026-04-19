@@ -32,7 +32,7 @@
       systemd-boot.memtest86.enable = true;
       systemd-boot.enable = lib.mkDefault true;
       efi.canTouchEfiVariables = lib.mkForce false;
-      boot.loader.efi.efiSysMountPoint = "/boot";
+      efi.efiSysMountPoint = "/boot";
     };
   };
 
