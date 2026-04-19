@@ -27,16 +27,17 @@
   };
 
   environment = {
+    systemPackages = with pkgs; [
+      git
+      nix-output-monitor
+      networkmanager
+    ];
     shellAliases = rec {
       rebuild = "/home/${username}/NixOS-Hyprland/rebuild-flake.sh";
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-    nix-output-monitor
-    networkmanager
-  ];
+  networking.networkmanager.enable = true;
 
   programs = {
     nh = {
