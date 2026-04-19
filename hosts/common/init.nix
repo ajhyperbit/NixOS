@@ -41,8 +41,10 @@
     nix-output-monitor
   ];
 
-  nh = {
-    enable = true;
-    flake = "/home/${username}/NixOS-Hyprland";
+  programs = {
+    nh = {
+      enable = true;
+      flake = "/home/${username}/NixOS-Hyprland";
+    };
   };
 }
