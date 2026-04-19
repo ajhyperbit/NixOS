@@ -26,7 +26,7 @@ fi
 host=${1:-}
 reswitch=${2:-}
 # Capture all arguments into a variable for use with nixos-rebuild
-args=${*:3}  # Capture arguments starting from the 3rd argument
+args=${*:3} # Capture arguments starting from the 3rd argument
 user=$LOGNAME
 #if [ -z "$user" ] then
 #user=$(logname)
@@ -89,7 +89,10 @@ printf "NixOS Rebuilding...\n"
 set -o pipefail
 
 sudo -v
-keepalive() { while true; do sleep 50; sudo -v; done; }
+keepalive() { while true; do
+	sleep 50
+	sudo -v
+done; }
 keepalive &
 KEEPALIVE_PID=$!
 trap 'kill $KEEPALIVE_PID 2>/dev/null' EXIT
@@ -120,15 +123,17 @@ if [[ $(git status --short) != '' ]]; then
 	dirty='-dirty'
 fi
 
-if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
-	# shellcheck disable=SC2086
-	git tag Gen-$hostname-$current_tag-$hash$dirty
+if [ "$reswitch" != "test" ]; then
+	if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
+		# shellcheck disable=SC2086
+		git tag Gen-$hostname-$current_tag-$hash$dirty
 
-	printf "Last tag: %s\n" "$last_tag"
+		printf "Last tag: %s\n" "$last_tag"
 
-	# shellcheck disable=SC2027
-	# shellcheck disable=SC2086
-	choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
+		# shellcheck disable=SC2027
+		# shellcheck disable=SC2086
+		choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
+	fi
 fi
 
 #REVIEW - Testing required
