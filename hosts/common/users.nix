@@ -25,8 +25,7 @@ in
       ];
 
       # define user packages here
-      packages = with pkgs; [
-      ];
+      initialHashedPassword = "$y$j9T$54o/3RK4qAaVQQIJhxrWQ1$9E3Fs.KWkEY03wrnoHvN7ZlQ4TwXzqv431lgkLGuYQ0";
     };
 
     defaultUserShell = pkgs.zsh;
