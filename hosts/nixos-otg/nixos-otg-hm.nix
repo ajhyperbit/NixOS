@@ -12,7 +12,7 @@
   home-manager.useUserPackages = true;
   home-manager.users.${username} = {
     imports = [
-      ./sys-ver-home.nix
+      ./home.nix
       ../../hosts/${otg-host}/home.nix
     ];
   };
