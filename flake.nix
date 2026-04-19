@@ -112,7 +112,7 @@
     let
       system = "x86_64-linux"; # Remove later
       host = "nixos";
-      otg-host = "nixos-otg";
+      otg-host = "nixos-otg-host";
       username = "ajhyperbit";
       home = "/home/${username}";
       cursor_size = 32;
@@ -216,15 +216,15 @@
             inherit nix-cachyos-kernel;
           };
           modules = [
-            ./hosts/${otg}/config.nix
-            ./hosts/${otg}/ai.nix
+            ./hosts/${otg-host}/config.nix
+            ./hosts/${otg-host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
-            ./hosts/${otg}/drives.nix
-            ./hosts/${otg}/disko/singe-drive-setup.nix
+            ./hosts/${otg-host}/drives.nix
+            ./hosts/${otg-host}/disko/singe-drive-setup.nix
             ./hosts/${host}/input.nix
-            ./hosts/${otg}/${otg}-hm.nix
+            ./hosts/${otg-host}/${otg-host}-hm.nix
             ./hosts/${host}/cachyos-kernel.nix
-            ./hosts/${otg}/system-ver.nix
+            ./hosts/${otg-host}/system-ver.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix

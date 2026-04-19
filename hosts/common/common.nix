@@ -170,10 +170,6 @@ in
         fi
       }
 
-      bottles () {
-        steam-run bottles
-      }
-
       bottles-offline () {
         steam-run unshare --net --user --map-root-user -- bottles
       }
