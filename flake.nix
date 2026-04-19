@@ -112,7 +112,7 @@
     let
       system = "x86_64-linux"; # Remove later
       host = "nixos";
-      otg-host = "nixos-otg-host";
+      otg-host = "nixos-otg";
       username = "ajhyperbit";
       home = "/home/${username}";
       cursor_size = 32;
