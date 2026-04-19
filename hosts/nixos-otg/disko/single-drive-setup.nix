@@ -1,4 +1,7 @@
 {...}:
+let
+  disk1 = "usb-Sabrent_Sabrent_012345678930-0:0";
+in
 {
   disko.devices = {
     disk = {
