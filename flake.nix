@@ -224,7 +224,8 @@
             ./hosts/${host}/input.nix
             ./hosts/${otg-host}/${otg-host}-hm.nix
             ./hosts/${host}/cachyos-kernel.nix
-            ./hosts/${otg-host}/system-ver.nix
+            ./hosts/${otg-host}/sys-ver.nix
+            ./hosts/${otg-host}/sys-ver-home.nix
             ./hosts/common/common.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix
