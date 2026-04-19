@@ -14,9 +14,7 @@ let
 in
 {
   imports = [
-    ./users.nix
     ../../modules/local-hardware-clock.nix
-    ./packages/packages.nix
   ];
 
   # BOOT related stuff

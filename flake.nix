@@ -166,6 +166,7 @@
             ./hosts/${host}/${host}-hm.nix
             ./hosts/${host}/cachyos-kernel.nix
             ./hosts/common/common.nix
+            ./hosts/common/packages/packages.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix
             ./hosts/common/audio.nix
@@ -226,8 +227,9 @@
             ./hosts/${host}/cachyos-kernel.nix
             ./hosts/${otg-host}/sys-ver.nix
             ./hosts/common/common.nix
+            ./hosts/common/packages/packages.nix
             ./hosts/common/users.nix
-            #./hosts/common/fonts.nix
+            ./hosts/common/fonts.nix
             ./hosts/common/audio.nix
             ./hosts/common/desktop-entries/default-apps.nix
             ./hosts/common/startup.nix
@@ -283,6 +285,7 @@
             ./hosts/${host}/cachyos-kernel.nix
             ./hosts/${otg-host}/sys-ver.nix
             ./hosts/common/common.nix
+            #./hosts/common/packages/packages.nix
             ./hosts/common/users.nix
             #./hosts/common/fonts.nix
             ./hosts/common/audio.nix
