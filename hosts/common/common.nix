@@ -464,10 +464,6 @@ in
       flake = "/home/${username}/NixOS-Hyprland";
     };
 
-    ssh = {
-      startAgent = true;
-    };
-
     #KDE window borders fix
     dconf = {
       enable = true;
