@@ -1,6 +1,6 @@
 {...}:
 let
-  disk1 = "usb-Sabrent_Sabrent_012345678930-0:0";
+  disk1 = "/dev/sda";
 in
 {
   disko.devices = {
