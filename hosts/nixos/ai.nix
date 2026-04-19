@@ -31,7 +31,9 @@
       loadModels = [
         #"mistral:7b"
         #"deepseek-r1:8b"
+        "gpt-oss:20b"
         "gemma4:e2b"
+        "gemma4:26b"
         #"dolphin-llama3:8b"
         #"qwen2.5:3b"
         #"qwen2.5-coder:1.5b"
