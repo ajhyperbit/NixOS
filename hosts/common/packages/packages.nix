@@ -384,6 +384,8 @@
     bubblewrap
 
     file
+
+    rsync
   ];
   #    ++ [
   #      python-packages
