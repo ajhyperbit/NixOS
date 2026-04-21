@@ -1,6 +1,6 @@
-{...}:
+{ ... }:
 let
-  disk1 = "usb-Sabrent_Sabrent_012345678930-0:0";
+  disk1 = "/dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0";
 in
 {
   disko.devices = {
@@ -11,6 +11,11 @@ in
         content = {
           type = "gpt";
           partitions = {
+            BIOS = {
+              name = "EFI";
+              size = "2M";
+              type = "EF02";
+            };
             ESP = {
               label = "boot";
               name = "ESP";
@@ -28,7 +33,6 @@ in
               size = "32G";
               content = {
                 type = "swap";
-                resumeDevice = true;
               };
             };
             root = {
@@ -48,4 +52,5 @@ in
   };
 }
 
-# sudo nix --experimental-features "nix-command flakes" run 'github:nix-community/disko/latest#disko-install' -- --flake ../NixOS/#nixos-otg --disk 'usb-Sabrent_Sabrent_012345678930-0:0' /dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0
+# sudo nix --experimental-features "nix-command flakes" run 'github:nix-community/disko/latest#disko-install' --
+#--flake ../NixOS/#nixos-otg --disk '/dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0' /dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0

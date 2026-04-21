@@ -29,8 +29,13 @@
     extraModulePackages = [ ];
 
     loader = {
-      systemd-boot.memtest86.enable = true;
-      systemd-boot.enable = lib.mkDefault true;
+      systemd-boot.enable = false;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        efiInstallAsRemovable = true;
+      };
+      efiInstallAsRemovable = true;
       efi.canTouchEfiVariables = lib.mkForce false;
       efi.efiSysMountPoint = "/boot";
     };
