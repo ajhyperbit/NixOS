@@ -218,12 +218,13 @@
           };
           modules = [
             ./hosts/${otg-host}/config.nix
-            ./hosts/${otg-host}/ai.nix
+            #./hosts/${otg-host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
             ./hosts/${otg-host}/disko/single-drive-setup.nix
             ./hosts/${host}/input.nix
             ./hosts/${otg-host}/${otg-host}-hm.nix
             ./hosts/${host}/cachyos-kernel.nix
+            ./hosts/${otg-host}/password.nix
             ./hosts/${otg-host}/sys-ver.nix
             ./hosts/common/common.nix
             ./hosts/common/packages/packages.nix
