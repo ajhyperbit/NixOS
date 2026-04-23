@@ -37,7 +37,7 @@ in
             };
             root = {
               label = "nixos";
-              name = "File system";
+              name = "nixos-otg";
               size = "100%";
               content = {
                 type = "filesystem";
