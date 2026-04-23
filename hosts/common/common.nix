@@ -10,7 +10,7 @@
 }:
 let
   #inherit (import ./variables.nix) keyboardLayout;
-  nhArgs = "--keep-since 14d --keep 5 --optimise";
+  nhArgs = "--keep-since 7d --keep 5 --optimise";
 in
 {
   imports = [
