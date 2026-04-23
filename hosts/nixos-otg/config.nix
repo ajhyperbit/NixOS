@@ -35,7 +35,6 @@
         efiSupport = true;
         efiInstallAsRemovable = true;
       };
-      efiInstallAsRemovable = true;
       efi.canTouchEfiVariables = lib.mkForce false;
       efi.efiSysMountPoint = "/boot";
     };
