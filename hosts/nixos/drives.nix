@@ -33,6 +33,11 @@
   #  options = [ "relatime" ];
   #};
 
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/55e624cb-c65a-4446-9c9e-b89ac0d8e57f";
+    fsType = "ext4";
+  };
+
   fileSystems."/run/media/${username}/SATA_SSD" = {
     device = "/dev/disk/by-uuid/c879995c-386a-42c2-bc3b-8d02a03c61de";
     fsType = "ext4";
