@@ -235,7 +235,7 @@
     #swaybg
     #wpaperd
     #mpvpaper
-    swww
+    awww
     #App Launcher
     #most popular
     rofi
