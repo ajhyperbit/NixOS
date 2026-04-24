@@ -34,7 +34,7 @@
   #};
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/55e624cb-c65a-4446-9c9e-b89ac0d8e57f";
+    device = "/dev/disk/by-uuid/f3276570-2ce9-4e12-ab06-61c7cf10dfeb";
     fsType = "ext4";
   };
 
