@@ -24,19 +24,14 @@
     ];
   };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/5b448087-dd9e-4631-9c8c-39851229c1b6"; }
-  ];
-
-  #fileSystems."/home" = {
-  #  device = "/";
-  #  options = [ "relatime" ];
-  #};
-
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/f3276570-2ce9-4e12-ab06-61c7cf10dfeb";
     fsType = "ext4";
   };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/5b448087-dd9e-4631-9c8c-39851229c1b6"; }
+  ];
 
   fileSystems."/run/media/${username}/SATA_SSD" = {
     device = "/dev/disk/by-uuid/c879995c-386a-42c2-bc3b-8d02a03c61de";
@@ -49,7 +44,7 @@
       "exec" # Permit execution of binaries and other executable files
     ];
   };
-  
+
   fileSystems."/run/media/${username}/DATA" = {
     device = "/dev/disk/by-uuid/5fbf2ab2-4950-467b-ac78-13fbb8bf516b";
     fsType = "ext4";
