@@ -218,7 +218,7 @@
           };
           modules = [
             ./hosts/${otg-host}/config.nix
-            ./hosts/${otg-host}/ai.nix
+            #./hosts/${otg-host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
             ./hosts/${otg-host}/disko/single-drive-setup.nix
             ./hosts/${host}/input.nix
@@ -234,7 +234,7 @@
             ./hosts/common/desktop-entries/default-apps.nix
             ./hosts/common/startup.nix
             #./hosts/common/packages/ardunio.nix
-            ./hosts/common/temp-fixes.nix
+            #./hosts/common/temp-fixes.nix
             # ./hosts/common/overlays.nix
             ./hosts/common/virtualization.nix
             home-manager.nixosModules.home-manager
