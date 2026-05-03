@@ -113,7 +113,7 @@ current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | h
 
 hostname=$(uname -n)
 
-if [ "$reswitch" == "test" ] || [ "$reswitch" == "build" ]; then
+if [ "$reswitch" != "test" ] && [ "$reswitch" != "build" ]; then
 	#Pulled from https://github.com/NixOS/nixpkgs/blob/66aa98b29099c636622a9d9c18370f13701716f6/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh#L596
 	last_tag=$(git describe --tags --always)
 	hash=$(git rev-parse --short HEAD)
