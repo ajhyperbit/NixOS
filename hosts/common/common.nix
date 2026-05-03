@@ -178,7 +178,7 @@ in
       fi
     '';
 
-    shellAliases = rec {
+    shellAliases = {
       ll = "ls -l";
       soft-reboot = "systemctl kexec";
       sr = "systemctl kexec";
