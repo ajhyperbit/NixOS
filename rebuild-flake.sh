@@ -123,7 +123,7 @@ if [[ $(git status --short) != '' ]]; then
 	dirty='-dirty'
 fi
 
-if [ "$reswitch" != "test" ]; then
+if [ "$reswitch" == "test" ] || [ "$reswitch" == "build" ]; then
 	if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
 		# shellcheck disable=SC2086
 		git tag Gen-$hostname-$current_tag-$hash$dirty
