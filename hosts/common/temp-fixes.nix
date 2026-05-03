@@ -13,23 +13,19 @@
     restartIfChanged = false;
   };
 
-  #nixpkgs issue: 493679
-  #https://nixpkgs-tracker.ocfox.me/?pr=493679
-  nixpkgs.overlays = [
-    (final: prev: {
-      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-        (python-final: python-prev: {
-          picosvg = python-prev.picosvg.overridePythonAttrs (_: {
-            doCheck = false;
-          });
-        })
-      ];
-    })
-  ];
-
-  #nixpkgs issue: 493384
+  #nixpkgs pr: 493384
   #https://nixpkgs-tracker.ocfox.me/?pr=493384
   services.sunshine.package = pkgs.sunshine.override {
     boost = pkgs.boost187;
   };
+
+  #nixpkgs issue: 514113
+  #nixpkgs related pr: 510494
+  nixpkgs.overlays = [
+    (_: prev: {
+      openldap = prev.openldap.overrideAttrs {
+        doCheck = !prev.stdenv.hostPlatform.isi686;
+      };
+    })
+  ];
 }
