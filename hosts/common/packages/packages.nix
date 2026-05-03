@@ -384,6 +384,8 @@
     file
 
     rsync
+
+    i2c-tools
   ];
   #    ++ [
   #      python-packages
