@@ -72,7 +72,7 @@
     remmina
     ethtool
     hwinfo
-    wireshark
+    #wireshark
     vlc
     mpv
     pciutils
