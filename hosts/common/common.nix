@@ -15,7 +15,7 @@ in
 {
   imports = [
     ../../modules/local-hardware-clock.nix
-    ./hyprland.nix
+    ./hyprland/hyprland.nix
   ];
 
   # BOOT related stuff
