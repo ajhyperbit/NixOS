@@ -15,6 +15,7 @@ in
 {
   imports = [
     ../../modules/local-hardware-clock.nix
+    ./hyprland.nix
   ];
 
   # BOOT related stuff
@@ -146,10 +147,7 @@ in
 
     XCURSOR_THEME = "${cursor_theme}";
     XCURSOR_SIZE = 32; # {cursor_size};
-    HYPRCURSOR_SIZE = 32; # {cursor_size};
-    HYPRCURSOR_THEME = "rose-pine-hyprcursor";
 
-    QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_STYLE_OVERRIDE = "Breeze";
@@ -325,20 +323,9 @@ in
     #  openFirewall = true;
     #};
 
-    #Hyprland
-    hypridle.enable = true;
-
     greetd = {
       enable = true;
       useTextGreeter = true;
-      settings = {
-        default_session = {
-          user = username;
-          command = ''
-            ${pkgs.tuigreet}/bin/tuigreet --kb-command 2 --kb-sessions 3 --kb-power 12 --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop" --power-reboot 'sudo systemctl kexec'
-          '';
-        };
-      };
     };
 
     #sysc-greet = {
@@ -412,28 +399,6 @@ in
   #Programs
 
   programs = {
-    #Hyprland
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (old: {
-        postPatch = (old.postPatch or "") + ''
-          sed -i 's/find_package(glaze 6\.0\.0 QUIET)/find_package(glaze QUIET)/' hyprpm/CMakeLists.txt
-        '';
-        buildInputs = (old.buildInputs or [ ]) ++ [
-          pkgs.glaze
-          pkgs.openssl
-        ];
-        cmakeFlags = (old.cmakeFlags or [ ]) ++ [
-          "-Dglaze_DIR=${pkgs.glaze}/share/glaze"
-        ];
-      });
-      portalPackage =
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland; # xdphls
-      xwayland.enable = true;
-      withUWSM = true;
-    };
-    #waybar.enable = true; # has some kind of race condition when used in the Hyprland UWSM env
-    hyprlock.enable = true;
     firefox.enable = true;
 
     git = {

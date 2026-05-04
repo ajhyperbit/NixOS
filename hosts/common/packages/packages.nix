@@ -198,13 +198,6 @@
     greetd
     tuigreet
 
-    (pkgs.hyprland.override {
-      # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
-      #enableXWayland = true;  # whether to enable XWayland
-      #legacyRenderer = false; # whether to use the legacy renderer (for old GPUs)
-      withSystemd = true; # whether to build with systemd support
-    })
-
     #Hyperland  #https://www.youtube.com/watch?v=61wGzIv12Ds
     xlsclients # Check if running with xwayland
     #Terminals
@@ -331,7 +324,6 @@
     rose-pine-cursor
     inputs.rose-pine-hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
-    hyprland-qt-support
     qt6.qt5compat
     qt6.qtbase
     qt6.qtquick3d

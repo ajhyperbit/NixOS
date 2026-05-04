@@ -31,7 +31,12 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.53.3";
+      type = "github";
+      owner = "hyprwm";
+      repo = "Hyprland";
+      #Bump (or remove) later
+      ref = "v0.53.3";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     quickshell = {
