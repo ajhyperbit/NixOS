@@ -415,7 +415,18 @@ in
     #Hyprland
     hyprland = {
       enable = true;
-      #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland; #hyprland-git
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland.overrideAttrs (old: {
+        postPatch = (old.postPatch or "") + ''
+          sed -i 's/find_package(glaze 6\.0\.0 QUIET)/find_package(glaze QUIET)/' hyprpm/CMakeLists.txt
+        '';
+        buildInputs = (old.buildInputs or [ ]) ++ [
+          pkgs.glaze
+          pkgs.openssl
+        ];
+        cmakeFlags = (old.cmakeFlags or [ ]) ++ [
+          "-Dglaze_DIR=${pkgs.glaze}/share/glaze"
+        ];
+      });
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland; # xdphls
       xwayland.enable = true;
