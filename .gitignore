@@ -6,3 +6,4 @@ nixos-hyprland.code-workspace
 *.code-workspace
 images/**
 result
+disko.html
