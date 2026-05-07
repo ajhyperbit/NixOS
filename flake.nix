@@ -239,7 +239,7 @@
             ./hosts/common/desktop-entries/default-apps.nix
             ./hosts/common/startup.nix
             #./hosts/common/packages/ardunio.nix
-            #./hosts/common/temp-fixes.nix
+            ./hosts/common/temp-fixes.nix
             # ./hosts/common/overlays.nix
             ./hosts/common/virtualization.nix
             home-manager.nixosModules.home-manager
