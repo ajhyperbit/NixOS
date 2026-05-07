@@ -36,7 +36,7 @@ in
               };
             };
             root = {
-              label = "nixos";
+              label = "nixos-otg";
               name = "nixos-otg";
               size = "100%";
               content = {
