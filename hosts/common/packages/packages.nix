@@ -378,6 +378,8 @@
     rsync
 
     i2c-tools
+
+    tmux
   ];
   #    ++ [
   #      python-packages
