@@ -51,6 +51,5 @@ in
     };
   };
 }
-
 # sudo nix --experimental-features "nix-command flakes" run 'github:nix-community/disko/latest#disko-install' --
 #--flake ../NixOS/#nixos-otg --disk '/dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0' /dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0

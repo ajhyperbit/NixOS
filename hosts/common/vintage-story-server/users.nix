@@ -1,8 +1,5 @@
 #This file is likely not finalized
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   users = {
     users."vintagestory" = {

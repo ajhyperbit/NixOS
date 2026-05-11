@@ -9,7 +9,6 @@ let
   #DATA disk
   disk4 = "/dev/disk/by-id/ata-ST2000NE0025-2FL101_ZDS1968N";
   #Archive disk
-  disk5 = "/dev/disk/by-id/ata-ST6000VN0033-2EE110_ZADBCVNZ";
 in
 {
   disko.devices = {

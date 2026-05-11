@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     pwvucontrol # Pipewire Volume Control

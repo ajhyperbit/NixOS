@@ -14,7 +14,6 @@
   ];
   # BOOT related stuff
   boot = {
-
     kernelParams = [
       "amd_iommu=on"
     ];

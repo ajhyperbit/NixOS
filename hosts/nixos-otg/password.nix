@@ -1,4 +1,4 @@
-{ lib, username, ... }:
+{ username, ... }:
 {
   lib.mkMerge = {
     users.users.ajhyperbit = {

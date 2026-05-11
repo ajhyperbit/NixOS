@@ -4,7 +4,6 @@
   username,
   options,
   lib,
-  inputs,
   cursor_theme,
   ...
 }:

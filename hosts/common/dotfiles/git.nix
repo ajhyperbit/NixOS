@@ -1,9 +1,8 @@
-{
-  username,
-  ...
-}: let
+{ username, ... }:
+let
   inherit (import ./variables.nix) gitEmail;
-in {
+in
+{
   programs.git = {
     enable = true;
     config = {

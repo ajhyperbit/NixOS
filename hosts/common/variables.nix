@@ -1,5 +1,4 @@
 # Variables
-
 {
   # Git Configuration ( For Pulling Software Repos )
   gitUsername = "AJHyperBit";

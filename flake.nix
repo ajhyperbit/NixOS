@@ -107,13 +107,8 @@
       nixos-hardware, # hardware-specific modules
       nix-cachyos-kernel, # cachyos kernels
       home-manager, # home manager
-      nix-index-database, # nix index db
-      nix-alien, # package overlay/tool (never used as far as I remember)
-      nix4vscode, # Declaritve VS code stuff
-      nix-vscode-extensions, # More declaritve VS code stuff
-      fw-fanctrl, # framework fan control
-      stylix, # personal configuration overlay
-      alejandra, # formatter
+      nix-index-database, # nix index db # package overlay/tool (never used as far as I remember) # Declaritve VS code stuff # More declaritve VS code stuff # framework fan control
+      stylix, # personal configuration overlay # formatter
       disko, # disk management
       nix-systems,
       treefmt-nix,
@@ -127,13 +122,6 @@
       home = "/home/${username}";
       cursor_size = 32;
       cursor_theme = "BreezeX-RosePine";
-
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
       pkgs-d49b5ff = import nixpkgs-d49b5ff {
         inherit system;
         config = {
@@ -147,7 +135,8 @@
         };
       };
       #Formatter related
-      eachSystem = f: nixpkgs.lib.genAttrs (import nix-systems) (system: f nixpkgs.legacyPackages.${system});
+      eachSystem =
+        f: nixpkgs.lib.genAttrs (import nix-systems) (system: f nixpkgs.legacyPackages.${system});
       treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./format/treefmt.nix);
     in
     {
@@ -239,24 +228,12 @@
             ./hosts/common/temp-fixes.nix
             # ./hosts/common/overlays.nix
             ./hosts/common/virtualization.nix
+            ./hosts/common/nix-alien.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-pc-ssd
             stylix.nixosModules.stylix
             disko.nixosModules.disko
             nix-index-database.nixosModules.nix-index
-
-            (
-              {
-                self,
-                ...
-              }:
-              {
-                environment.systemPackages =
-                  with self.inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}; [
-                    nix-alien
-                  ];
-              }
-            )
           ];
         };
 
@@ -287,13 +264,11 @@
             disko.nixosModules.disko
           ];
         };
-
       };
       formatter = eachSystem (pkgs: treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
       # for `nix flake check`
       checks = eachSystem (pkgs: {
         formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
       });
-
     };
 }

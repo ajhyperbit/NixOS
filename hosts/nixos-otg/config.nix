@@ -1,6 +1,5 @@
 # Main default config
 {
-  config,
   pkgs,
   otg-host,
   lib,
