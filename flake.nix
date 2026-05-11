@@ -91,6 +91,11 @@
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
     };
+    nix-systems.url = "github:nix-systems/default";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -110,7 +115,8 @@
       stylix, # personal configuration overlay
       alejandra, # formatter
       disko, # disk management
-      # lumen, # diff viewer, commit message generator, and summerizer of changes using local LLM
+      nix-systems,
+      treefmt-nix,
       ...
     }:
     let
@@ -140,6 +146,9 @@
           allowUnfree = true;
         };
       };
+      #Formatter related
+      eachSystem = f: nixpkgs.lib.genAttrs (import nix-systems) (system: f nixpkgs.legacyPackages.${system});
+      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./format/treefmt.nix);
     in
     {
       nixosConfigurations = {
@@ -181,6 +190,7 @@
             # ./hosts/common/overlays.nix
             ./hosts/common/virtualization.nix
             ./hosts/common/security/security.nix
+            ./hosts/common/nix-alien.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
@@ -189,19 +199,6 @@
             stylix.nixosModules.stylix
             disko.nixosModules.disko
             nix-index-database.nixosModules.nix-index
-
-            (
-              {
-                self,
-                ...
-              }:
-              {
-                environment.systemPackages =
-                  with self.inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}; [
-                    nix-alien
-                  ];
-              }
-            )
           ];
         };
 
@@ -291,15 +288,12 @@
           ];
         };
 
-        formatter =
-          let
-            pkg = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
-          in
-          {
-            x86_64-linux = pkg;
-            x86_64-darwin = pkg;
-            aarch64-darwin = pkg;
-          };
       };
+      formatter = eachSystem (pkgs: treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
+      # for `nix flake check`
+      checks = eachSystem (pkgs: {
+        formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
+      });
+
     };
 }
