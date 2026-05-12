@@ -5,8 +5,7 @@
   lib,
   modulesPath,
   ...
-}:
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -23,9 +22,9 @@
         "sd_mod"
         "sr_mod"
       ];
-      kernelModules = [ ];
+      kernelModules = [];
     };
-    extraModulePackages = [ ];
+    extraModulePackages = [];
 
     loader = {
       systemd-boot.enable = false;
@@ -51,6 +50,12 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+    };
+  };
+
+  virtualbox = {
+    host = {
+      enable = lib.mkForce true;
     };
   };
 

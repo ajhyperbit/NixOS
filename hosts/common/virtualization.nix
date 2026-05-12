@@ -48,7 +48,7 @@
     };
     virtualbox = {
       host = {
-        enable = false;
+        enable = lib.mkDefault false;
         addNetworkInterface = true;
         enableExtensionPack = true;
       };
