@@ -9,6 +9,14 @@ usage() {
   printf "More details on rebuild methods here: https://nixos.wiki/wiki/Nixos-rebuild\n"
 }
 
+if [ "$1" == "check" ]; then
+  nix flake check
+  exit 0
+elif [ "$1" == "fmt" ] || [ "$1" == "format" ]; then
+  nix fmt
+  exit 0
+fi
+
 if [ $# -eq 1 ]; then # if help requested
   if [ "$1" = "-h" ]; then
     usage
