@@ -2,25 +2,25 @@
 
 ## Usage
 usage() {
-	printf "Usage:\t %s <host> <rebuild method>\n\n" "$0"
-	printf "host:\t Requires a valid hostname from nixosConfigurations inside flake.nix\n"
-	printf "rebuild method:\t Rebuild methods are either switch, boot, test, build, or dry-activate.\n"
-	printf "Arguments put after the ones listed above will be used as arguments for nixos-rebuild command.\n\n"
-	printf "More details on rebuild methods here: https://nixos.wiki/wiki/Nixos-rebuild\n"
+  printf "Usage:\t %s <host> <rebuild method>\n\n" "$0"
+  printf "host:\t Requires a valid hostname from nixosConfigurations inside flake.nix\n"
+  printf "rebuild method:\t Rebuild methods are either switch, boot, test, build, or dry-activate.\n"
+  printf "Arguments put after the ones listed above will be used as arguments for nixos-rebuild command.\n\n"
+  printf "More details on rebuild methods here: https://nixos.wiki/wiki/Nixos-rebuild\n"
 }
 
 if [ $# -eq 1 ]; then # if help requested
-	if [ "$1" = "-h" ]; then
-		usage
-		exit 1
-	fi
-	if [ "$1" = "--help" ]; then
-		usage
-		exit 1
-	fi
-	printf "Don't recognize %s exiting...\n\n" "$1"
-	usage
-	exit 2
+  if [ "$1" = "-h" ]; then
+    usage
+    exit 1
+  fi
+  if [ "$1" = "--help" ]; then
+    usage
+    exit 1
+  fi
+  printf "Don't recognize %s exiting...\n\n" "$1"
+  usage
+  exit 2
 fi
 
 host=${1:-}
@@ -35,50 +35,50 @@ user=$LOGNAME
 #storage=$(df --output=pcent,target $(mount -t ext4 | grep rw | cut -d" " -f1) | head -n -1)
 
 if [ -z "$host" ] || [ -z "$reswitch" ]; then
-	printf "Usage: %s <host> <rebuild method>\n" "$0"
-	printf "  <host>: 'nixos' or 'nixtop'\n"
-	printf "  <rebuild method>: 'switch', 'boot', 'test', or 'build'\n"
-	printf "For more help, use -h or --help\n"
-	exit 3
+  printf "Usage: %s <host> <rebuild method>\n" "$0"
+  printf "  <host>: 'nixos' or 'nixtop'\n"
+  printf "  <rebuild method>: 'switch', 'boot', 'test', or 'build'\n"
+  printf "For more help, use -h or --help\n"
+  exit 3
 fi
 
 path=$(pwd)
 
 if [ "$path" != /home/"$user"/NixOS-Hyprland ]; then
-	pushd ~/NixOS-Hyprland || exit
+  pushd ~/NixOS-Hyprland || exit
 fi
 
 #Code block for choices
 choose() {
-	local default="$1"
-	local prompt="$2"
-	local answer
-	local command="$3"
+  local default="$1"
+  local prompt="$2"
+  local answer
+  local command="$3"
 
-	# shellcheck disable=SC2162
-	read -p "$prompt" answer
-	[ -z "$answer" ] && answer="$default"
+  # shellcheck disable=SC2162
+  read -p "$prompt" answer
+  [ -z "$answer" ] && answer="$default"
 
-	case "$answer" in
-	[yY1]) #printf "answered yes!\n"
-		eval "$command"
-		;;
-	[nN0])
-		printf "Ok.\n"
-		;;
-	[qQ])
-		printf "Exiting....\n"
-		exit 5
-		;;
-	#REVIEW - Requires Testing
-	#[sS]  ) printf "Running as sudo...\n"
-	#    eval "sudo $command"
-	#    ;;
-	*)
-		printf "%b" "Unexpected answer '$answer'!\n" >&2
-		exit 3
-		;;
-	esac
+  case "$answer" in
+  [yY1]) #printf "answered yes!\n"
+    eval "$command"
+    ;;
+  [nN0])
+    printf "Ok.\n"
+    ;;
+  [qQ])
+    printf "Exiting....\n"
+    exit 5
+    ;;
+  #REVIEW - Requires Testing
+  #[sS]  ) printf "Running as sudo...\n"
+  #    eval "sudo $command"
+  #    ;;
+  *)
+    printf "%b" "Unexpected answer '$answer'!\n" >&2
+    exit 3
+    ;;
+  esac
 }
 
 choose "n" "Do you want to update flake.lock? [(Y)es/(N)o] (Default: No): " "source ~/NixOS-Hyprland/update-flake.sh"
@@ -90,23 +90,23 @@ set -o pipefail
 
 sudo -v
 keepalive() { while true; do
-	sleep 50
-	sudo -v
+  sleep 50
+  sudo -v
 done; }
 keepalive &
 KEEPALIVE_PID=$!
 trap 'kill $KEEPALIVE_PID 2>/dev/null' EXIT
 
 if command -v nh >/dev/null 2>&1; then
-	if [ -z "$args" ]; then
-		nh os "$reswitch" -H "$host" |& tee nixos-switch.log
-	else
-		nh os "$reswitch" -H "$host" "$args" |& tee nixos-switch.log
-	fi
+  if [ -z "$args" ]; then
+    nh os "$reswitch" -H "$host" |& tee nixos-switch.log
+  else
+    nh os "$reswitch" -H "$host" "$args" |& tee nixos-switch.log
+  fi
 elif command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
-	sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
+  sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
 else
-	sudo nix-shell -p nix-output-monitor.out expect.out --run "unbuffer nixos-rebuild $reswitch --upgrade --show-trace --flake .#$host --log-format internal-json |& nom --json"
+  sudo nix-shell -p nix-output-monitor.out expect.out --run "unbuffer nixos-rebuild $reswitch --upgrade --show-trace --flake .#$host --log-format internal-json |& nom --json"
 fi
 
 current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | head -1)
@@ -114,24 +114,24 @@ current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | h
 hostname=$(uname -n)
 
 if [ "$reswitch" != "test" ] && [ "$reswitch" != "build" ]; then
-	#Pulled from https://github.com/NixOS/nixpkgs/blob/66aa98b29099c636622a9d9c18370f13701716f6/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh#L596
-	last_tag=$(git describe --tags --always)
-	hash=$(git rev-parse --short HEAD)
+  #Pulled from https://github.com/NixOS/nixpkgs/blob/66aa98b29099c636622a9d9c18370f13701716f6/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh#L596
+  last_tag=$(git describe --tags --always)
+  hash=$(git rev-parse --short HEAD)
 
-	if [[ $(git status --short) != '' ]]; then
-		dirty='-dirty'
-	fi
-	
-	if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
-		# shellcheck disable=SC2086
-		git tag Gen-$hostname-$current_tag-$hash$dirty
+  if [[ $(git status --short) != '' ]]; then
+    dirty='-dirty'
+  fi
 
-		printf "Last tag: %s\n" "$last_tag"
+  if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
+    # shellcheck disable=SC2086
+    git tag Gen-$hostname-$current_tag-$hash$dirty
 
-		# shellcheck disable=SC2027
-		# shellcheck disable=SC2086
-		choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
-	fi
+    printf "Last tag: %s\n" "$last_tag"
+
+    # shellcheck disable=SC2027
+    # shellcheck disable=SC2086
+    choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
+  fi
 fi
 
 #REVIEW - Testing required
@@ -151,7 +151,7 @@ fi
 #choose "n" "Do you want to trim generations? [(Y)es/(N)o/(Q)uit] (Default: No): " "source ~/NixOS-Hyprland/trim-generations.sh"
 
 if [ "$path" != /home/"$user"/NixOS-Hyprland ]; then
-	popd || exit
+  popd || exit
 fi
 
 exit 0

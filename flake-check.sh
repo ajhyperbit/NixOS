@@ -8,11 +8,11 @@
 
 #fetch = $(git fetch)
 #
-#    if [[ -z "$fetch" ]] 
+#    if [[ -z "$fetch" ]]
 #    then
 #        echo "Local Repo up to date, no git pull needed"
-#    else 
-#        git pull || echo "git pull failed, please see log." ; exit 1 
+#    else
+#        git pull || echo "git pull failed, please see log." ; exit 1
 
 echo "Evaluating flake......"
 
