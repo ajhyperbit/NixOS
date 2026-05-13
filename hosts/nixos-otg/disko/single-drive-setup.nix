@@ -12,6 +12,7 @@ in
           type = "gpt";
           partitions = {
             BIOS = {
+              #For MBR/BIOS computers
               name = "EFI";
               size = "2M";
               type = "EF02";
