@@ -52,5 +52,8 @@ in
     };
   };
 }
-# sudo nix --experimental-features "nix-command flakes" run 'github:nix-community/disko/latest#disko-install' --
-#--flake ../NixOS/#nixos-otg --disk '/dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0' /dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0
+#sudo nix --experimental-features "nix-command flakes" run 'github:nix-community/disko/latest#disko-install' -- --flake ../NixOS/#nixos-otg --disk '/dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0' /dev/disk/by-id/usb-Sabrent_Sabrent_012345678930-0:0
+
+#sudo mount /dev/disk/by-partlabel/nixos-otg /run/media/$USER/nixos-otg
+
+#rsync -aHAXv --progress --append-verify /home/$USER/ /run/media/$USER/nixos-otg/home/$USER
