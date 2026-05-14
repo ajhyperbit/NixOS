@@ -108,7 +108,7 @@
       nix-cachyos-kernel, # cachyos kernels
       home-manager, # home manager
       nix-index-database, # nix index db # package overlay/tool (never used as far as I remember) # Declaritve VS code stuff # More declaritve VS code stuff # framework fan control
-      stylix, # personal configuration overlay # formatter
+      stylix, # personal configuration overlay
       disko, # disk management
       nix-systems,
       treefmt-nix,
