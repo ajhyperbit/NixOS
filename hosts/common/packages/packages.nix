@@ -380,6 +380,8 @@
     i2c-tools
 
     tmux
+
+    firefox-devedition
   ];
   #    ++ [
   #      python-packages
