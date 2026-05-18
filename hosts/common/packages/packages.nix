@@ -382,6 +382,8 @@
     tmux
 
     firefox-devedition
+
+    bind
   ];
   #    ++ [
   #      python-packages
