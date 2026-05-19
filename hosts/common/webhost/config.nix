@@ -123,7 +123,7 @@
           http_addr = "127.0.0.1";
           http_port = 5000;
           domain = "ajhyperbit.dev";
-          root_url = "https://ajhyperbit.dev/";
+          root_url = "https://grafana.ajhyperbit.dev/";
         };
         security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
       };
