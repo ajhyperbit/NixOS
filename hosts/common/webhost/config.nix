@@ -4,10 +4,6 @@
   ...
 }:
 {
-  # imports = [
-  #   ./homer-settings.nix
-  # ];
-
   services = {
     postgresql = {
       enable = true;
@@ -44,13 +40,6 @@
       environment = {
         CONFIG_FILEPATH = "/home/ajhyperbit/private/porkbun/ddns-updater/config.json";
         DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
-      };
-    };
-
-    homer = {
-      enable = true;
-      virtualHost = {
-        nginx.enable = false;
       };
     };
 
