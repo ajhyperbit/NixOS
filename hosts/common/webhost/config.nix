@@ -86,11 +86,6 @@
       };
     };
 
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "ajhyperbit@gmail.com";
-    };
-
     prometheus = {
       enable = true;
       globalConfig.scrape_interval = "15s";
@@ -127,6 +122,11 @@
         security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
       };
     };
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "ajhyperbit@gmail.com";
   };
 
   environment.systemPackages = with pkgs; [
