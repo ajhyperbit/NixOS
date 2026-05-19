@@ -180,6 +180,7 @@
             ./hosts/common/virtualization.nix
             ./hosts/common/security/security.nix
             ./hosts/common/nix-alien.nix
+            ./hosts/common/webhost/config.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate

@@ -48,7 +48,7 @@
       ];
     };
     open-webui = {
-      enable = true;
+      enable = false;
       environment = {
         ANONYMIZED_TELEMETRY = "False";
         DO_NOT_TRACK = "True";
