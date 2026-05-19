@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # imports = [
   #   ./homer-settings.nix
   # ];
@@ -10,7 +11,7 @@
   services = {
     postgresql = {
       enable = true;
-      ensureDatabases = ["forgejo"];
+      ensureDatabases = [ "forgejo" ];
       ensureUsers = [
         {
           name = "forgejo";
@@ -58,6 +59,7 @@
       virtualHosts = {
         "ajhyperbit.dev" = {
           forceSSL = true;
+          enableACME = true;
           sslCertificate = "/etc/ssl/ajhyperbit.dev/domain.cert.pem";
           sslCertificateKey = "/etc/ssl/ajhyperbit.dev/private.key.pem";
           locations."/" = {
@@ -73,6 +75,7 @@
         };
         "git.ajhyperbit.dev" = {
           forceSSL = true;
+          enableACME = true;
           sslCertificate = "/etc/ssl/ajhyperbit.dev/domain.cert.pem";
           sslCertificateKey = "/etc/ssl/ajhyperbit.dev/private.key.pem";
           locations."/" = {
@@ -83,6 +86,11 @@
       };
     };
 
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "ajhyperbit@gmail.com";
+    };
+
     prometheus = {
       enable = true;
       globalConfig.scrape_interval = "15s";
@@ -91,7 +99,7 @@
           job_name = "node";
           static_configs = [
             {
-              targets = ["localhost:${toString config.services.prometheus.exporters.node.port}"];
+              targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
             }
           ];
         }
