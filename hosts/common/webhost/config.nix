@@ -2,8 +2,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   # imports = [
   #   ./homer-settings.nix
   # ];
@@ -11,7 +10,7 @@
   services = {
     postgresql = {
       enable = true;
-      ensureDatabases = [ "forgejo" ];
+      ensureDatabases = ["forgejo"];
       ensureUsers = [
         {
           name = "forgejo";
@@ -92,7 +91,7 @@
           job_name = "node";
           static_configs = [
             {
-              targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
+              targets = ["localhost:${toString config.services.prometheus.exporters.node.port}"];
             }
           ];
         }
@@ -102,6 +101,8 @@
         enabledCollectors = [
           "systemd"
           "pressure"
+          "interrupts"
+          "tcpstat"
         ];
       };
     };
