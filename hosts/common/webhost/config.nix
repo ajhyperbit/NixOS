@@ -134,12 +134,13 @@ in
         security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
       };
     };
-
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "ajhyperbit@gmail.com";
-    };
   };
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "ajhyperbit@gmail.com";
+  };
+
   environment.systemPackages = with pkgs; [
     nginx
     forgejo
