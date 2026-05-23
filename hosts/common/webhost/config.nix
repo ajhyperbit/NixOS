@@ -139,15 +139,14 @@ in
       acceptTerms = true;
       defaults.email = "ajhyperbit@gmail.com";
     };
-
-    environment.systemPackages = with pkgs; [
-      nginx
-      forgejo
-    ];
-
-    networking.firewall.allowedTCPPorts = [
-      80
-      443
-    ];
   };
+  environment.systemPackages = with pkgs; [
+    nginx
+    forgejo
+  ];
+
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 }
