@@ -2,7 +2,6 @@
   lib,
   username,
   pkgs,
-  pkgs-d49b5ff,
   pkgs-sliding,
   ...
 }:
@@ -50,7 +49,7 @@ in
         #WEBUI_AUTH = "False";
         #OLLAMA_VULKAN = "1";
       };
-      package = pkgs-d49b5ff.open-webui;
+      package = pkgs.open-webui;
     };
   };
 
