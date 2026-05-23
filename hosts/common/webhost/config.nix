@@ -3,6 +3,17 @@
   pkgs,
   ...
 }:
+let
+  ssl = "/etc/ssl/ajhyperbit.dev/domain.cert.pem";
+  sslKey = "/etc/ssl/ajhyperbit.dev/private.key.pem";
+  proxyPass = ''
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  '';
+  domain = "ajhyperbit.dev";
+in
 {
   services = {
     postgresql = {
@@ -28,9 +39,9 @@
         service.DISABLE_REGISTRATION = true;
         privacy.SHOW_USER_EMAIL = false;
         server = {
-          DOMAIN = "git.ajhyperbit.dev";
+          DOMAIN = "git.${domain}";
           HTTP_PORT = 3000;
-          ROOT_URL = "https://git.ajhyperbit.dev/";
+          ROOT_URL = "https://git.${domain}/";
         };
       };
     };
@@ -46,33 +57,39 @@
     nginx = {
       enable = true;
       virtualHosts = {
-        "ajhyperbit.dev" = {
+        # "${domain}" = {
+        #   forceSSL = true;
+        #   enableACME = true;
+        #   sslCertificate = ssl;
+        #   sslCertificateKey = sslKey;
+        # };
+        "grafana.${domain}" = {
           forceSSL = true;
           enableACME = true;
-          sslCertificate = "/etc/ssl/ajhyperbit.dev/domain.cert.pem";
-          sslCertificateKey = "/etc/ssl/ajhyperbit.dev/private.key.pem";
-        };
-        "grafana.ajhyperbit.dev" = {
-          forceSSL = true;
-          enableACME = true;
-          sslCertificate = "/etc/ssl/ajhyperbit.dev/domain.cert.pem";
-          sslCertificateKey = "/etc/ssl/ajhyperbit.dev/private.key.pem";
+          sslCertificate = ssl;
+          sslCertificateKey = sslKey;
           locations."/" = {
             proxyPass = "http://127.0.0.1:5000";
             proxyWebsockets = true;
-            extraConfig = ''
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-            '';
+            extraConfig = proxyPass;
           };
         };
-        "git.ajhyperbit.dev" = {
+        "search.${domain}" = {
           forceSSL = true;
           enableACME = true;
-          sslCertificate = "/etc/ssl/ajhyperbit.dev/domain.cert.pem";
-          sslCertificateKey = "/etc/ssl/ajhyperbit.dev/private.key.pem";
+          sslCertificate = ssl;
+          sslCertificateKey = sslKey;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8888";
+            proxyWebsockets = true;
+            extraConfig = proxyPass;
+          };
+        };
+        "git.${domain}" = {
+          forceSSL = true;
+          enableACME = true;
+          sslCertificate = ssl;
+          sslCertificateKey = sslKey;
           locations."/" = {
             proxyPass = "http://127.0.0.1:3000";
             proxyWebsockets = true;
@@ -111,26 +128,26 @@
         server = {
           http_addr = "127.0.0.1";
           http_port = 5000;
-          domain = "ajhyperbit.dev";
-          root_url = "https://grafana.ajhyperbit.dev/";
+          domain = "${domain}";
+          root_url = "https://grafana.${domain}/";
         };
         security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
       };
     };
+
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "ajhyperbit@gmail.com";
+    };
+
+    environment.systemPackages = with pkgs; [
+      nginx
+      forgejo
+    ];
+
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
   };
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "ajhyperbit@gmail.com";
-  };
-
-  environment.systemPackages = with pkgs; [
-    nginx
-    forgejo
-  ];
-
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
 }
