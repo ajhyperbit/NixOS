@@ -3,10 +3,8 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-d49b5ff.url = "github:nixos/nixpkgs/d49b5ff8f46788770abcb732ac38bfa431ca5d5e";
-    #Run this command to update this one specifically:
-    #nix flake update nixpkgs-sliding-commit
-    nixpkgs-sliding-commit.url = "nixpkgs/nixpkgs-unstable";
+
+    nix-systems.url = "github:nix-systems/default";
 
     flake-compat = {
       url = "github:NixOS/flake-compat";
@@ -16,6 +14,11 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs-lib";
+    };
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "nix-systems";
     };
 
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
@@ -37,6 +40,7 @@
       #Bump (or remove) later
       ref = "v0.53.3";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
     };
 
     quickshell = {
@@ -50,6 +54,7 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
+      inputs.systems.follows = "nix-systems";
     };
 
     alejandra = {
@@ -67,6 +72,7 @@
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
+      inputs.nix-index-database.follows = "nix-index-database";
     };
 
     disko = {
@@ -83,17 +89,28 @@
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "nix-systems";
     };
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel/release";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
     };
-    nix-systems.url = "github:nix-systems/default";
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -102,8 +119,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-d49b5ff, # specific pinned nixpkgs version
-      nixpkgs-sliding-commit,
       nixos-hardware, # hardware-specific modules
       nix-cachyos-kernel, # cachyos kernels
       home-manager, # home manager
@@ -115,25 +130,13 @@
       ...
     }:
     let
-      system = "x86_64-linux"; # Remove later
+      # Remove later
       host = "nixos";
       otg-host = "nixos-otg";
       username = "ajhyperbit";
       home = "/home/${username}";
       cursor_size = 32;
       cursor_theme = "BreezeX-RosePine";
-      pkgs-d49b5ff = import nixpkgs-d49b5ff {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-      pkgs-sliding = import nixpkgs-sliding-commit {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
       #Formatter related
       eachSystem =
         f: nixpkgs.lib.genAttrs (import nix-systems) (system: f nixpkgs.legacyPackages.${system});
@@ -141,7 +144,7 @@
     in
     {
       nixosConfigurations = {
-        #ANCHOR Main Desktop
+        #Main Desktop
         "${host}" = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           specialArgs = {
@@ -153,8 +156,6 @@
             inherit self;
             inherit cursor_size;
             inherit cursor_theme;
-            inherit pkgs-d49b5ff;
-            inherit pkgs-sliding;
             inherit nix-cachyos-kernel;
           };
           modules = [
@@ -204,8 +205,6 @@
             inherit self;
             inherit cursor_size;
             inherit cursor_theme;
-            inherit pkgs-d49b5ff;
-            inherit pkgs-sliding;
             inherit nix-cachyos-kernel;
           };
           modules = [
@@ -250,8 +249,6 @@
             inherit self;
             inherit cursor_size;
             inherit cursor_theme;
-            inherit pkgs-d49b5ff;
-            inherit pkgs-sliding;
             inherit nix-cachyos-kernel;
           };
           modules = [
