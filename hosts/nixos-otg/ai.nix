@@ -2,7 +2,6 @@
   lib,
   username,
   pkgs,
-  pkgs-sliding,
   ...
 }:
 let
@@ -17,7 +16,7 @@ in
     ollama = {
       enable = true;
       home = ollama_location;
-      package = pkgs-sliding.ollama;
+      package = pkgs.ollama;
       user = "ollama";
       group = "users";
       syncModels = true;
