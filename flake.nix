@@ -129,7 +129,6 @@
       ...
     }:
     let
-      # Remove later
       host = "nixos";
       otg-host = "nixos-otg";
       username = "ajhyperbit";
@@ -142,6 +141,22 @@
       treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./format/treefmt.nix);
     in
     {
+      devShells = eachSystem (
+        _pkgs:
+        let
+          pkgs = import nixpkgs {
+            system = _pkgs.stdenv.hostPlatform.system;
+            config.allowUnfree = true;
+          };
+        in
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              python3Minimal
+            ];
+          };
+        }
+      );
       nixosConfigurations = {
         #Main Desktop
         "${host}" = nixpkgs.lib.nixosSystem rec {
@@ -158,6 +173,7 @@
             inherit nix-cachyos-kernel;
           };
           modules = [
+            ./sops/config.nix
             ./hosts/${host}/config.nix
             ./hosts/${host}/ai.nix
             ./hosts/${host}/gpg-agent.nix
@@ -180,7 +196,7 @@
             ./hosts/common/virtualization.nix
             ./hosts/common/security/security.nix
             ./hosts/common/nix-alien.nix
-            ./hosts/common/webhost/config.nix
+            ./hosts/common/webhost/default.nix
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate

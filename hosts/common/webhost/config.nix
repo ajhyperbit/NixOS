@@ -1,153 +1,204 @@
 {
-  config,
+  lib,
   pkgs,
+  config,
   ...
 }:
 let
-  ssl = "/etc/ssl/ajhyperbit.dev/domain.cert.pem";
-  sslKey = "/etc/ssl/ajhyperbit.dev/private.key.pem";
+  domain = config.webhost.domain;
+
+  ssl =
+    if config.webhost.ssl != null then
+      config.webhost.ssl
+    else
+      "/etc/ssl/${config.webhost.domain}/domain.cert.pem";
+  sslKey =
+    if config.webhost.sslKey != null then
+      config.webhost.sslKey
+    else
+      "/etc/ssl/${config.webhost.domain}/private.key.pem";
+
+  sslAttrs = lib.mkIf config.webhost.enableDirectIPHosting.enable {
+    forceSSL = true;
+    enableACME = true;
+    sslCertificate = ssl;
+    sslCertificateKey = sslKey;
+  };
+
   proxyPass = ''
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
   '';
-  domain = "ajhyperbit.dev";
+  grafanaPortStr = builtins.toString config.webhost.grafanaPort;
+  searxngPortStr = builtins.toString config.webhost.searxngPort;
+  forgejoPortStr = builtins.toString config.webhost.forgejoPort;
 in
 {
-  services = {
-    postgresql = {
-      enable = true;
-      ensureDatabases = [ "forgejo" ];
-      ensureUsers = [
-        {
-          name = "forgejo";
-          ensureDBOwnership = true;
-        }
-      ];
-    };
+  imports = [
+    ./options.nix
+  ];
 
-    forgejo = {
-      enable = true;
-      database = {
-        type = "postgres";
-        user = "forgejo";
-        name = "forgejo";
-        socket = "/run/postgresql";
-      };
-      settings = {
-        service.DISABLE_REGISTRATION = true;
-        privacy.SHOW_USER_EMAIL = false;
-        server = {
-          DOMAIN = "git.${domain}";
-          HTTP_PORT = 3000;
-          ROOT_URL = "https://git.${domain}/";
-        };
-      };
-    };
-
-    ddns-updater = {
-      enable = true;
-      environment = {
-        CONFIG_FILEPATH = "/home/ajhyperbit/private/porkbun/ddns-updater/config.json";
-        DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
-      };
-    };
-
-    nginx = {
-      enable = true;
-      virtualHosts = {
-        # "${domain}" = {
-        #   forceSSL = true;
-        #   enableACME = true;
-        #   sslCertificate = ssl;
-        #   sslCertificateKey = sslKey;
-        # };
-        "grafana.${domain}" = {
-          forceSSL = true;
-          enableACME = true;
-          sslCertificate = ssl;
-          sslCertificateKey = sslKey;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:5000";
-            proxyWebsockets = true;
-            extraConfig = proxyPass;
-          };
-        };
-        "search.${domain}" = {
-          forceSSL = true;
-          enableACME = true;
-          sslCertificate = ssl;
-          sslCertificateKey = sslKey;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8888";
-            proxyWebsockets = true;
-            extraConfig = proxyPass;
-          };
-        };
-        "git.${domain}" = {
-          forceSSL = true;
-          enableACME = true;
-          sslCertificate = ssl;
-          sslCertificateKey = sslKey;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:3000";
-            proxyWebsockets = true;
-          };
-        };
-      };
-    };
-
-    prometheus = {
-      enable = true;
-      globalConfig.scrape_interval = "15s";
-      scrapeConfigs = [
-        {
-          job_name = "node";
-          static_configs = [
-            {
-              targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
-            }
-          ];
-        }
-      ];
-      exporters.node = {
+  config = lib.mkIf config.webhost.enable {
+    services = {
+      postgresql = {
         enable = true;
-        enabledCollectors = [
-          "systemd"
-          "pressure"
-          "interrupts"
-          "tcpstat"
+        ensureDatabases = [ "forgejo" ];
+        ensureUsers = [
+          {
+            name = "forgejo";
+            ensureDBOwnership = true;
+          }
         ];
       };
-    };
 
-    grafana = {
-      enable = true;
-      settings = {
-        server = {
-          http_addr = "127.0.0.1";
-          http_port = 5000;
-          domain = "${domain}";
-          root_url = "https://grafana.${domain}/";
+      forgejo = {
+        enable = true;
+        database = {
+          type = "postgres";
+          user = "forgejo";
+          name = "forgejo";
+          socket = "/run/postgresql";
         };
-        security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
+        settings = {
+          service.DISABLE_REGISTRATION = true;
+          privacy.SHOW_USER_EMAIL = false;
+          server = {
+            DOMAIN = "git.${domain}";
+            HTTP_PORT = config.webhost.forgejoPort;
+            ROOT_URL = "https://git.${domain}/";
+          };
+        };
+      };
+
+      ddns-updater = {
+        enable = config.webhost.enableDirectIPHosting.enable;
+        environment = {
+          CONFIG_FILEPATH = "/home/ajhyperbit/private/porkbun/ddns-updater/config.json";
+          DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
+        };
+      };
+
+      nginx = {
+        enable = true;
+        virtualHosts = {
+          "${domain}" = sslAttrs // {
+          };
+          "grafana.${domain}" = sslAttrs // {
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${grafanaPortStr}";
+              proxyWebsockets = true;
+              extraConfig = proxyPass;
+            };
+          };
+          "search.${domain}" = sslAttrs // {
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${searxngPortStr}";
+              proxyWebsockets = true;
+              extraConfig = proxyPass;
+            };
+          };
+          "git.${domain}" = sslAttrs // {
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${forgejoPortStr}";
+              proxyWebsockets = true;
+              extraConfig = proxyPass;
+            };
+          };
+        };
+      };
+
+      prometheus = {
+        enable = true;
+        globalConfig.scrape_interval = "5s";
+        scrapeConfigs = [
+          {
+            job_name = "node";
+            static_configs = [
+              {
+                targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
+              }
+            ];
+          }
+        ];
+        exporters.node = {
+          enable = true;
+          enabledCollectors = [
+            "systemd"
+            "pressure"
+            "interrupts"
+            "tcpstat"
+          ];
+        };
+      };
+
+      grafana = {
+        enable = true;
+        settings = {
+          server = {
+            http_addr = "127.0.0.1";
+            http_port = config.webhost.grafanaPort;
+            domain = "${domain}";
+            root_url = "https://grafana.${domain}/";
+          };
+          security.secret_key = "$__file{${config.webhost.grafanaKey}}";
+        };
+      };
+
+      # fail2ban = {
+      #   enable = true;
+      #   maxretry = 5;
+      #   bantime = "1h";
+      #   jails = {
+      #     nginx-botsearch = ''
+      #       enabled   = true
+      #       port      = http,https
+      #       filter    = nginx-botsearch
+      #       logpath   = /var/log/nginx/access.log
+      #       maxretry  = 5
+      #     '';
+      #   };
+      # };
+
+      cloudflared = {
+        enable = true;
+        tunnels = {
+          "693f4fee-c3a1-4133-ad4c-872e1031858c" = {
+            credentialsFile = "${config.webhost.cloudflareTunnelCert}";
+            certificateFile = "${config.webhost.cloudflareOriginCertPK}";
+            ingress = {
+              "grafana.${domain}" = "http://localhost:${grafanaPortStr}";
+              "search.${domain}" = "http://localhost:${searxngPortStr}";
+              "git.${domain}" = "http://localhost:${forgejoPortStr}";
+            };
+            default = "http_status:404";
+          };
+        };
       };
     };
+
+    #enable to debug cloudflared tunnel
+    # systemd.services."cloudflared-tunnel-693f4fee-c3a1-4133-ad4c-872e1031858c" = {
+    #   environment = {
+    #     TUNNEL_LOGLEVEL = "debug";
+    #   };
+    # };
+
+    security.acme = {
+      acceptTerms = lib.mkIf config.webhost.enableDirectIPHosting.enable true;
+      defaults.email = "${config.webhost.enableDirectIPHosting.email}";
+    };
+
+    environment.systemPackages = with pkgs; [
+      nginx
+      forgejo
+      cloudflared
+    ];
+
+    # networking.firewall.allowedTCPPorts = [
+    #   80
+    #   443
+    # ];
   };
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "ajhyperbit@gmail.com";
-  };
-
-  environment.systemPackages = with pkgs; [
-    nginx
-    forgejo
-  ];
-
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
 }
