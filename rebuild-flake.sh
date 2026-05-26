@@ -117,30 +117,30 @@ else
   sudo nix-shell -p nix-output-monitor.out expect.out --run "unbuffer nixos-rebuild $reswitch --upgrade --show-trace --flake .#$host --log-format internal-json |& nom --json"
 fi
 
-current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | head -1)
+# current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | head -1)
 
-hostname=$(uname -n)
+# hostname=$(uname -n)
 
-if [ "$reswitch" != "test" ] && [ "$reswitch" != "build" ]; then
-  #Pulled from https://github.com/NixOS/nixpkgs/blob/66aa98b29099c636622a9d9c18370f13701716f6/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh#L596
-  last_tag=$(git describe --tags --always)
-  hash=$(git rev-parse --short HEAD)
+# if [ "$reswitch" != "test" ] && [ "$reswitch" != "build" ]; then
+#   #Pulled from https://github.com/NixOS/nixpkgs/blob/66aa98b29099c636622a9d9c18370f13701716f6/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh#L596
+#   last_tag=$(git describe --tags --always)
+#   hash=$(git rev-parse --short HEAD)
 
-  if [[ $(git status --short) != '' ]]; then
-    dirty='-dirty'
-  fi
+#   if [[ $(git status --short) != '' ]]; then
+#     dirty='-dirty'
+#   fi
 
-  if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
-    # shellcheck disable=SC2086
-    git tag Gen-$hostname-$current_tag-$hash$dirty
+#   if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
+#     # shellcheck disable=SC2086
+#     git tag Gen-$hostname-$current_tag-$hash$dirty
 
-    printf "Last tag: %s\n" "$last_tag"
+#     printf "Last tag: %s\n" "$last_tag"
 
-    # shellcheck disable=SC2027
-    # shellcheck disable=SC2086
-    choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
-  fi
-fi
+#     # shellcheck disable=SC2027
+#     # shellcheck disable=SC2086
+#     choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
+#   fi
+# fi
 
 #REVIEW - Testing required
 #if ["$hostname" == "nixos"]; then

@@ -182,6 +182,7 @@ in
       google-chrome = "google-chrome-stable";
       fl = "findlink";
       rebuild = "/home/${username}/NixOS-Hyprland/rebuild-flake.sh";
+      tag = "/home/${username}/NixOS-Hyprland/tag.sh";
       clean = "nh clean all ${nhArgs}";
       llsblk = "lsblk -o NAME,FSTYPE,KNAME,SIZE,TYPE,MOUNTPOINT,SERIAL,UUID";
     };
