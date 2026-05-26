@@ -42,16 +42,16 @@ last_tag=$(git describe --tags --always)
 hash=$(git rev-parse --short HEAD)
 
 if [[ $(git status --short) != '' ]]; then
-	dirty='-dirty'
+  dirty='-dirty'
 fi
 
 if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
-	# shellcheck disable=SC2086
-	git tag Gen-$hostname-$current_tag-$hash$dirty
+  # shellcheck disable=SC2086
+  git tag Gen-$hostname-$current_tag-$hash$dirty
 
-	printf "Last tag: %s\n" "$last_tag"
+  printf "Last tag: %s\n" "$last_tag"
 
-	# shellcheck disable=SC2027
-	# shellcheck disable=SC2086
-	choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$hostname-$current_tag-$hash$dirty"
+  # shellcheck disable=SC2027
+  # shellcheck disable=SC2086
+  choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$hostname-$current_tag-$hash$dirty"
 fi
