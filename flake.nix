@@ -59,8 +59,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
+
+    #Wayland ecosystem
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -185,6 +192,7 @@
             ./hosts/${host}/cachyos-kernel.nix
             ./hosts/common/common.nix
             ./hosts/common/packages/packages.nix
+            ./hosts/common/hyprland/noctalia.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix
             ./hosts/common/audio.nix

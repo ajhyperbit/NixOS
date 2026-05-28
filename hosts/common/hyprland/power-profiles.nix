@@ -1,0 +1,8 @@
+{ ... }:
+{
+  services = {
+    tuned = {
+      enable = true;
+    };
+  };
+}

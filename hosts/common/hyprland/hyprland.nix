@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  username,
   ...
 }:
 {
@@ -33,14 +32,21 @@
     greetd = {
       settings = {
         default_session = {
-          user = username;
+          user = "greeter";
           command = ''
-            ${pkgs.tuigreet}/bin/tuigreet --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop" --power-reboot 'sudo systemctl kexec'
+            ${pkgs.tuigreet}/bin/tuigreet --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop" --power-reboot 'sudo systemctl kexec' --kb-command 2 --kb-sessions 3 --kb-power 12
           '';
         };
       };
     };
   };
+
+  environment.etc."greetd/sessions/hyprland.desktop".text = ''
+    [Desktop Entry]
+    Name=Hyprland UWSM custom
+    Exec=${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop
+    Type=Application
+  '';
 
   environment.sessionVariables = rec {
     QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";

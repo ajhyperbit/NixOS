@@ -195,7 +195,6 @@
     wlogout
     yad
     yt-dlp
-    greetd
     tuigreet
 
     #Hyperland  #https://www.youtube.com/watch?v=61wGzIv12Ds
