@@ -1,6 +1,8 @@
 {
   inputs,
+  lib,
   pkgs,
+  config,
   ...
 }:
 #let
@@ -390,4 +392,5 @@
       drkonqi
     ];
   };
+  systemd.services."drkonqi-coredump-processor@".wantedBy = lib.mkForce [ ];
 }
