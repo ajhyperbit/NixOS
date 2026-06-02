@@ -1,8 +1,6 @@
 {
   inputs,
-  lib,
   pkgs,
-  config,
   ...
 }:
 #let
@@ -15,6 +13,7 @@
 #in
 {
   imports = [
+    ./plasma.nix
     ./package-overlays/proton-ge-overlays/proton-ge-overlay.nix
   ];
 
@@ -386,11 +385,8 @@
       firefox-devedition
 
       bind
-    ];
 
-    plasma6.excludePackages = with pkgs.kdePackages; [
-      drkonqi
+      lmstudio
     ];
   };
-  systemd.services."drkonqi-coredump-processor@".wantedBy = lib.mkForce [ ];
 }
