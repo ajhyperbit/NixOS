@@ -408,6 +408,7 @@ in
       enable = true;
       lfs = {
         enable = true;
+        enablePureSSHTransfer = true;
       };
     };
 
