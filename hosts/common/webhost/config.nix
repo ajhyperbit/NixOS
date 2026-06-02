@@ -70,6 +70,7 @@ in
             ROOT_URL = "https://git.${domain}/";
           };
         };
+        lfs.enable = true;
       };
 
       ddns-updater = {
