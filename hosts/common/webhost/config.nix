@@ -31,6 +31,7 @@ let
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
   '';
+  sshPortStr = builtins.toString config.webhost.domainSSH.port;
   grafanaPortStr = builtins.toString config.webhost.grafanaPort;
   searxngPortStr = builtins.toString config.webhost.searxngPort;
   forgejoPortStr = builtins.toString config.webhost.forgejoPort;
@@ -68,43 +69,61 @@ in
             DOMAIN = "git.${domain}";
             HTTP_PORT = config.webhost.forgejoPort;
             ROOT_URL = "https://git.${domain}/";
+            SSH_PORT = config.webhost.domainSSH.port;
+            SSH_DOMAIN = "ssh.${domain}";
           };
         };
-        lfs.enable = true;
+        lfs = {
+          enable = true;
+        };
       };
 
       ddns-updater = {
-        enable = config.webhost.enableDirectIPHosting.enable;
-        environment = {
-          CONFIG_FILEPATH = "/home/ajhyperbit/private/porkbun/ddns-updater/config.json";
-          DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
-        };
+        enable = config.webhost.enableDirectIPHosting.enable || config.webhost.domainSSH.enable;
+        environment = lib.mkMerge [
+          (lib.mkIf config.webhost.domainSSH.enable {
+            CONFIG_FILEPATH = "/home/ajhyperbit/private/cloudflare/ddns-updater/config.json";
+            DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
+          })
+          (lib.mkIf (!config.webhost.domainSSH.enable) {
+            CONFIG_FILEPATH = "/home/ajhyperbit/private/porkbun/ddns-updater/config.json";
+            DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
+          })
+        ];
       };
 
       nginx = {
         enable = true;
+        #clientMaxBodySize = "512M";
         virtualHosts = {
           "${domain}" = sslAttrs // {
           };
-          "grafana.${domain}" = sslAttrs // {
+          "ssh.${domain}" = sslAttrs // {
             locations."/" = {
-              proxyPass = "http://127.0.0.1:${grafanaPortStr}";
+              proxyPass = "http://127.0.0.1:${sshPortStr}";
               proxyWebsockets = true;
               extraConfig = proxyPass;
             };
-          };
-          "search.${domain}" = sslAttrs // {
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${searxngPortStr}";
-              proxyWebsockets = true;
-              extraConfig = proxyPass;
+            "grafana.${domain}" = sslAttrs // {
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${grafanaPortStr}";
+                proxyWebsockets = true;
+                extraConfig = proxyPass;
+              };
             };
-          };
-          "git.${domain}" = sslAttrs // {
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${forgejoPortStr}";
-              proxyWebsockets = true;
-              extraConfig = proxyPass;
+            "search.${domain}" = sslAttrs // {
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${searxngPortStr}";
+                proxyWebsockets = true;
+                extraConfig = proxyPass;
+              };
+            };
+            "git.${domain}" = sslAttrs // {
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${forgejoPortStr}";
+                proxyWebsockets = true;
+                extraConfig = proxyPass;
+              };
             };
           };
         };

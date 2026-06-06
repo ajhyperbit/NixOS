@@ -30,6 +30,14 @@
         description = "Email to be used with ACME";
       };
 
+      domainSSH.enable = lib.mkEnableOption "Enables domain direct IP hosting";
+
+      domainSSH.port = lib.mkOption {
+        type = lib.types.int;
+        default = 22;
+        description = "The port to be used with ssh";
+      };
+
       ssl = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = null;
@@ -51,6 +59,12 @@
         '';
       };
 
+      forgejoPort = lib.mkOption {
+        type = lib.types.int;
+        default = 3000;
+        description = "The port to be used with searxng";
+      };
+
       grafanaPort = lib.mkOption {
         type = lib.types.int;
         default = 5000;
@@ -60,12 +74,6 @@
       searxngPort = lib.mkOption {
         type = lib.types.int;
         default = 8888;
-        description = "The port to be used with searxng";
-      };
-
-      forgejoPort = lib.mkOption {
-        type = lib.types.int;
-        default = 3000;
         description = "The port to be used with searxng";
       };
     };

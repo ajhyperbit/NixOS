@@ -33,6 +33,8 @@
     cloudflareTunnelCert = "${config.sops.secrets.cloudflareTunnelCert.path}";
     cloudflareOriginCertPK = "${config.sops.secrets.cloudflareOriginCertPK.path}";
 
+    domainSSH.enable = false;
+
     enableDirectIPHosting.enable = false;
     enableDirectIPHosting.email = "ajhyperbit@gmail.com";
   };
