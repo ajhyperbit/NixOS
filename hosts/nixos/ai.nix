@@ -8,6 +8,11 @@
   environment.systemPackages = with pkgs; [
     clinfo
     rocmPackages.rocm-smi
+
+    opencode
+    opencode-desktop
+
+    mcp-nixos
   ];
 
   nixpkgs.config.rocmSupport = true;
