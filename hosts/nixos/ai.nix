@@ -37,6 +37,9 @@
         "gpt-oss:20b"
         "gemma4:e2b"
         "gemma4:26b"
+        "qwen3-coder:30b"
+        "qwen3-coder-next:q4_K_M"
+        "devstral-small-2:24b"
         #"dolphin-llama3:8b"
         #"qwen2.5:3b"
         #"qwen2.5-coder:1.5b"
@@ -49,6 +52,12 @@
         #"translategemma:12b"
         #"mevatron/diffsense:0.5b"
       ];
+
+      environmentVariables = {
+        OLLAMA_CONTEXT_LENGTH = "131072";
+        OLLAMA_FLASH_ATTENTION = "1";
+        OLLAMA_KV_CACHE_TYPE = "q8_0";
+      };
     };
     open-webui = {
       enable = true;
