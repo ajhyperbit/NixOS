@@ -32,31 +32,18 @@
       #So this option should not be needed
       syncModels = true;
       loadModels = [
-        #"mistral:7b"
-        #"deepseek-r1:8b"
-        "gpt-oss:20b"
-        "gemma4:e2b"
-        "gemma4:26b"
-        "qwen3-coder:30b"
-        "qwen3-coder-next:q4_K_M"
-        "devstral-small-2:24b"
-        #"dolphin-llama3:8b"
-        #"qwen2.5:3b"
-        #"qwen2.5-coder:1.5b"
-        #"qwen2.5-coder:3b"
-        #"qwen2.5-coder:7B"
-        #"qwen3:8b"
-        #"llama3.2:3b"
-        #"nomic-embed-text:latest"
-        #"translategemma:4b"
-        #"translategemma:12b"
-        #"mevatron/diffsense:0.5b"
+        #newest to oldest
+        "gemma4:26b" # April 2, 2026 
+        "qwen3.5:9b" # February 16, 2026
+        "devstral-small-2:24b" # December 9, 2025 
+        "gpt-oss:20b" # August 5, 2025
+        "qwen3-coder:30b" # July 2025 
       ];
 
       environmentVariables = {
-        OLLAMA_CONTEXT_LENGTH = "131072";
+        OLLAMA_CONTEXT_LENGTH = "32768";
         OLLAMA_FLASH_ATTENTION = "1";
-        OLLAMA_KV_CACHE_TYPE = "q8_0";
+        OLLAMA_KV_CACHE_TYPE = "q4_0";
       };
     };
     open-webui = {
