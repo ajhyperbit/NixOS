@@ -137,7 +137,6 @@
     }:
     let
       host = "nixos";
-      otg-host = "nixos-otg";
       username = "ajhyperbit";
       home = "/home/${username}";
       cursor_size = 32;
