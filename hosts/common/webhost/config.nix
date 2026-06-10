@@ -72,6 +72,9 @@ in
             SSH_PORT = config.webhost.domainSSH.port;
             SSH_DOMAIN = "ssh.${domain}";
           };
+          actions = {
+            ENABLED = true;
+          };
         };
         lfs = {
           enable = true;
