@@ -191,7 +191,7 @@
             ./hosts/${host}/cachyos-kernel.nix
             ./hosts/common/common.nix
             ./hosts/common/packages/packages.nix
-            ./hosts/common/hyprland/noctalia.nix
+            ./hosts/common/hyprland/noctalia/noctalia.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix
             ./hosts/common/audio.nix
