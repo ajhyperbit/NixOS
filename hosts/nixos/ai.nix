@@ -48,8 +48,8 @@ let
       ];
     };
     "qwen3.5:9b" = {
-      numCtx = 65536;
-      output = 8192;
+      numCtx = 131072;
+      output = 16384;
       name = "Qwen 3.5 9b";
       roles = [
         "chat"
@@ -58,6 +58,10 @@ let
       ];
     };
   };
+
+  maxContextLength = lib.foldl' lib.max 0 (
+    map (cfg: cfg.numCtx) (builtins.attrValues ollamaModelConfigs)
+  );
 
   continueConfig = {
     name = "Local Config";
@@ -117,7 +121,7 @@ in
       syncModels = true;
       loadModels = lib.attrNames ollamaModelConfigs;
       environmentVariables = {
-        OLLAMA_CONTEXT_LENGTH = "32768";
+        OLLAMA_CONTEXT_LENGTH = toString maxContextLength;
         OLLAMA_FLASH_ATTENTION = "1";
         OLLAMA_KV_CACHE_TYPE = "q4_0";
       };
