@@ -6,31 +6,72 @@
 }:
 let
   ollamaModelConfigs = {
-    "gpt-oss:20b" = {
-      numCtx = 32768;
-      output = 8192;
-      name = "GPT-OSS";
-    };
-    "qwen3.5:9b" = {
-      numCtx = 65536;
-      output = 8192;
-      name = "Qwen 3.5 9b";
+    "devstral-small-2:24b" = {
+      numCtx = 8192;
+      output = 4096;
+      name = "Devstral Small 2";
+      roles = [
+        "chat"
+        "edit"
+        "apply"
+      ];
     };
     "gemma4:26b" = {
       numCtx = 8192;
       output = 4096;
       name = "Gemma 4 26b";
+      roles = [
+        "chat"
+        "edit"
+        "apply"
+        "embed"
+      ];
     };
-    "devstral-small-2:24b" = {
-      numCtx = 8192;
-      output = 4096;
-      name = "Devstral Small 2";
+    "gpt-oss:20b" = {
+      numCtx = 32768;
+      output = 8192;
+      name = "GPT-OSS";
+      roles = [
+        "chat"
+        "edit"
+        "apply"
+      ];
     };
     "qwen3-coder:30b" = {
       numCtx = 8192;
       output = 4096;
       name = "Qwen 3 Coder 30b";
+      roles = [
+        "chat"
+        "edit"
+        "apply"
+      ];
     };
+    "qwen3.5:9b" = {
+      numCtx = 65536;
+      output = 8192;
+      name = "Qwen 3.5 9b";
+      roles = [
+        "chat"
+        "edit"
+        "apply"
+      ];
+    };
+  };
+
+  continueConfig = {
+    name = "Local Config";
+    version = "1.0.0";
+    schema = "v1";
+    models = lib.mapAttrsToList (model: cfg: {
+      name = cfg.name;
+      provider = "ollama";
+      inherit model;
+      roles = cfg.roles;
+      defaultCompletionOptions = {
+        contextLength = cfg.numCtx;
+      };
+    }) ollamaModelConfigs;
   };
 
   mkModelfile =
@@ -154,25 +195,31 @@ in
   };
 
   home-manager.users.${username} = {
-    xdg.configFile."opencode/opencode.jsonc".source = (pkgs.formats.json { }).generate "opencode.jsonc" {
-      "$schema" = "https://opencode.ai/config.json";
-      disabled_providers = [ ];
-      provider = {
-        ollama-local = {
-          name = "Ollama";
-          npm = "@ai-sdk/openai-compatible";
-          options = {
-            baseURL = "http://localhost:11434/v1";
-          };
-          models = lib.mapAttrs (_name: cfg: {
-            name = cfg.name;
-            limit = {
-              context = cfg.numCtx;
-              output = cfg.output;
+    xdg.configFile."opencode/opencode.jsonc".source =
+      (pkgs.formats.json { }).generate "opencode.jsonc"
+        {
+          "$schema" = "https://opencode.ai/config.json";
+          disabled_providers = [ ];
+          provider = {
+            ollama-local = {
+              name = "Ollama";
+              npm = "@ai-sdk/openai-compatible";
+              options = {
+                baseURL = "http://localhost:11434/v1";
+              };
+              models = lib.mapAttrs (_name: cfg: {
+                name = cfg.name;
+                limit = {
+                  context = cfg.numCtx;
+                  output = cfg.output;
+                };
+              }) ollamaModelConfigs;
             };
-          }) ollamaModelConfigs;
+          };
         };
-      };
-    };
+
+    home.file.".continue/config.yaml".source =
+      (pkgs.formats.yaml { }).generate "config.yaml"
+        continueConfig;
   };
 }
