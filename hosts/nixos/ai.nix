@@ -123,7 +123,7 @@ in
       environmentVariables = {
         OLLAMA_CONTEXT_LENGTH = toString maxContextLength;
         OLLAMA_FLASH_ATTENTION = "1";
-        OLLAMA_KV_CACHE_TYPE = "q4_0";
+        OLLAMA_KV_CACHE_TYPE = "q8_0";
       };
     };
 
