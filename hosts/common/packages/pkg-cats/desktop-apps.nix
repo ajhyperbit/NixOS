@@ -135,6 +135,9 @@
         impression # Bootable USB drive creator (simple GUI)
         usbimager # Minimal bootable USB image writer
 
+        # ── Terminal ──────────────────────────────────────────────────────────────
+        kitty #Fast, feature-rich, GPU based terminal emulator
+
         # ── Misc ──────────────────────────────────────────────────────────────────
         spotify # Spotify music streaming client
       ];

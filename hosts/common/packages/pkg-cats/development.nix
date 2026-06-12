@@ -17,7 +17,7 @@
   config = lib.mkIf config.packages.development.enable {
     environment = {
       systemPackages = with pkgs; [
-        # ── CLI & Terminal Utilities ──────────────────────────────────────────────
+        # ── CLI & Term Utilities ──────────────────────────────────────────────────
         lsof # List open files and file descriptors
         strace # System call tracer for debugging
         socat # Multipurpose relay for bidirectional data transfer
