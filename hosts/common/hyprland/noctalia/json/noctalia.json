@@ -127,7 +127,10 @@
           "drawerEnabled": true,
           "hidePassive": false,
           "id": "Tray",
-          "pinned": []
+          "pinned": [
+            "steam",
+            "Discord"
+          ]
         },
         {
           "hideWhenZero": false,
@@ -375,7 +378,7 @@
         {
           "id": "Network"
         },
-                {
+        {
           "id": "PowerProfile"
         },
         {

@@ -6,5 +6,8 @@ let
   );
 in
 {
-  imports = map (name: dir + "/${name}") (lib.attrNames nixFiles);
+  imports = [
+    ./pkg-cats/package-overlays/proton-ge-overlays/proton-ge-overlay.nix
+  ]
+  ++ map (name: dir + "/${name}") (lib.attrNames nixFiles);
 }
