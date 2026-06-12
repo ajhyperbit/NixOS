@@ -103,8 +103,12 @@ in
   environment.systemPackages = with pkgs; [
     clinfo
     rocmPackages.rocm-smi
+
     opencode
     opencode-desktop
+
+    lmstudio
+
     mcp-nixos
   ];
 

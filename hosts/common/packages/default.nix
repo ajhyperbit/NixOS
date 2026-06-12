@@ -1,0 +1,6 @@
+{ ... }:
+{
+  imports = [
+    ./pkgs-module.nix
+  ];
+}

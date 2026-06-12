@@ -1,17 +1,23 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 let
-  proton-ge-overlay = _self: super: {
-    proton-ge-9-27 = super.callPackage ./proton-ge-package-9-27.nix { };
-    proton-ge-10-1 = super.callPackage ./proton-ge-package-10-1.nix { };
-  };
+  dir = ./proton-versions;
+  nixFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".nix" name) (
+    builtins.readDir dir
+  );
+
+  protonPackages = lib.mapAttrs' (
+    name: _: lib.nameValuePair (lib.removeSuffix ".nix" name) (dir + "/${name}")
+  ) nixFiles;
+
+  proton-ge-overlay =
+    _self: super: lib.mapAttrs (_name: path: super.callPackage path { }) protonPackages;
 in
 {
-  nixpkgs.overlays = [
-    proton-ge-overlay
-  ];
+  nixpkgs.overlays = [ proton-ge-overlay ];
 
-  programs.steam.extraCompatPackages = with pkgs; [
-    proton-ge-9-27
-    proton-ge-10-1
-  ];
+  programs.steam.extraCompatPackages = map (name: pkgs.${name}) (lib.attrNames protonPackages);
 }
