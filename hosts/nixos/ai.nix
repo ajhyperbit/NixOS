@@ -1,7 +1,7 @@
 {
   lib,
-  username,
   pkgs,
+  username,
   ...
 }:
 let
@@ -100,6 +100,13 @@ let
   '';
 in
 {
+  sops.secrets = {
+    openrouterKey_auth = {
+      owner = "${username}";
+      path = "/home/${username}/.local/share/opencode/auth.json";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     clinfo
     rocmPackages.rocm-smi

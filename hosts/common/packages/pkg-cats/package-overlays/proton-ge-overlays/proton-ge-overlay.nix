@@ -1,6 +1,7 @@
 {
-  pkgs,
   lib,
+  pkgs,
+  config,
   ...
 }:
 let
@@ -17,7 +18,17 @@ let
     _self: super: lib.mapAttrs (_name: path: super.callPackage path { }) protonPackages;
 in
 {
-  nixpkgs.overlays = [ proton-ge-overlay ];
+  options = {
+    packages.proton-Packages.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      example = true;
+    };
+  };
 
-  programs.steam.extraCompatPackages = map (name: pkgs.${name}) (lib.attrNames protonPackages);
+  config = lib.mkIf config.packages.proton-Packages.enable {
+    nixpkgs.overlays = [ proton-ge-overlay ];
+
+    programs.steam.extraCompatPackages = map (name: pkgs.${name}) (lib.attrNames protonPackages);
+  };
 }
