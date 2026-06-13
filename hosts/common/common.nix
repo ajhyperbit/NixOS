@@ -390,7 +390,6 @@ in
       "wheel"
       "audio"
       "video"
-      "root"
       "greeter"
       "gamemode"
       "seat"
