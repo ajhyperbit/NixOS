@@ -303,30 +303,6 @@
         "type": "github"
       }
     },
-    "fw-fanctrl": {
-      "inputs": {
-        "flake-compat": [
-          "flake-compat"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1758876503,
-        "narHash": "sha256-cFMFr0lheAKxEj0WYgFbHf+YFWCdyQJsVv6cBhmpgFg=",
-        "owner": "TamtamHero",
-        "repo": "fw-fanctrl",
-        "rev": "6ce57662e2f31dd7090a591fdd77185410ab3181",
-        "type": "github"
-      },
-      "original": {
-        "owner": "TamtamHero",
-        "ref": "packaging/nix",
-        "repo": "fw-fanctrl",
-        "type": "github"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -1012,7 +988,6 @@
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
-        "fw-fanctrl": "fw-fanctrl",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nix-alien": "nix-alien",
