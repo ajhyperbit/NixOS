@@ -45,6 +45,7 @@ in
       #"modprobe.blacklist=iTCO_wdt" #watchdog for Intel
       "nohibernate"
       #"mitigations=off"
+      "threadirqs"
     ];
 
     kernelModules = [ "ntsync" ];

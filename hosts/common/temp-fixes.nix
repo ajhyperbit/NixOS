@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   #nixpkgs issue: 487054
-  #https://nixpkgs-tracker.ocfox.me/?pr=487054
   systemd.services.gfxrace = {
     before = [ "ollama.service" ];
     serviceConfig = {
@@ -15,9 +14,9 @@
 
   #nixpkgs pr: 493384
   #https://nixpkgs-tracker.ocfox.me/?pr=493384
-  services.sunshine.package = pkgs.sunshine.override {
-    boost = pkgs.boost187;
-  };
+  # services.sunshine.package = pkgs.sunshine.override {
+  #   boost = pkgs.boost187;
+  # };
 
   #nixpkgs issue: 514113
   #nixpkgs related pr: 510494
