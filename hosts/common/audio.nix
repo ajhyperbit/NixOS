@@ -22,7 +22,7 @@ in
     default = true;
     description = "Disable HFP/HSP bluetooth profiles in WirePlumber. Set to false to re-enable voice/call profiles.";
   };
-  
+
   config = {
     environment.systemPackages = with pkgs; [
       pwvucontrol
@@ -84,6 +84,34 @@ in
                 "log.level" = "D";
               };
             };
+
+            "99-audio-device-priority" = {
+              "monitor.bluez.rules" = [
+                {
+                  matches = [
+                    (defaultMatchCriteria // { "device.product.id" = "0x0cd3"; })
+                    (defaultMatchCriteria // { "device.product.id" = "0x0d58"; })
+                    (defaultMatchCriteria // { "device.product.id" = "0x0f8a"; })
+                  ];
+                  actions.update-props = {
+                    "priority.session" = 2000;
+                  };
+                }
+              ];
+
+              "monitor.alsa.rules" = [
+                {
+                  matches = [
+                    #preferred fallback ALSA sink
+                    { "node.name" = "alsa_output.pci-0000_0f_00.4.analog-stereo"; }
+                  ];
+                  actions.update-props = {
+                    "priority.session" = 1500;
+                  };
+                }
+              ];
+            };
+
             "wh-1000xm3-ldac-hq" = {
               "monitor.bluez.rules" = [
                 {
