@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
 }
 #VSCode extensions installed
 #arrterian.nix-env-selector

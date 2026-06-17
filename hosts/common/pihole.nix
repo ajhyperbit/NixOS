@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   services = {
     pihole-web = {
       enable = true;

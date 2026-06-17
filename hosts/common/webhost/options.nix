@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{ lib, ... }: {
   options = {
     webhost = {
       enable = lib.mkEnableOption "Enable webhost services";

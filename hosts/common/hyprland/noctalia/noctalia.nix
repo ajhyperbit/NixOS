@@ -15,12 +15,11 @@
     ];
 
     # configure options
-    
+
     programs.noctalia-shell = {
       enable = true;
       settings = builtins.fromJSON (builtins.readFile ./config/noctalia.json);
     };
-
 
     # v5
     # programs.noctalia = {

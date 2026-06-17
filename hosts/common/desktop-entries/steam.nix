@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   xdg = {
     desktopEntries = {
       steam = {

@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   services.pipewire.wireplumber.extraConfig = {
     "mute-quadcast" = {
       "monitor.alsa.rules" = [

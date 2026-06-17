@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   #nixpkgs issue: 487054
   systemd.services.gfxrace = {
     before = [ "ollama.service" ];
