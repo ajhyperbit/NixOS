@@ -88,7 +88,7 @@
   environment.systemPackages = with pkgs; [
     ddclient
     btop-rocm
-    vintagestory
+    #vintagestory
   ];
 
   lib.mkMerge = {

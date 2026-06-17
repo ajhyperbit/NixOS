@@ -50,7 +50,8 @@
       owner = "hyprwm";
       repo = "Hyprland";
       #Bump (or remove) later
-      ref = "v0.53.3";
+      #ref = "v0.53.3";
+      ref = "v0.55.4";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
     };
@@ -67,7 +68,9 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia/legacy-v4";
+      # Testing upgrade to Noctalia v5
+      # url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

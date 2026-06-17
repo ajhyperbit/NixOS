@@ -25,7 +25,7 @@
         # ── Gaming & Emulation ────────────────────────────────────────────────────
         mangohud # Vulkan/OpenGL overlay for FPS, CPU/GPU usage, and temps
         rare # Epic Games Store launcher GUI for Linux
-        rpcs3 # PlayStation 3 emulator
+        # rpcs3 # PlayStation 3 emulator
         ryubing # Nintendo Switch emulator (Ryujinx community fork)
         fusee-nano # Fusée Gelée payload injector for Nintendo Switch hacking
         theclicker # Auto-clicker

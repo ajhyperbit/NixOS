@@ -33,9 +33,7 @@
       settings = {
         default_session = {
           user = "greeter";
-          command = ''
-            ${pkgs.tuigreet}/bin/tuigreet --time -w 120 --cmd "${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop" --power-reboot 'sudo systemctl kexec' --kb-command 2 --kb-sessions 3 --kb-power 12
-          '';
+          command = "${pkgs.tuigreet}/bin/tuigreet --time -w 120 --cmd '${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop' --power-reboot 'sudo systemctl kexec' --kb-command 2 --kb-sessions 3 --kb-power 12";
         };
       };
     };
