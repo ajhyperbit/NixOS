@@ -1,6 +1,5 @@
 <domain type="kvm">
-  <name>win11</name>
-  <uuid>bf32bcda-5645-4008-9b97-8eab2dc8be7a</uuid>
+  <name>win11-nvidia</name>
   <metadata>
     <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
       <libosinfo:os id="http://microsoft.com/win/11"/>
@@ -8,6 +7,10 @@
   </metadata>
   <memory unit="KiB">8388608</memory>
   <currentMemory unit="KiB">8388608</currentMemory>
+  <memoryBacking>
+    <source type="memfd"/>
+    <access mode="shared"/>
+  </memoryBacking>
   <vcpu placement="static">4</vcpu>
   <os firmware="efi">
     <type arch="x86_64" machine="pc-q35-11.0">hvm</type>
@@ -61,7 +64,7 @@
     <emulator>/run/libvirt/nix-emulators/qemu-system-x86_64</emulator>
     <disk type="file" device="disk">
       <driver name="qemu" type="qcow2"/>
-      <source file="/run/media/ajhyperbit/SATA_SSD/VMs/win11-2.qcow2"/>
+      <source file="/run/media/ajhyperbit/SATA_SSD/VMs/win11-nvidia.qcow2"/>
       <target dev="sda" bus="sata"/>
       <address type="drive" controller="0" bus="0" target="0" unit="0"/>
     </disk>
@@ -71,6 +74,13 @@
       <target dev="sdb" bus="sata"/>
       <readonly/>
       <address type="drive" controller="0" bus="0" target="0" unit="1"/>
+    </disk>
+    <disk type="file" device="cdrom">
+      <driver name="qemu" type="raw"/>
+      <source file="/run/media/ajhyperbit/SATA_SSD/VMs/Images-ISO/virtio-win-0.1.285.iso"/>
+      <target dev="sdc" bus="sata"/>
+      <readonly/>
+      <address type="drive" controller="0" bus="0" target="0" unit="2"/>
     </disk>
     <controller type="usb" index="0" model="qemu-xhci" ports="15">
       <address type="pci" domain="0x0000" bus="0x02" slot="0x00" function="0x0"/>
@@ -161,8 +171,14 @@
     <controller type="virtio-serial" index="0">
       <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
     </controller>
+    <filesystem type="mount" accessmode="passthrough">
+      <driver type="virtiofs"/>
+      <source dir="/run/media/ajhyperbit/SATA_SSD/VMs/drivers"/>
+      <target dir="drivers"/>
+      <readonly/>
+      <address type="pci" domain="0x0000" bus="0x08" slot="0x00" function="0x0"/>
+    </filesystem>
     <interface type="network">
-      <mac address="52:54:00:e8:44:48"/>
       <source network="network"/>
       <model type="e1000e"/>
       <address type="pci" domain="0x0000" bus="0x01" slot="0x00" function="0x0"/>
