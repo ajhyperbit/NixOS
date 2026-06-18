@@ -117,9 +117,15 @@ else
   sudo nix-shell -p nix-output-monitor.out expect.out --run "unbuffer nixos-rebuild $reswitch --upgrade --show-trace --flake .#$host --log-format internal-json |& nom --json"
 fi
 
-# current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | head -1)
+current_tag=$(nixos-rebuild list-generations | grep True | grep -Eo '[0-9]+' | head -1)
 
-# hostname=$(uname -n)
+hostname=$(uname -n)
+
+hash=$(git rev-parse --short HEAD)
+
+if [[ $(git status --short) != '' ]]; then
+  dirty='-dirty'
+fi
 
 # if [ "$reswitch" != "test" ] && [ "$reswitch" != "build" ]; then
 #   #Pulled from https://github.com/NixOS/nixpkgs/blob/66aa98b29099c636622a9d9c18370f13701716f6/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh#L596
@@ -142,21 +148,7 @@ fi
 #   fi
 # fi
 
-#REVIEW - Testing required
-#if ["$hostname" == "nixos"]; then
-#printf "\n"%s"\n" "$storage"
-#else
-#:
-#fi
-#REVIEW - Testing required
-
-#TODO: add a way to run nix-collect garbage with sudo?
-
-#choose "n" "Do you want to run the nix garbage collector? [(Y)es/(S)udo/(N)o/(Q)uit] (Default: No): " "nix-collect-garbage -d &> nix-collect-garbage.log"
-
-#choose "n" "Do you want to run the nix garbage collector? [(Y)es/(N)o/(Q)uit] (Default: No): " "nix-collect-garbage -d &> nix-collect-garbage.log"
-
-#choose "n" "Do you want to trim generations? [(Y)es/(N)o/(Q)uit] (Default: No): " "source ~/NixOS-Hyprland/trim-generations.sh"
+printf Gen-%s-%s-%s, "${hostname}", "${current_tag}", "${hash}${dirty}"
 
 if [ "$path" != /home/"$user"/NixOS-Hyprland ]; then
   popd || exit
