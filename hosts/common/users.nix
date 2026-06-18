@@ -16,7 +16,6 @@ in
       extraGroups = [
         "networkmanager"
         "wheel"
-        "libvirtd"
         "scanner"
         "lp"
         "video"

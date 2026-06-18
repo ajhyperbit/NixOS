@@ -14,16 +14,7 @@
   ];
   # BOOT related stuff
   boot = {
-    kernelParams = [
-      "amd_iommu=on"
-    ];
-
     kernelModules = [
-      "kvm-amd"
-      "vfio_virqfd"
-      "vfio_pci"
-      "vfio_iommu_type1"
-      "vfio"
       #From https://github.com/NixOS/nixos-hardware/blob/master/asus/rog-strix/x570e/default.nix
       "btintel" # Bluetooth driver for Intel AX200 802.11ax
       "nct6775" # Temperature and Fan Sensor for Nuvoton NCT6798D-R

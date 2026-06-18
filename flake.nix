@@ -185,6 +185,7 @@
             ./hosts/${host}/audio.nix
             ./hosts/${host}/${host}-hm.nix
             ./hosts/${host}/cachyos-kernel.nix
+            ./hosts/${host}/virtualization.nix
             ./hosts/common/common.nix
             ./hosts/common/packages/default.nix
             ./hosts/common/hyprland/noctalia/noctalia.nix
