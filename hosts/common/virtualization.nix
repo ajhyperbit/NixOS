@@ -31,6 +31,9 @@
         package = pkgs.qemu_kvm;
         runAsRoot = true;
         swtpm.enable = true; # Required for Windows 11 TPM support
+        vhostUserPackages = with pkgs; [
+          virtiofsd
+        ];
       };
       #https://www.reddit.com/r/NixOS/comments/177wcyi/comment/k4vok4n
     };
