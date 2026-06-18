@@ -148,7 +148,7 @@ fi
 #   fi
 # fi
 
-printf Gen-%s-%s-%s, "${hostname}", "${current_tag}", "${hash}${dirty}"
+printf 'Gen-%s-%s-%s\n' "${hostname}" "${current_tag}" "${hash}${dirty}"
 
 if [ "$path" != /home/"$user"/NixOS-Hyprland ]; then
   popd || exit
