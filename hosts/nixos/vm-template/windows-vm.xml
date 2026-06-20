@@ -20,7 +20,6 @@
     </firmware>
     <loader readonly="yes" secure="yes" type="pflash" format="raw">/run/libvirt/nix-ovmf/edk2-x86_64-secure-code.fd</loader>
     <nvram template="/run/libvirt/nix-ovmf/edk2-i386-vars.fd" templateFormat="raw" format="raw">/var/lib/libvirt/qemu/nvram/win11-2_VARS.fd</nvram>
-    <boot dev="hd"/>
   </os>
   <features>
     <acpi/>
@@ -46,7 +45,10 @@
     <smm state="on"/>
     <ioapic driver="kvm"/>
   </features>
-  <cpu mode="host-passthrough" check="none" migratable="on"/>
+  <cpu mode="host-passthrough" check="none" migratable="on">
+    <topology sockets="1" dies="1" clusters="1" cores="2" threads="2"/>
+    <feature policy="require" name="topoext"/>
+  </cpu>
   <clock offset="localtime">
     <timer name="rtc" tickpolicy="catchup"/>
     <timer name="pit" tickpolicy="delay"/>
@@ -66,11 +68,12 @@
       <driver name="qemu" type="qcow2"/>
       <source file="/run/media/ajhyperbit/SATA_SSD/VMs/win11-nvidia.qcow2"/>
       <target dev="sda" bus="sata"/>
+      <boot order="1"/>
       <address type="drive" controller="0" bus="0" target="0" unit="0"/>
     </disk>
     <disk type="file" device="cdrom">
       <driver name="qemu" type="raw"/>
-      <source file="/run/media/ajhyperbit/SATA_SSD/VMs/Images-ISO/Win11.ISO"/>
+      <source file="/run/media/ajhyperbit/SATA_SSD/VMs/Images-ISO/tiny11 23H2 x64.iso"/>
       <target dev="sdb" bus="sata"/>
       <readonly/>
       <address type="drive" controller="0" bus="0" target="0" unit="1"/>
@@ -195,25 +198,30 @@
       <target type="virtio" name="com.redhat.spice.0"/>
       <address type="virtio-serial" controller="0" bus="0" port="1"/>
     </channel>
-    <input type="tablet" bus="usb">
+    <input type="mouse" bus="usb">
       <address type="usb" bus="0" port="1"/>
+    </input>
+    <input type="keyboard" bus="usb">
+      <address type="usb" bus="0" port="4"/>
     </input>
     <input type="mouse" bus="ps2"/>
     <input type="keyboard" bus="ps2"/>
     <tpm model="tpm-crb">
-      <backend type="emulator" version="2.0"/>
+      <backend type="emulator" version="2.0">
+        <profile name="default-v1"/>
+      </backend>
     </tpm>
     <graphics type="spice" autoport="yes">
       <listen type="address"/>
       <image compression="off"/>
+      <streaming mode="off"/>
     </graphics>
     <sound model="ich9">
       <address type="pci" domain="0x0000" bus="0x00" slot="0x1b" function="0x0"/>
     </sound>
     <audio id="1" type="spice"/>
     <video>
-      <model type="qxl" ram="65536" vram="65536" vgamem="16384" heads="1" primary="yes"/>
-      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x0"/>
+      <model type="none"/>
     </video>
     <hostdev mode="subsystem" type="pci" managed="yes">
       <source>
@@ -239,7 +247,7 @@
     </memballoon>
     <shmem name="looking-glass">
       <model type="ivshmem-plain"/>
-      <size unit="M">64</size>
+      <size unit="M">128</size>
       <address type="pci" domain="0x0000" bus="0x10" slot="0x01" function="0x0"/>
     </shmem>
   </devices>
