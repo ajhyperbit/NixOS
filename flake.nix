@@ -35,6 +35,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
 
     # Kernel
     nix-cachyos-kernel = {
@@ -209,6 +214,11 @@
             stylix.nixosModules.stylix
             disko.nixosModules.disko
             nix-index-database.nixosModules.nix-index
+
+            {
+              nixpkgs.overlays = [ inputs.nix-topology.overlays.default ];
+            }
+            inputs.nix-topology.nixosModules.default
           ];
         };
       };
@@ -217,5 +227,23 @@
       checks = eachSystem (pkgs: {
         formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
       });
+
+      # Add the topology build pipeline here
+      # Replace your manual 'topology =' block with this:
+      topology = nixpkgs.lib.genAttrs (import nix-systems) (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [ inputs.nix-topology.overlays.default ];
+          };
+        in
+        import inputs.nix-topology {
+          inherit pkgs;
+          modules = [
+            { nixosConfigurations = self.nixosConfigurations; }
+          ];
+        }
+      );
     };
 }
