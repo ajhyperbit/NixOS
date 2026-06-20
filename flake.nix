@@ -230,7 +230,8 @@
 
       # Add the topology build pipeline here
       # Replace your manual 'topology =' block with this:
-      topology = nixpkgs.lib.genAttrs (import nix-systems) (system:
+      topology = nixpkgs.lib.genAttrs (import nix-systems) (
+        system:
         let
           pkgs = import nixpkgs {
             inherit system;
