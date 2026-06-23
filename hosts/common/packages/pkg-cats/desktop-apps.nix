@@ -147,7 +147,7 @@
         # ── Misc ──────────────────────────────────────────────────────────────────
         spotify # Spotify music streaming client
         manim # Animation engine for explanatory math videos
-        handy # Free, open source, offline speech-to-text application
+        # handy # Free, open source, offline speech-to-text application
       ];
     };
   };
