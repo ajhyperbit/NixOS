@@ -41,6 +41,7 @@
         ydotool # Input event injector (keyboard/mouse automation)
         cloc # Count lines of code across source files and languages
         inxi # Comprehensive system information CLI tool
+        tree # Command to produce a depth indented directory listing
 
         # ── Editors & IDEs ────────────────────────────────────────────────────────
         neovim # Extensible Vim-based text editor
