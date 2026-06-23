@@ -40,6 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
+    #nix build .#topology.x86_64-linux.config.output
 
     # Kernel
     nix-cachyos-kernel = {
