@@ -67,7 +67,7 @@
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
 
-    #Wayland ecosystem
+    # Wayland ecosystem
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -143,7 +143,7 @@
       home = "/home/${username}";
       cursor_size = 32;
       cursor_theme = "BreezeX-RosePine";
-      #Formatter related
+      # Formatter related
       eachSystem =
         f: nixpkgs.lib.genAttrs (import nix-systems) (system: f nixpkgs.legacyPackages.${system});
       treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./format/treefmt.nix);
@@ -166,7 +166,7 @@
         }
       );
       nixosConfigurations = {
-        #Main Desktop
+        # Main Desktop
         "${host}" = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           specialArgs = {
@@ -202,7 +202,7 @@
             ./hosts/common/startup.nix
             #./hosts/common/packages/ardunio.nix
             ./hosts/common/temp-fixes.nix
-            # ./hosts/common/overlays.nix
+            #./hosts/common/overlays.nix
             ./hosts/common/virtualization.nix
             ./hosts/common/security/security.nix
             ./hosts/common/nix-alien.nix

@@ -46,7 +46,7 @@
           scripts = [ mpvScripts.mpris ];
         })
         vlc # Versatile media player supporting many formats
-        handbrake #Tool for converting video files and ripping DVDs
+        handbrake # Tool for converting video files and ripping DVDs
         pavucontrol # PulseAudio/PipeWire volume control GUI
         pamixer # PulseAudio/PipeWire CLI mixer
         playerctl # MPRIS media player controller for scripts and keybinds
