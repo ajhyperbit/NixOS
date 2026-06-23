@@ -229,8 +229,6 @@
         formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
       });
 
-      # Add the topology build pipeline here
-      # Replace your manual 'topology =' block with this:
       topology = nixpkgs.lib.genAttrs (import nix-systems) (
         system:
         let
