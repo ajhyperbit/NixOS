@@ -56,6 +56,8 @@
         yt-dlp # YouTube and multi-site video/audio downloader
         v4l-utils # Video4Linux2 utilities for webcams and capture cards
         libcec # HDMI-CEC device control library and utilities
+        blanket # Listen to different sounds
+        audacity # Sound editor with graphical UI
 
         # ── OBS Studio ────────────────────────────────────────────────────────────
         (wrapOBS {
@@ -126,21 +128,26 @@
         rar # RAR archiver and extractor
         arj # ARJ legacy archive tool
         commons-compress # Apache Commons Compress library (archive format support)
+        switcheroo # App for converting images between different formats
 
         # ── Productivity & Office ─────────────────────────────────────────────────
         libreoffice # Full-featured open-source office suite
+        onlyoffice-desktopeditors # Full-featured open-source office suite, again
         hunspell # Spell checker library
         hunspellDicts.en_US # Hunspell English (US) dictionary
         hunspellDicts.en-us # Hunspell English (US) dictionary (alternate package name)
         eog # GNOME image viewer
         impression # Bootable USB drive creator (simple GUI)
         usbimager # Minimal bootable USB image writer
+        appflowy # Open-source alternative to Notion
 
         # ── Terminal ──────────────────────────────────────────────────────────────
         kitty # Fast, feature-rich, GPU based terminal emulator
 
         # ── Misc ──────────────────────────────────────────────────────────────────
         spotify # Spotify music streaming client
+        manim # Animation engine for explanatory math videos
+        handy # Free, open source, offline speech-to-text application
       ];
     };
   };

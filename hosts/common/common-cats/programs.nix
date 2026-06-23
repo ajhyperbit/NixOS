@@ -84,7 +84,7 @@ in
       mtr.enable = true;
 
       steam = {
-        enable = true;
+        enable = lib.mkDefault true;
         remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
         #dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
         localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
@@ -140,13 +140,24 @@ in
           };
         };
       };
+
       usbtop.enable = true;
+
       tmux = {
         enable = false;
         extraConfig = ''
           set -g update-environment "GPG_TTY SSH_TTY"
           set-hook -g client-attached 'run-shell "gpg-connect-agent updatestartuptty /bye"'
         '';
+      };
+
+      localsend = {
+        enable = true;
+        openFirewall = lib.mkDefault true;
+      };
+
+      yazi = {
+        enable = true;
       };
     };
   };
