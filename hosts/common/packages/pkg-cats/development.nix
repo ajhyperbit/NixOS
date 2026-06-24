@@ -67,6 +67,7 @@
         direnv # Automatically load/unload env vars per directory
         nvd # Nix/NixOS package version diff tool
         nix-output-monitor # Prettier output for nix build commands
+        nix-inspect # Interactive TUI for inspecting nix configs and other expressions
       ];
     };
   };
