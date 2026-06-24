@@ -71,15 +71,6 @@
       #fwupd = {
       #  enable = true;
       #};
-      #Printing
-      #TODO: look into gutenprint and brlaser and/or pkgs.brgenml1lpr and pkgs.brgenml1cupswrapper for brother printers)
-      #LINK: https://askubuntu.com/questions/1090410/16-04-how-do-i-install-canon-pixma-mg3620-driver
-      #printing.enable = true;
-      #avahi = {
-      #  enable = true;
-      #  nssmdns4 = true;
-      #  openFirewall = true;
-      #};
 
       greetd = {
         enable = true;
