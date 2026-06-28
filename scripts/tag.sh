@@ -53,5 +53,5 @@ if [ "$last_tag" != "Gen-$hostname-$current_tag-$hash$dirty" ]; then
 
   # shellcheck disable=SC2027
   # shellcheck disable=SC2086
-  choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$hostname-$current_tag-$hash$dirty"
+  choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$hostname-$current_tag-$hash$dirty && git push forgejo tag Gen-$hostname-$current_tag-$hash$dirty"
 fi
