@@ -45,7 +45,6 @@ in
     };
   };
 }
-
 # Commands to list for default applications
-#cat /etc/xdg/mimeapps.list 
+#cat /etc/xdg/mimeapps.list
 #cat ~/.config/mimeapps.list

@@ -8,3 +8,4 @@ images/**
 result
 disko.html
 .decrypted~secrets.json
+hosts/common/hyprland/hl.meta.lua

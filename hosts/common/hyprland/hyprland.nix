@@ -5,7 +5,8 @@
 }:
 {
   imports = [
-    ./temp-hyprland.nix
+    #./temp-hyprland.nix
+    ./hyprland-lua.nix
     inputs.hyprland.nixosModules.default
   ];
 

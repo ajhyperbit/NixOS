@@ -1,9 +1,9 @@
 {
+  lib,
   pkgs,
   username,
-  lib,
-  cursor_theme,
   cursor_size,
+  cursor_theme,
   ...
 }:
 #LINK - https://discourse.nixos.org/t/how-to-manage-dotfiles-with-home-manager/30576
