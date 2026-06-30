@@ -89,7 +89,7 @@ choose() {
   esac
 }
 
-choose "n" "Do you want to update flake.lock? [(Y)es/(N)o] (Default: No): " "source ~/NixOS-Hyprland/update-flake.sh"
+choose "n" "Do you want to update flake.lock? [(Y)es/(N)o] (Default: No): " "source ~/NixOS-Hyprland/scripts/update-flake.sh"
 
 printf "NixOS Rebuilding...\n"
 
