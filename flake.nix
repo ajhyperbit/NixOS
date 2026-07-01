@@ -185,9 +185,7 @@
             ./hosts/common/audio.nix
             ./hosts/common/desktop-entries/default-apps.nix
             ./hosts/common/startup.nix
-            #./hosts/common/packages/ardunio.nix
             ./hosts/common/temp-fixes.nix
-            #./hosts/common/overlays.nix
             ./hosts/common/virtualization.nix
             ./hosts/common/security/security.nix
             ./hosts/common/nix-alien.nix
