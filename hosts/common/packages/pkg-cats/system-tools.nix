@@ -36,6 +36,7 @@
         mesa-demos # Mesa OpenGL demo and benchmark programs
         furmark # GPU stress test and OpenGL/Vulkan benchmark
         phoronix-test-suite # Comprehensive cross-platform hardware benchmarking suite
+        desktop-file-utils # Command line utilities for working with .desktop files
 
         # ── Disk & Storage ────────────────────────────────────────────────────────
         btrfs-progs # Btrfs filesystem utilities (balance, scrub, snapshot, etc.)
