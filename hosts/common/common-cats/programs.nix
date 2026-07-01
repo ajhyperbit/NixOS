@@ -20,7 +20,10 @@ in
 
   config = lib.mkIf config.common.programs.enable {
     programs = {
-      firefox.enable = lib.mkDefault true;
+      firefox = {
+        enable = lib.mkDefault true;
+        package = pkgs.stable.firefox;
+      };
 
       git = {
         enable = true;

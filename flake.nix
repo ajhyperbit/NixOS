@@ -4,6 +4,7 @@
   inputs = {
     # Base inputs - no follows
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-26.05";
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nix-systems.url = "github:nix-systems/default";
     flake-compat = {
@@ -40,7 +41,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
-    #nix build .#topology.x86_64-linux.config.output
+    #nix build .#topology
 
     # Kernel
     nix-cachyos-kernel = {
@@ -149,22 +150,6 @@
       treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./format/treefmt.nix);
     in
     {
-      devShells = eachSystem (
-        _pkgs:
-        let
-          pkgs = import nixpkgs {
-            system = _pkgs.stdenv.hostPlatform.system;
-            config.allowUnfree = true;
-          };
-        in
-        {
-          default = pkgs.mkShell {
-            packages = with pkgs; [
-              python3Minimal
-            ];
-          };
-        }
-      );
       nixosConfigurations = {
         # Main Desktop
         "${host}" = nixpkgs.lib.nixosSystem rec {
@@ -229,20 +214,40 @@
         formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
       });
 
-      topology = nixpkgs.lib.genAttrs (import nix-systems) (
-        system:
+      packages = eachSystem (
+        _pkgs:
         let
           pkgs = import nixpkgs {
-            inherit system;
+            system = _pkgs.stdenv.hostPlatform.system;
             config.allowUnfree = true;
             overlays = [ inputs.nix-topology.overlays.default ];
           };
         in
-        import inputs.nix-topology {
-          inherit pkgs;
-          modules = [
-            { nixosConfigurations = self.nixosConfigurations; }
-          ];
+        {
+          topology =
+            (import inputs.nix-topology {
+              inherit pkgs;
+              modules = [
+                { nixosConfigurations = self.nixosConfigurations; }
+              ];
+            }).config.output;
+        }
+      );
+
+      devShells = eachSystem (
+        _pkgs:
+        let
+          pkgs = import nixpkgs {
+            system = _pkgs.stdenv.hostPlatform.system;
+            config.allowUnfree = true;
+          };
+        in
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              python3Minimal
+            ];
+          };
         }
       );
     };

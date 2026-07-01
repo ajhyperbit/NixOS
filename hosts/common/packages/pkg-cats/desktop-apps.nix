@@ -20,7 +20,7 @@
         google-chrome # Google Chrome browser
         chromium # Open-source Chromium browser
         floorp-bin # Firefox-based privacy-focused browser
-        firefox-devedition # Firefox Developer Edition with devtools
+        stable.firefox-devedition # Firefox Developer Edition with devtools
 
         # ── Gaming & Emulation ────────────────────────────────────────────────────
         mangohud # Vulkan/OpenGL overlay for FPS, CPU/GPU usage, and temps
@@ -33,7 +33,7 @@
 
         # ── Communication ─────────────────────────────────────────────────────────
         (discord.override {
-          # Discord with OpenASAR performance patches and Vencord mods
+          # Discord with OpenASAR performance patches
           withOpenASAR = true;
         })
         vesktop # Alternate Discord client with Vencord built in
