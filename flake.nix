@@ -56,8 +56,6 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      #Bump (or remove) later
-      #ref = "v0.53.3";
       ref = "v0.55.4";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
