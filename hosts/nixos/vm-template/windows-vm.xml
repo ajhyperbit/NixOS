@@ -5,8 +5,8 @@
       <libosinfo:os id="http://microsoft.com/win/11"/>
     </libosinfo:libosinfo>
   </metadata>
-  <memory unit="KiB">8388608</memory>
-  <currentMemory unit="KiB">8388608</currentMemory>
+  <memory unit="KiB">16777216</memory>
+  <currentMemory unit="KiB">16777216</currentMemory>
   <memoryBacking>
     <source type="memfd"/>
     <access mode="shared"/>
@@ -20,6 +20,7 @@
     </firmware>
     <loader readonly="yes" secure="yes" type="pflash" format="raw">/run/libvirt/nix-ovmf/edk2-x86_64-secure-code.fd</loader>
     <nvram template="/run/libvirt/nix-ovmf/edk2-i386-vars.fd" templateFormat="raw" format="raw">/var/lib/libvirt/qemu/nvram/win11-2_VARS.fd</nvram>
+    <boot dev="hd"/>
   </os>
   <features>
     <acpi/>
@@ -65,10 +66,9 @@
   <devices>
     <emulator>/run/libvirt/nix-emulators/qemu-system-x86_64</emulator>
     <disk type="file" device="disk">
-      <driver name="qemu" type="qcow2"/>
+      <driver name="qemu" type="qcow2" discard="unmap"/>
       <source file="/run/media/ajhyperbit/SATA_SSD/VMs/win11-nvidia.qcow2"/>
-      <target dev="sda" bus="sata"/>
-      <boot order="1"/>
+      <target dev="sda" bus="sata" rotation_rate="1"/>
       <address type="drive" controller="0" bus="0" target="0" unit="0"/>
     </disk>
     <disk type="file" device="cdrom">
@@ -174,13 +174,9 @@
     <controller type="virtio-serial" index="0">
       <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
     </controller>
-    <filesystem type="mount" accessmode="passthrough">
-      <driver type="virtiofs"/>
-      <source dir="/run/media/ajhyperbit/SATA_SSD/VMs/drivers"/>
-      <target dir="drivers"/>
-      <readonly/>
-      <address type="pci" domain="0x0000" bus="0x08" slot="0x00" function="0x0"/>
-    </filesystem>
+    <controller type="scsi" index="0" model="lsilogic">
+      <address type="pci" domain="0x0000" bus="0x10" slot="0x02" function="0x0"/>
+    </controller>
     <interface type="network">
       <source network="network"/>
       <model type="e1000e"/>
