@@ -37,6 +37,7 @@
         furmark # GPU stress test and OpenGL/Vulkan benchmark
         phoronix-test-suite # Comprehensive cross-platform hardware benchmarking suite
         desktop-file-utils # Command line utilities for working with .desktop files
+        memtester # Userspace utility for testing the memory subsystem for faults
 
         # ── Disk & Storage ────────────────────────────────────────────────────────
         btrfs-progs # Btrfs filesystem utilities (balance, scrub, snapshot, etc.)
