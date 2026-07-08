@@ -6,7 +6,7 @@
 }:
 let
   defaultMatchCriteria = {
-    "device.name" = "~bluez_card.*";
+    "media.class" = "Audio/Sink";
     "device.vendor.id" = "usb:054c";
   };
   bt_headset_props = {
@@ -41,7 +41,7 @@ in
             "default.clock.rate" = 48000;
             "default.clock.quantum" = 32;
             "default.clock.min-quantum" = 32;
-            "default.clock.max-quantum" = 512;
+            "default.clock.max-quantum" = 32;
           };
         };
         pipewire-pulse."92-low-latency" = {
@@ -51,9 +51,9 @@ in
               args = {
                 pulse.min.req = "32/48000";
                 pulse.default.req = "32/48000";
-                pulse.max.req = "512/48000";
+                pulse.max.req = "32/48000";
                 pulse.min.quantum = "32/48000";
-                pulse.max.quantum = "512/48000";
+                pulse.max.quantum = "32/48000";
               };
             }
           ];
@@ -85,7 +85,7 @@ in
               };
             };
 
-            "99-audio-device-priority" = {
+            "51-device-priority" = {
               "monitor.bluez.rules" = [
                 {
                   matches = [
@@ -94,7 +94,8 @@ in
                     (defaultMatchCriteria // { "device.product.id" = "0x0f8a"; })
                   ];
                   actions.update-props = {
-                    "priority.session" = 2000;
+                    "priority.driver" = 1500;
+                    "priority.session" = 1500;
                   };
                 }
               ];
@@ -103,10 +104,20 @@ in
                 {
                   matches = [
                     #preferred fallback ALSA sink
-                    { "node.name" = "alsa_output.pci-0000_0f_00.4.analog-stereo"; }
+                    { "node.name" = "alsa_output.pci-0000_10_00.4.analog-stereo"; }
                   ];
                   actions.update-props = {
-                    "priority.session" = 1500;
+                    "priority.driver" = 1200;
+                    "priority.session" = 1200;
+                  };
+                }
+                {
+                  matches = [
+                    { "node.name" = "alsa_output.usb-Kingston_HyperX_QuadCast_S_4101-00.pro-output-0"; }
+                  ];
+                  actions.update-props = {
+                    "priority.session" = 900;
+                    "priority.driver" = 900;
                   };
                 }
               ];
