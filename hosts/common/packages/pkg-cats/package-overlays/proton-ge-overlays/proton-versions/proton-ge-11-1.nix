@@ -5,15 +5,15 @@
   writeScript,
   # Can be overridden to alter the display name in steam
   # This could be useful if multiple versions should be installed together
-  steamDisplayName ? "GE-Proton-10-1",
+  steamDisplayName ? "GE-Proton-11-1",
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "proton-ge-10-1";
-  version = "GE-Proton10-1";
+  pname = "proton-ge-11-1";
+  version = "GE-Proton11-1";
 
   src = fetchzip {
     url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/${finalAttrs.version}/${finalAttrs.version}.tar.gz";
-    hash = "sha256-sGKmfdxZK2quI7QamIGRaW1/ElwS/gJPeE4Tvh6icUo=";
+    hash = "sha256-I7SSvzQQ/NqdvwjpJ9IFFtAaTS+rgHUyXx0us1vIOnw=";
   };
 
   dontUnpack = true;

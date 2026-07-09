@@ -45,14 +45,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
       --replace-fail "${finalAttrs.version}" "${steamDisplayName}"
   '';
 
-  /*
-    We use the created releases, and not the tags, for the update script as nix-update loads releases.atom
-    that contains both. Sometimes upstream pushes the tags but the Github releases don't get created due to
-    CI errors. Last time this happened was on 8-33, where a tag was created but no releases were created.
-    As of 2024-03-13, there have been no announcements indicating that the CI has been fixed, and thus
-    we avoid nix-update-script and use our own update script instead.
-    See: <https://github.com/NixOS/nixpkgs/pull/294532#issuecomment-1987359650>
-  */
   passthru.updateScript = writeScript "update-proton-ge" ''
     #!/usr/bin/env nix-shell
     #!nix-shell -i bash -p curl jq common-updater-scripts
@@ -69,11 +61,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     '';
     homepage = "https://github.com/GloriousEggroll/proton-ge-custom";
     license = lib.licenses.bsd3;
-    maintainers = with lib.maintainers; [
-      NotAShelf
-      Scrumplex
-      shawn8901
-    ];
     platforms = [ "x86_64-linux" ];
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
   };
