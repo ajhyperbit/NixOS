@@ -5,6 +5,8 @@ I've found running only "which" when searching for a package, like "which speedt
 will just return something like "/run/current-system/sw/bin/speedtest"
 which is not very useful, but I found on this reddit post https://www.reddit.com/r/NixOS/comments/1597l4i/comment/jtep18u/
 which suggested using namei, which, while verbose, does point exactly where the package lives
+
+This has transitioned to a bash function I have in my shellinit that is called findlink, much less verbose, just prints the path.
 ----------------------------------------
 nix-locate:
 
@@ -13,7 +15,7 @@ Before running nix-locate, you must run nix-index.
 nix-locate is quite verbose when just running something like "nix-locate speedtest"
 attempt to narrow the search by using something more specific before hand.
 
-nix-locate for gcc header files is incredibly useful, exampele below.
+nix-locate for gcc header files is incredibly useful, example below.
 nix-locate -p gcc float.h
 Substitue float.h for any header file I want to locate
 Better yet, run where gcc to find gcc's path and run something like this
