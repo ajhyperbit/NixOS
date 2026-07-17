@@ -1,0 +1,42 @@
+
+/*************************************************************************************************************************************************************************************************************************************************************
+
+"userChrome.css" is a custom CSS file that can be used to specify CSS style rules for Floorp's interface (NOT internal site) using "chrome" privileges.
+For instance, if you want to hide the tab bar, you can use the following CSS rule:
+
+**************************************
+#TabsToolbar {                       *
+    display: none !important;        *
+}                                    *
+**************************************
+
+NOTE: You can use the userChrome.css file without change preferences (about:config)
+
+Quote: https://userChrome.org | https://github.com/topics/userchrome 
+
+************************************************************************************************************************************************************************************************************************************************************/
+
+@charset "UTF-8";
+@-moz-document url(chrome://browser/content/browser.xhtml) {
+/* Please write your custom CSS under this line*/
+
+#context_moveTabToSplitView { display: none !important; }
+#context_reopenInContainer { display: none !important; }
+#context_toggleToPrivateContainer { display: none !important; }
+#context_closeTabOptions { display: none !important; }
+#context_moveTabOptions { display: none !important; }
+#context-openlinkinusercontext-menu { display: none !important; }
+#context_openLinkInExternalBrowser { display: none !important; }
+#open_in_private_container { display: none !important; }
+#context-previewlink { display: none !important; }
+#context-bookmarklink { display: none !important; }
+#context-savelink { display: none !important; }
+#context-copylink { display: none !important; }
+#context-sendimage { display: none !important; }
+#context-searchselect-private { display: none !important; }
+#context-take-screenshot { display: none !important; }
+#context_undoCloseTab { display: none !important; }
+#context-openlinkinsplitview { display: none !important; }
+#toolbar-context-toggle-vertical-tabs { display: none !important; }
+
+}
