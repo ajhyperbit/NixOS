@@ -36,7 +36,7 @@
           # Discord with OpenASAR performance patches
           withOpenASAR = true;
         })
-        vesktop # Alternate Discord client with Vencord built in
+        # vesktop # Alternate Discord client with Vencord built in
         #zoom-us # Zoom video conferencing client
 
         # ── Audio & Video ─────────────────────────────────────────────────────────
