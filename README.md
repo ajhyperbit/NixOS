@@ -44,7 +44,7 @@ format/                    treefmt configuration
 | CPU         | AMD Ryzen 5700X3D  (Zen)        |
 | Primary GPU | AMD Radeon 9070 XT (amdgpu)     |
 | Passthrough | NVIDIA RTX 3050 (VFIO isolated) |
-| Kernel      | linux-zen / CachyOS (optional)  |
+| Kernel      | CachyOS |
 
 ## Quick Start
 
@@ -61,7 +61,7 @@ nix flake check
 
 The rebuild script primarily wraps `nh os switch`, prompts for a flake.lock update, tags successful generations, and logs output to `nixos-switch.log`.
 
-## Key Technologies
+## Key Aspects
 
 | Tool | Purpose |
 |------|---------|
@@ -77,7 +77,7 @@ The rebuild script primarily wraps `nh os switch`, prompts for a flake.lock upda
 
 ---
 
-For a deep technical walkthrough with code examples, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+For a deep technical walkthrough with code examples, see **[ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
 
 ## License
 
