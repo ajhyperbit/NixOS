@@ -59,7 +59,7 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      ref = "v0.55.4";
+      ref = "v0.56.1";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
     };
@@ -87,6 +87,7 @@
       url = "github:noctalia-dev/noctalia/cachix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
     # Theming
     stylix = {
       url = "github:danth/stylix";
