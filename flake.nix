@@ -5,7 +5,7 @@
     # Base inputs - no follows
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-26.05";
-    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+    nixpkgs-lib.follows = "nixpkgs"; # = "github:nix-community/nixpkgs.lib";
     nix-systems.url = "github:nix-systems/default";
     flake-compat = {
       url = "github:NixOS/flake-compat";
@@ -23,7 +23,10 @@
     };
 
     # NixOS infrastructure
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware = { 
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,6 +66,7 @@
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "nix-systems";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
 
@@ -74,13 +78,15 @@
 
     noctaliav4 = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
-      # Testing upgrade to Noctalia v5
-      # url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.noctalia-qs.inputs.systems.follows = "nix-systems";
+      inputs.noctalia-qs.inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
-    noctaliav5.url = "github:noctalia-dev/noctalia/cachix";
-
+    noctaliav5 = {
+      url = "github:noctalia-dev/noctalia/cachix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Theming
     stylix = {
       url = "github:danth/stylix";
