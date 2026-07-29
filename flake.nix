@@ -5,7 +5,7 @@
     # Base inputs - no follows
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-26.05";
-    nixpkgs-lib.follows = "github:nix-community/nixpkgs.lib";
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nix-systems.url = "github:nix-systems/default";
     flake-compat = {
       url = "github:NixOS/flake-compat";
@@ -66,7 +66,7 @@
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "nix-systems";
+      inputs.utils.follows = "flake-utils";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
 
