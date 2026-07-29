@@ -72,12 +72,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctalia = {
+    noctaliav4 = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
       # Testing upgrade to Noctalia v5
       # url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    noctaliav5.url = "github:noctalia-dev/noctalia/cachix";
 
     # Theming
     stylix = {
