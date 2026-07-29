@@ -5,7 +5,7 @@
     # Base inputs - no follows
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-26.05";
-    nixpkgs-lib.follows = "nixpkgs"; # = "github:nix-community/nixpkgs.lib";
+    nixpkgs-lib.follows = "github:nix-community/nixpkgs.lib";
     nix-systems.url = "github:nix-systems/default";
     flake-compat = {
       url = "github:NixOS/flake-compat";

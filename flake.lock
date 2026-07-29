@@ -881,6 +881,21 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1785031560,
+        "narHash": "sha256-OmshNvn2vupOFpYinLUu+1Dnpu4n7Q5N3ggGVNHpkUI=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "0e79af5e3d4dcfcd676ab5ba3f95d2e3352e078c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1785133411,
@@ -1053,9 +1068,7 @@
         "nix4vscode": "nix4vscode",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-lib": [
-          "nixpkgs"
-        ],
+        "nixpkgs-lib": "nixpkgs-lib",
         "nixpkgs-stable": "nixpkgs-stable",
         "noctaliav4": "noctaliav4",
         "noctaliav5": "noctaliav5",
