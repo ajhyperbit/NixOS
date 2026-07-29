@@ -6,47 +6,47 @@
 }:
 let
   ollamaModelConfigs = {
-    "devstral-small-2:24b" = {
-      numCtx = 8192;
-      output = 4096;
-      name = "Devstral Small 2";
-      roles = [
-        "chat"
-        "edit"
-        "apply"
-      ];
-    };
-    "gemma4:26b" = {
-      numCtx = 8192;
-      output = 4096;
-      name = "Gemma 4 26b";
-      roles = [
-        "chat"
-        "edit"
-        "apply"
-        "embed"
-      ];
-    };
-    "gpt-oss:20b" = {
-      numCtx = 32768;
-      output = 8192;
-      name = "GPT-OSS";
-      roles = [
-        "chat"
-        "edit"
-        "apply"
-      ];
-    };
-    "qwen3-coder:30b" = {
-      numCtx = 8192;
-      output = 4096;
-      name = "Qwen 3 Coder 30b";
-      roles = [
-        "chat"
-        "edit"
-        "apply"
-      ];
-    };
+    # "devstral-small-2:24b" = {
+    #   numCtx = 8192;
+    #   output = 4096;
+    #   name = "Devstral Small 2";
+    #   roles = [
+    #     "chat"
+    #     "edit"
+    #     "apply"
+    #   ];
+    # };
+    # "gemma4:26b" = {
+    #   numCtx = 8192;
+    #   output = 4096;
+    #   name = "Gemma 4 26b";
+    #   roles = [
+    #     "chat"
+    #     "edit"
+    #     "apply"
+    #     "embed"
+    #   ];
+    # };
+    # "gpt-oss:20b" = {
+    #   numCtx = 32768;
+    #   output = 8192;
+    #   name = "GPT-OSS";
+    #   roles = [
+    #     "chat"
+    #     "edit"
+    #     "apply"
+    #   ];
+    # };
+    # "qwen3-coder:30b" = {
+    #   numCtx = 8192;
+    #   output = 4096;
+    #   name = "Qwen 3 Coder 30b";
+    #   roles = [
+    #     "chat"
+    #     "edit"
+    #     "apply"
+    #   ];
+    # };
     "qwen3.5:9b" = {
       numCtx = 131072;
       output = 16384;
