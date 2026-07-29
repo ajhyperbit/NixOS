@@ -1,3 +1,14 @@
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+
+[control_center.calendar]
+show_week_numbers = true
+
+[desktop_widgets]
+enabled = false
+
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
@@ -59,5 +70,11 @@ widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@DP-2", "lock
         input_radius = 6.0
         show_login_button = true
 
-[shell]
-settings_show_advanced = true
+[theme.templates]
+enable_builtin_templates = false
+
+[wallpaper]
+enabled = false
+
+[weather]
+enabled = false
