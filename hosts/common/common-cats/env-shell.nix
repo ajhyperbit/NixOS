@@ -7,6 +7,8 @@
 }:
 let
   nhArgs = "--keep-since 7d --keep 5 --optimise";
+
+  inherit (import ../variables.nix) browser terminal;
 in
 {
   options = {
@@ -19,7 +21,11 @@ in
 
   config = lib.mkIf config.common.env-shell.enable {
     environment = {
+
       shellInit = ''
+        BROWSER=${browser}
+        TERMINAL=${terminal}
+
         findlink () {
           origUser=$LOGNAME
           location=$(readlink -f "$(command -v $1)")
