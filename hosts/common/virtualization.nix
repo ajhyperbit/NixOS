@@ -21,6 +21,7 @@
     spice-gtk
 
     looking-glass-client
+    scream
   ];
 
   virtualisation = {
