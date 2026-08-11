@@ -18,7 +18,7 @@
     environment = {
       systemPackages = with pkgs; [
         # ── Themes, Fonts & Appearance ────────────────────────────────────────────
-        gtk-engine-murrine # GTK2 Murrine engine (required by some legacy GTK themes)
+        # gtk-engine-murrine # GTK2 Murrine engine (required by some legacy GTK themes)
         libsForQt5.qtstyleplugin-kvantum # Kvantum SVG-based theme engine for Qt5
         qt6Packages.qtstyleplugin-kvantum # Kvantum SVG-based theme engine for Qt6
         nwg-look # GTK3/4 appearance configuration tool for wlroots compositors
