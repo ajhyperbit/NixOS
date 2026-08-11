@@ -7,5 +7,5 @@ nixos-hyprland.code-workspace
 images/**
 result
 disko.html
-.decrypted~secrets.json
+*.decrypted~secrets.*
 hosts/common/hyprland/hl.meta.lua
