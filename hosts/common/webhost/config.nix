@@ -43,6 +43,8 @@ in
 
   config = lib.mkIf config.webhost.enable {
     services = {
+      cloudflare-warp.enable = true;
+
       postgresql = {
         enable = true;
         ensureDatabases = [ "forgejo" ];
