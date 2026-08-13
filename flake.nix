@@ -59,9 +59,9 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      ref = "v0.56.1";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
+      # ref = "v0.56.1";
+      # inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
     };
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
