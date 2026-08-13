@@ -4,11 +4,12 @@
   projectRootFile = "flake.nix";
   # Enable the formatters
   programs = {
+    alejandra.enable = true;
     deadnix.enable = true;
     nixfmt.enable = true;
-    alejandra.enable = true;
     shellcheck.enable = true;
     shfmt.enable = true;
+    yamlfmt.enable = true;
   };
   # Formatting settings
   settings.formatter = {
