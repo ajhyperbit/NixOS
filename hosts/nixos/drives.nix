@@ -53,16 +53,68 @@
     ];
   };
 
-  fileSystems."/run/media/${username}/Archive" = {
-  device = "/dev/disk/by-uuid/9074e293-b54e-4139-b991-7a8064533f66";
-  fsType = "btrfs";
-  options = [
-    "compress=zstd:3"
-    "noatime"
-    "space_cache=v2"
-    "users"   # allow any user to mount/unmount
-    "nofail"  # don't block boot if it's unplugged
-    "exec"
-  ];
-};
+  fileSystems."/run/media/${username}/Archive-snapshots" = {
+    device = "/dev/disk/by-uuid/9074e293-b54e-4139-b991-7a8064533f66";
+    fsType = "btrfs";
+    options = [
+      "subvol=archive-snapshots"
+      "noatime"
+      "space_cache=v2"
+      "users"
+      "nofail"
+      "exec"
+    ];
+  };
+
+  fileSystems."/run/media/${username}/Archive-typical" = {
+    device = "/dev/disk/by-uuid/9074e293-b54e-4139-b991-7a8064533f66";
+    fsType = "btrfs";
+    options = [
+      "subvol=archive-typical"
+      "compress=zstd:3"
+      "noatime"
+      "space_cache=v2"
+      "users"
+      "nofail"
+      "exec"
+    ];
+  };
+
+  services.btrbk.instances."archive-typical" = {
+    onCalendar = "weekly";
+    settings = {
+      snapshot_preserve_min = "30d";
+      snapshot_preserve = "6m";
+      volume."/run/media/${username}/Archive-typical" = {
+        subvolume = ".";
+        snapshot_dir = "/run/media/${username}/Archive-snapshots/typical";
+      };
+    };
+  };
+
+  fileSystems."/run/media/${username}/Archive-max" = {
+    device = "/dev/disk/by-uuid/9074e293-b54e-4139-b991-7a8064533f66";
+    fsType = "btrfs";
+    options = [
+      "subvol=archive-max"
+      "compress-force=zstd:15"
+      "noatime"
+      "space_cache=v2"
+      "users"
+      "nofail"
+      "exec"
+    ];
+  };
+  
+    services.btrbk.instances."archive-max" = {
+    onCalendar = "weekly";
+    settings = {
+      snapshot_preserve_min = "30d";
+      snapshot_preserve = "6m";
+      volume."/run/media/${username}/Archive-max" = {
+        subvolume = ".";
+        snapshot_dir = "/run/media/${username}/Archive-snapshots/max";
+      };
+    };
+  };
 }
