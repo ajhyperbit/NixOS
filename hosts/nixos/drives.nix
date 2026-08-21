@@ -53,15 +53,16 @@
     ];
   };
 
-  #fileSystems."/run/media/${username}/Archive" = {
-  #  device = "/dev/disk/by-uuid/4fd45309-e0dc-4124-8c19-36c011aad8eb";
-  #  label = "Archive";
-  #  fsType = "btrfs";
-  #  options = [
-  #    "users" # Allows any user to mount and unmount
-  #    "nofail" # Prevent system from failing if this drive doesn't mount
-  #    "exec" # Permit execution of binaries and other executable files
-  #    "noauto" #Do not mount the filesystem automatically
-  #  ];
-  #};
+  fileSystems."/run/media/${username}/Archive" = {
+  device = "/dev/disk/by-uuid/9074e293-b54e-4139-b991-7a8064533f66";
+  fsType = "btrfs";
+  options = [
+    "compress=zstd:3"
+    "noatime"
+    "space_cache=v2"
+    "users"   # allow any user to mount/unmount
+    "nofail"  # don't block boot if it's unplugged
+    "exec"
+  ];
+};
 }
