@@ -23,7 +23,7 @@
     };
 
     # NixOS infrastructure
-    nixos-hardware = { 
+    nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -87,7 +87,7 @@
       url = "github:noctalia-dev/noctalia/cachix";
       #inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # Theming
     stylix = {
       url = "github:danth/stylix";

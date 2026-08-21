@@ -21,7 +21,6 @@ in
 
   config = lib.mkIf config.common.env-shell.enable {
     environment = {
-
       shellInit = ''
         BROWSER=${browser}
         TERMINAL=${terminal}
