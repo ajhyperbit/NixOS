@@ -53,11 +53,6 @@
     ];
   };
 
-  # systemd.tmpfiles.rules = [
-  #   # Type Path                                  Mode UID    GID Age Argument
-  #   "d     /run/media/${username}/SATA_SSD/ollama 0755 ollama 100 -   -"
-  # ];
-
   #fileSystems."/run/media/${username}/Archive" = {
   #  device = "/dev/disk/by-uuid/4fd45309-e0dc-4124-8c19-36c011aad8eb";
   #  label = "Archive";

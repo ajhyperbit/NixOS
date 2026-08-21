@@ -185,16 +185,22 @@ in
 
   systemd = {
     services.ollama.serviceConfig.UMask = lib.mkForce "0022";
-    tmpfiles.settings = {
-      "ollamaConfig" = {
-        "/run/media/${username}/SATA_SSD/ollama" = {
-          d = {
-            group = "users";
-            mode = "0755";
-            user = "ollama";
+    tmpfiles = {
+      settings = {
+        "ollamaConfig" = {
+          "/run/media/${username}/SATA_SSD/ollama" = {
+            d = {
+              group = "users";
+              mode = "0755";
+              user = "ollama";
+            };
           };
         };
       };
+      #  rules = [
+      #   # Type Path                                  Mode UID    GID Age Argument
+      #   "d     /run/media/${username}/SATA_SSD/ollama 0755 ollama 100 -   -"
+      # ];
     };
   };
 
