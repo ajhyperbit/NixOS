@@ -50,6 +50,7 @@
         testdisk # Partition and file recovery utility
         disko # Declarative disk partitioning and formatting using nix
         gomtree # File system tree validation against recorded manifests
+        compsize #Find compression type/ratio in a Btrfs filesystem
 
         # ── Networking & Remote Access ────────────────────────────────────────────
         tailscale # WireGuard-based mesh VPN
