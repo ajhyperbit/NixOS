@@ -105,8 +105,8 @@
       "exec"
     ];
   };
-  
-    services.btrbk.instances."archive-max" = {
+
+  services.btrbk.instances."archive-max" = {
     onCalendar = "weekly";
     settings = {
       snapshot_preserve_min = "30d";
