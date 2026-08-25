@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   username,
   ...
 }:
@@ -100,147 +101,169 @@ let
   '';
 in
 {
-  sops.secrets = {
-    openRouterKeyAuth = {
-      owner = "${username}";
-      path = "/home/${username}/.local/share/opencode/auth.json";
+  options = {
+    nixos.ai.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      example = true;
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    clinfo
-    rocmPackages.rocm-smi
-
-    opencode
-    opencode-desktop
-
-    lmstudio
-
-    mcp-nixos
-  ];
-
-  nixpkgs.config.rocmSupport = true;
-
-  services = {
-    ollama = {
-      enable = true;
-      home = "/run/media/${username}/SATA_SSD/ollama";
-      package = pkgs.ollama-rocm;
-      user = "ollama";
-      group = "users";
-      rocmOverrideGfx = "12.0.1";
-      syncModels = true;
-      loadModels = lib.attrNames ollamaModelConfigs;
-      environmentVariables = {
-        OLLAMA_CONTEXT_LENGTH = toString maxContextLength;
-        OLLAMA_FLASH_ATTENTION = "1";
-        OLLAMA_KV_CACHE_TYPE = "q8_0";
+  config = lib.mkIf config.nixos.ai.enable {
+    sops.secrets = {
+      openRouterKeyAuth = {
+        owner = "${username}";
+        path = "/home/${username}/.local/share/opencode/auth.json";
       };
     };
 
-    open-webui = {
-      enable = false;
-      environment = {
-        ANONYMIZED_TELEMETRY = "False";
-        DO_NOT_TRACK = "True";
-        SCARF_NO_ANALYTICS = "True";
-        ENABLE_SIGNUP = "False";
-      };
-      package = pkgs.open-webui;
-    };
-  };
+    environment.systemPackages = with pkgs; [
+      clinfo
+      rocmPackages.rocm-smi
 
-  systemd.services.ollama-apply-modelfiles = {
-    description = "Apply per-model Ollama parameter overrides";
-    after = [ "ollama.service" ];
-    requires = [ "ollama.service" ];
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.ollama-rocm ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      User = "ollama";
-      ExecStart = createModelsScript;
-    };
-  };
+      opencode
+      opencode-desktop
 
-  systemd.paths.ollama-modelfiles-watch = {
-    description = "Watch for Ollama modelfile changes";
-    wantedBy = [ "multi-user.target" ];
-    pathConfig = {
-      PathChanged = map (
-        {
-          name,
-          value,
-        }:
-        "${mkModelfile name value}"
-      ) (lib.attrsToList ollamaModelConfigs);
-      Unit = "ollama-apply-modelfiles.service";
-    };
-  };
+      lmstudio
 
-  users.users.ollama = {
-    extraGroups = [ "render" ];
-  };
+      mcp-nixos
+    ];
 
-  systemd = {
-    services.ollama.serviceConfig.UMask = lib.mkForce "0022";
-    tmpfiles = {
-      settings = {
-        "ollamaConfig" = {
-          "/run/media/${username}/SATA_SSD/ollama" = {
-            d = {
-              group = "users";
-              mode = "0755";
-              user = "ollama";
-            };
-          };
+    nixpkgs.config.rocmSupport = true;
+
+    services = {
+      ollama = {
+        enable = true;
+        home = "/run/media/${username}/SATA_SSD/ollama";
+        package = pkgs.ollama-rocm;
+        user = "ollama";
+        group = "users";
+        rocmOverrideGfx = "12.0.1";
+        syncModels = true;
+        loadModels = lib.attrNames ollamaModelConfigs;
+        environmentVariables = {
+          OLLAMA_CONTEXT_LENGTH = toString maxContextLength;
+          OLLAMA_FLASH_ATTENTION = "1";
+          OLLAMA_KV_CACHE_TYPE = "q8_0";
         };
       };
-      #  rules = [
-      #   # Type Path                                  Mode UID    GID Age Argument
-      #   "d     /run/media/${username}/SATA_SSD/ollama 0755 ollama 100 -   -"
-      # ];
-    };
-  };
 
-  hardware = {
-    graphics = {
-      extraPackages = with pkgs; [
-        mesa.opencl
-        rocmPackages.clr.icd
-        rocmPackages.clr
-      ];
+      open-webui = {
+        enable = false;
+        environment = {
+          ANONYMIZED_TELEMETRY = "False";
+          DO_NOT_TRACK = "True";
+          SCARF_NO_ANALYTICS = "True";
+          ENABLE_SIGNUP = "False";
+        };
+        package = pkgs.open-webui;
+      };
     };
-    amdgpu.opencl.enable = true;
-  };
 
-  home-manager.users.${username} = {
-    xdg.configFile."opencode/opencode.jsonc".source =
-      (pkgs.formats.json { }).generate "opencode.jsonc"
-        {
-          "$schema" = "https://opencode.ai/config.json";
-          disabled_providers = [ ];
-          provider = {
-            ollama-local = {
-              name = "Ollama";
-              npm = "@ai-sdk/openai-compatible";
-              options = {
-                baseURL = "http://localhost:11434/v1";
+    systemd.services.ollama-apply-modelfiles = {
+      description = "Apply per-model Ollama parameter overrides";
+      after = [ "ollama.service" ];
+      requires = [ "ollama.service" ];
+      wantedBy = [ "multi-user.target" ];
+      path = [ pkgs.ollama-rocm ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        User = "ollama";
+        ExecStart = createModelsScript;
+      };
+    };
+
+    systemd.paths.ollama-modelfiles-watch = {
+      description = "Watch for Ollama modelfile changes";
+      wantedBy = [ "multi-user.target" ];
+      pathConfig = {
+        PathChanged = map (
+          {
+            name,
+            value,
+          }:
+          "${mkModelfile name value}"
+        ) (lib.attrsToList ollamaModelConfigs);
+        Unit = "ollama-apply-modelfiles.service";
+      };
+    };
+
+    #nixpkgs issue: 487054
+    systemd.services.gfxrace = {
+      before = [ "ollama.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.coreutils}/bin/sleep 5";
+      };
+      wantedBy = [ "multi-user.target" ];
+      restartIfChanged = false;
+    };
+
+    users.users.ollama = {
+      extraGroups = [ "render" ];
+    };
+
+    systemd = {
+      services.ollama.serviceConfig.UMask = lib.mkForce "0022";
+      tmpfiles = {
+        settings = {
+          "ollamaConfig" = {
+            "/run/media/${username}/SATA_SSD/ollama" = {
+              d = {
+                group = "users";
+                mode = "0755";
+                user = "ollama";
               };
-              models = lib.mapAttrs (_name: cfg: {
-                name = cfg.name;
-                limit = {
-                  context = cfg.numCtx;
-                  output = cfg.output;
-                };
-              }) ollamaModelConfigs;
             };
           };
         };
+        #  rules = [
+        #   # Type Path                                  Mode UID    GID Age Argument
+        #   "d     /run/media/${username}/SATA_SSD/ollama 0755 ollama 100 -   -"
+        # ];
+      };
+    };
 
-    home.file.".continue/config.yaml".source =
-      (pkgs.formats.yaml { }).generate "config.yaml"
-        continueConfig;
+    hardware = {
+      graphics = {
+        extraPackages = with pkgs; [
+          mesa.opencl
+          rocmPackages.clr.icd
+          rocmPackages.clr
+        ];
+      };
+      amdgpu.opencl.enable = true;
+    };
+
+    home-manager.users.${username} = {
+      xdg.configFile."opencode/opencode.jsonc".source =
+        (pkgs.formats.json { }).generate "opencode.jsonc"
+          {
+            "$schema" = "https://opencode.ai/config.json";
+            disabled_providers = [ ];
+            provider = {
+              ollama-local = {
+                name = "Ollama";
+                npm = "@ai-sdk/openai-compatible";
+                options = {
+                  baseURL = "http://localhost:11434/v1";
+                };
+                models = lib.mapAttrs (_name: cfg: {
+                  name = cfg.name;
+                  limit = {
+                    context = cfg.numCtx;
+                    output = cfg.output;
+                  };
+                }) ollamaModelConfigs;
+              };
+            };
+          };
+
+      home.file.".continue/config.yaml".source =
+        (pkgs.formats.yaml { }).generate "config.yaml"
+          continueConfig;
+    };
   };
 }
