@@ -9,6 +9,7 @@
     nixfmt.enable = true;
     shellcheck.enable = true;
     shfmt.enable = true;
+    jsonfmt.enable = true;
     yamlfmt.enable = true;
   };
   # Formatting settings
