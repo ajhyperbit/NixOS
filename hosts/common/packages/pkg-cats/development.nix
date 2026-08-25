@@ -11,6 +11,13 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Development tooling: CLI utilities, editors and IDEs (Neovim,
+        VS Code, VSCodium, Kate), Git/GitHub tooling, build systems,
+        language runtimes, and Nix-specific tooling such as
+        nixos-generators, nixfmt, alejandra, direnv, nvd, and
+        nix-output-monitor.
+      '';
     };
   };
 

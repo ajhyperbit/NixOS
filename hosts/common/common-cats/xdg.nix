@@ -10,6 +10,10 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        XDG desktop portal configuration, enabling xdg-open to use the
+        portal, the SPICE vdagentd service, and Qt theming.
+      '';
     };
   };
 

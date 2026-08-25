@@ -10,6 +10,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        USB and input device tooling: libratbag and Piper for gaming
+        mice, the overskride Bluetooth manager, and Android platform
+        tools (adb, fastboot).
+      '';
     };
   };
 

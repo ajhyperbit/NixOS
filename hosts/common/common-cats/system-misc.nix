@@ -10,6 +10,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Miscellaneous system settings, including the default host
+        platform, disabling the NixOS documentation, and enabling
+        zram swap.
+      '';
     };
   };
 

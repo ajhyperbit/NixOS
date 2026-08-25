@@ -10,6 +10,10 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Virtualization and sandboxing packages, including virt-manager,
+        virt-viewer, the SPICE protocol stack, quickemu, and bubblewrap.
+      '';
     };
   };
 

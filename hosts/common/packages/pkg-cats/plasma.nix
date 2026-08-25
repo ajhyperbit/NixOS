@@ -10,6 +10,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Workaround that excludes KDE's drkonqi crash handler from the
+        Plasma 6 package set and disables the drkonqi coredump processor
+        systemd unit.
+      '';
     };
   };
 

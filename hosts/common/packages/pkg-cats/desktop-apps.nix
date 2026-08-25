@@ -10,6 +10,13 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Desktop application bundle: browsers, games and emulators,
+        communication clients, audio/video tools, OBS Studio with
+        plugins, screenshot and clipboard utilities, Hyprland/Wayland
+        shell tools, file managers, office suites, and miscellaneous
+        desktop programs.
+      '';
     };
   };
 

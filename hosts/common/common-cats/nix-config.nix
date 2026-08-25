@@ -10,6 +10,12 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Nix and nixpkgs configuration, including experimental flake
+        features, automatic store optimisation, binary cache
+        substituters and trusted public keys, and unfree package
+        allowance.
+      '';
     };
   };
 

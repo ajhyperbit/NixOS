@@ -11,6 +11,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Systemd configuration, including a one-shot service to register
+        the Flathub Flatpak remote, disabling NetworkManager-wait-online,
+        and preventing suspend/hibernate via logind sleep settings.
+      '';
     };
   };
 

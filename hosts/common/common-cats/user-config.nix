@@ -11,6 +11,12 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Primary user configuration, creating the normal user and
+        assigning supplementary groups for flatpak, disk, sshd,
+        networkmanager, wheel, audio, video, greeter, gamemode, seat,
+        dialout, and ydotool access.
+      '';
     };
   };
 

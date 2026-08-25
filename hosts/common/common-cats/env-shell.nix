@@ -16,6 +16,11 @@ in
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Shell initialization, aliases, and default packages for the zsh
+        interactive shell, including helper functions and the default
+        environment package set.
+      '';
     };
   };
 

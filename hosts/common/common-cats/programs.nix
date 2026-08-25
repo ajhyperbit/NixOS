@@ -15,6 +15,11 @@ in
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        System-wide program configuration, including Firefox, Git, SSH,
+        zsh, Thunar, nh, Steam, gamescope, direnv, nix-ld, gamemode,
+        localsend, yazi, and other enabled programs.
+      '';
     };
   };
 

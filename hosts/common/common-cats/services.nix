@@ -12,6 +12,12 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        System services, including Plasma 6, OpenSSH, PipeWire
+        (PulseAudio disabled), Flatpak, D-Bus, Tailscale, envfs,
+        fstrim, greetd, smartd, gvfs, upower, MariaDB, saned, and
+        ratbagd.
+      '';
     };
   };
 

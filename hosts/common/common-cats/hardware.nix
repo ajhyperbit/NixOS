@@ -10,6 +10,10 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Hardware configuration for Bluetooth, Logitech wireless devices,
+        and SANE scanner support.
+      '';
     };
   };
 

@@ -10,6 +10,10 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Printing support via CUPS with Gutenprint drivers, plus Avahi
+        mDNS service discovery for network printers.
+      '';
     };
   };
 

@@ -12,6 +12,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Security configuration: sudo NOPASSWD rules for the primary user,
+        PAM settings for swaylock, RealtimeKit, and a polkit rule
+        allowing power/reboot actions for the users group.
+      '';
     };
   };
 

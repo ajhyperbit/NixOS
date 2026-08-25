@@ -10,6 +10,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Locale and timezone configuration, including the default locale,
+        per-category LC_* settings, the system time zone, and Plasma 6
+        packages to exclude.
+      '';
     };
   };
 

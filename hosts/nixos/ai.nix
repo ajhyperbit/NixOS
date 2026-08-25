@@ -106,6 +106,12 @@ in
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Local AI tooling: ROCm-enabled Ollama with per-model context
+        overrides, the opencode and opencode-desktop clients, LM Studio,
+        mcp-nixos, Open WebUI, and the corresponding user configuration
+        and systemd services.
+      '';
     };
   };
 

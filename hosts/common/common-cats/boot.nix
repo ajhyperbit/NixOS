@@ -11,6 +11,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Boot-related configuration: kernel selection, kernel parameters,
+        bootloader, initrd modules, tmpfs, AppImage binfmt registration,
+        Plymouth, and crash dump support.
+      '';
     };
   };
 

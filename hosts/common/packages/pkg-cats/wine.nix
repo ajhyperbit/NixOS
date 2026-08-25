@@ -10,6 +10,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Wine and Windows compatibility tooling: Wine (32/64-bit),
+        wine-staging, wine-wayland, winetricks, protontricks, and the
+        Bottles prefix manager.
+      '';
     };
   };
 

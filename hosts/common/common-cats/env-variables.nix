@@ -12,6 +12,10 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Environment and session variables, including XDG user directories,
+        cursor theme, Qt/Wayland preferences, and Qt QML import paths.
+      '';
     };
   };
 

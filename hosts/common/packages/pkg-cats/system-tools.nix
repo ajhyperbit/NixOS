@@ -10,6 +10,12 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        System tooling: hardware monitoring and benchmarks, disk and
+        storage utilities (Btrfs, partitioning, recovery, deduplication),
+        and networking/remote access clients such as Tailscale,
+        FileZilla, PuTTY, and Remmina.
+      '';
     };
   };
 

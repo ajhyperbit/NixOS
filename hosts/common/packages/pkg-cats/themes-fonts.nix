@@ -11,6 +11,12 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Themes, fonts, and appearance packages, including the Kvantum
+        Qt theme engine, the nwg-look GTK appearance tool, font-manager,
+        FontForge, and the Rosé Pine cursor themes for X11/Wayland and
+        Hyprland.
+      '';
     };
   };
 

@@ -10,6 +10,10 @@
       type = lib.types.bool;
       default = false;
       example = true;
+      description = ''
+        Arduino development packages, including the IDE, core library,
+        and command-line tools.
+      '';
     };
   };
 

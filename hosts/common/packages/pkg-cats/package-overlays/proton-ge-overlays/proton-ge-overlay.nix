@@ -23,6 +23,11 @@ in
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Proton-GE compatibility tool overlays. Adds custom Proton-GE
+        builds from the `proton-versions` directory as a nixpkgs overlay
+        and registers them as Steam extra compatibility packages.
+      '';
     };
   };
 

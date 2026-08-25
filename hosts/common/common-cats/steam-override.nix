@@ -10,6 +10,10 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Override the Steam package to bundle gamescope and MangoHud as
+        extra dependencies.
+      '';
     };
   };
 

@@ -11,6 +11,11 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Networking configuration: NetworkManager, IPv6 disablement, NTP
+        time servers, and firewall rules including Tailscale trusted
+        interfaces and VNC/Synergy ports.
+      '';
     };
   };
 

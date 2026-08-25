@@ -34,6 +34,11 @@ in
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Default application associations for MIME types, parsed from
+        `default-apps.list` and merged with explicit overrides for
+        PDF, directories, and patch files.
+      '';
     };
   };
 

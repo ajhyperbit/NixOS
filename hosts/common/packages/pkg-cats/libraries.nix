@@ -11,6 +11,12 @@
       type = lib.types.bool;
       default = true;
       example = true;
+      description = ''
+        Shared libraries and runtime dependencies, including Qt6
+        modules and Quickshell, Vulkan loader/tools/validation layers,
+        GLib, OpenSSL, libsecret, polkit, XDG utilities, and other
+        system libraries required by the desktop environment.
+      '';
     };
   };
 
