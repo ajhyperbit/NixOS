@@ -173,6 +173,7 @@
             inherit nix-cachyos-kernel;
           };
           modules = [
+            #files
             ./sops/config.nix
             ./hosts/${host}/config.nix
             ./hosts/${host}/ai.nix
@@ -197,6 +198,8 @@
             ./hosts/common/security/security.nix
             ./hosts/common/nix-alien.nix
             ./hosts/common/webhost/default.nix
+
+            #system modules
             home-manager.nixosModules.home-manager
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
@@ -210,6 +213,11 @@
               nixpkgs.overlays = [ inputs.nix-topology.overlays.default ];
             }
             inputs.nix-topology.nixosModules.default
+
+            {
+              #User modules
+              nixos.ai.enable = false;
+            }
           ];
         };
       };
