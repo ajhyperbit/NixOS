@@ -42,15 +42,41 @@
   };
 
   fileSystems."/run/media/${username}/DATA" = {
-    device = "/dev/disk/by-uuid/5fbf2ab2-4950-467b-ac78-13fbb8bf516b";
-    fsType = "ext4";
+    device = "/dev/disk/by-uuid/a6da3335-415e-4c81-97e0-0a18ef349b74";
+    fsType = "btrfs";
     options = [
-      # If you don't have this options attribute, it'll default to "defaults"
-      # boot options for fstab. Search up fstab mount options you can use
-      "users" # Allows any user to mount and unmount
-      "nofail" # Prevent system from failing if this drive doesn't mount
-      "exec" # Permit execution of binaries and other executable files
+      "subvol=data"
+      "compress=zstd:3"
+      "space_cache=v2"
+      "users"
+      "nofail"
+      "exec"
     ];
+  };
+
+  fileSystems."/run/media/${username}/DATA-snapshots" = {
+    device = "/dev/disk/by-uuid/a6da3335-415e-4c81-97e0-0a18ef349b74";
+    fsType = "btrfs";
+    options = [
+      "subvol=archive-snapshots"
+      "noatime"
+      "space_cache=v2"
+      "users"
+      "nofail"
+      "exec"
+    ];
+  };
+
+  services.btrbk.instances."data" = {
+    onCalendar = "daily";
+    settings = {
+      snapshot_preserve_min = "30d";
+      snapshot_preserve = "6m";
+      volume."/run/media/${username}/DATA" = {
+        subvolume = ".";
+        snapshot_dir = "/run/media/${username}/DATA-snapshots";
+      };
+    };
   };
 
   fileSystems."/run/media/${username}/Archive-snapshots" = {
