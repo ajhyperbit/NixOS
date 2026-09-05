@@ -31,12 +31,19 @@
       };
       logitech.wireless = {
         enable = true;
-        enableGraphical = true;
+        # enableGraphical = true;
       };
       sane = {
         enable = true;
         #brscan5.enable = true;
         #dsseries.enable = true;
+      };
+    };
+
+    programs.solaar = { 
+      enable = true;
+      userService = {
+        enable = true;
       };
     };
   };
