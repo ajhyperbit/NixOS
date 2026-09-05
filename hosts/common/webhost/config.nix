@@ -81,6 +81,8 @@ in
         lfs = {
           enable = true;
         };
+
+        package = pkgs.stable.forgejo;
       };
 
       ddns-updater = {
