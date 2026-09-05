@@ -68,7 +68,7 @@
 
         # ── OBS Studio ────────────────────────────────────────────────────────────
         (wrapOBS {
-          plugins = with pkgs.obs-studio-plugins; [
+          plugins = with pkgs.stable.obs-studio-plugins; [
             wlrobs # wlroots-based screen capture source
             obs-pipewire-audio-capture # PipeWire application audio capture source
             obs-vkcapture # Vulkan/OpenGL game capture via injection
