@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #Update flake.lock
 nix flake update
 #Update everything aside from hyprland
