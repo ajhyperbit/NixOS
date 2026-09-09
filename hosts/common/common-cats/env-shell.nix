@@ -58,6 +58,7 @@ in
       tag = "/home/${username}/NixOS-Hyprland/tag.sh";
       clean = "nh clean all ${nhArgs}";
       llsblk = "lsblk -o NAME,FSTYPE,KNAME,SIZE,TYPE,MOUNTPOINT,SERIAL,UUID";
+      theclicker-custom = "theclicker run -d'Logitech G903 LS' -c25 -C0 -l275 -H";
     };
 
     environment.defaultPackages = lib.mkForce [ ];
