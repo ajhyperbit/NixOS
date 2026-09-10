@@ -54,7 +54,7 @@
         # ── Editors & IDEs ────────────────────────────────────────────────────────
         neovim # Extensible Vim-based text editor
         nano # Simple terminal text editor
-        vscode-fhs # Visual Studio Code in an FHS-compatible environment
+        stable.vscode-fhs # Visual Studio Code in an FHS-compatible environment
         vscodium-fhs # VSCodium (open-source VS Code) in an FHS-compatible environment
         kdePackages.kate # KDE feature-rich text editor
 
@@ -74,7 +74,7 @@
         direnv # Automatically load/unload env vars per directory
         nvd # Nix/NixOS package version diff tool
         nix-output-monitor # Prettier output for nix build commands
-        nix-inspect # Interactive TUI for inspecting nix configs and other expressions
+        # nix-inspect # Interactive TUI for inspecting nix configs and other expressions
       ];
     };
   };
