@@ -58,7 +58,7 @@
     device = "/dev/disk/by-uuid/a6da3335-415e-4c81-97e0-0a18ef349b74";
     fsType = "btrfs";
     options = [
-      "subvol=archive-snapshots"
+      "subvol=data-snapshots"
       "noatime"
       "space_cache=v2"
       "users"
