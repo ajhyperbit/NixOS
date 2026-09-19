@@ -8,7 +8,6 @@
 assert
   steamDisplayName == null
   || throw "proton-ge-bin: The `steamDisplayName` interface has been changed to an attribute, which is overridable using `overrideAttrs`.";
-
 stdenvNoCC.mkDerivation (finalAttrs: {
   # Can be overridden to alter the display name in steam
   # This could be useful if multiple versions should be installed together
