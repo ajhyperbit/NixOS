@@ -59,7 +59,8 @@
       type = "github";
       owner = "hyprwm";
       repo = "Hyprland";
-      rev = "6d43ce8453f2d34b82b3da5ed9415f6fc3046ce4";
+      # rev = "6d43ce8453f2d34b82b3da5ed9415f6fc3046ce4";
+      rev = "5fbb2a7acce2d6f155d18cf5b590fc553a8e7abc";
       # ref = "v0.56.1";
       # inputs.nixpkgs.follows = "nixpkgs";
       # inputs.pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
