@@ -1,0 +1,152 @@
+[
+  {
+    "address": "0x649b40598c10",
+    "at": [
+      10,
+      46
+    ],
+    "size": [
+      1262,
+      1384
+    ],
+    "workspace": {
+      "id": 2,
+      "name": "2"
+    },
+    "floating": false,
+    "fullscreen": 0,
+    "fullscreenClient": 0,
+    "monitor": 2,
+    "initialClass": "discord",
+    "class": "discord",
+    "initialTitle": "Discord",
+    "title": "Friends - Discord",
+    "pid": 4013537,
+    "xwayland": false,
+    "pinned": false,
+    "grouped": [],
+    "mapped": true,
+    "swallowing": "0x0",
+    "focusHistoryID": 4
+  },
+  {
+    "address": "0x649b402d28c0",
+    "at": [
+      2570,
+      46
+    ],
+    "size": [
+      1262,
+      1384
+    ],
+    "workspace": {
+      "id": 6,
+      "name": "6"
+    },
+    "floating": false,
+    "fullscreen": 0,
+    "fullscreenClient": 0,
+    "monitor": 0,
+    "initialClass": "code",
+    "class": "code",
+    "initialTitle": "Visual Studio Code",
+    "title": "● clients.json - nixos-hyprland (Workspace) - Visual Studio Code",
+    "pid": 4010374,
+    "xwayland": false,
+    "pinned": false,
+    "grouped": [],
+    "mapped": true,
+    "swallowing": "0x0",
+    "focusHistoryID": 1
+  },
+  {
+    "address": "0x649b3f4532d0",
+    "at": [
+      3848,
+      46
+    ],
+    "size": [
+      1262,
+      1384
+    ],
+    "workspace": {
+      "id": 6,
+      "name": "6"
+    },
+    "floating": false,
+    "fullscreen": 0,
+    "fullscreenClient": 0,
+    "monitor": 0,
+    "initialClass": "kitty",
+    "class": "kitty",
+    "initialTitle": "kitty",
+    "title": "hyprsession save open-default",
+    "pid": 4010232,
+    "xwayland": false,
+    "pinned": false,
+    "grouped": [],
+    "mapped": true,
+    "swallowing": "0x0",
+    "focusHistoryID": 0
+  },
+  {
+    "address": "0x649b404b0030",
+    "at": [
+      1288,
+      46
+    ],
+    "size": [
+      1262,
+      1384
+    ],
+    "workspace": {
+      "id": 2,
+      "name": "2"
+    },
+    "floating": false,
+    "fullscreen": 0,
+    "fullscreenClient": 0,
+    "monitor": 2,
+    "initialClass": "steam",
+    "class": "steam",
+    "initialTitle": "Steam",
+    "title": "Steam",
+    "pid": 4010855,
+    "xwayland": true,
+    "pinned": false,
+    "grouped": [],
+    "mapped": true,
+    "swallowing": "0x0",
+    "focusHistoryID": 3
+  },
+  {
+    "address": "0x649b405ba5e0",
+    "at": [
+      10,
+      46
+    ],
+    "size": [
+      2540,
+      1384
+    ],
+    "workspace": {
+      "id": 1,
+      "name": "1"
+    },
+    "floating": false,
+    "fullscreen": 0,
+    "fullscreenClient": 0,
+    "monitor": 2,
+    "initialClass": "floorp",
+    "class": "floorp",
+    "initialTitle": "Ablaze Floorp",
+    "title": "Hyprland session restoration for 0.55+ - Claude — Ablaze Floorp",
+    "pid": 4010223,
+    "xwayland": false,
+    "pinned": false,
+    "grouped": [],
+    "mapped": true,
+    "swallowing": "0x0",
+    "focusHistoryID": 2
+  }
+]

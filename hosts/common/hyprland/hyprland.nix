@@ -6,6 +6,7 @@
 {
   imports = [
     #./temp-hyprland.nix
+    ./hyprsession/hyprsession.nix
     inputs.hyprland.nixosModules.default
   ];
 

@@ -70,6 +70,11 @@
       inputs.utils.follows = "flake-utils";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
+    # hyprsession = {
+    #   url = "github:joshurtree/hyprsession";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils"
+    # };
 
     # Wayland ecosystem
     quickshell = {
