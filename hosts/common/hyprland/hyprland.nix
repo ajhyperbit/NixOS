@@ -37,6 +37,10 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    inputs.hyprsession.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+
   environment.etc."greetd/sessions/hyprland.desktop".text = ''
     [Desktop Entry]
     Name=Hyprland UWSM custom

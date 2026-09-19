@@ -70,20 +70,23 @@
       inputs.utils.follows = "flake-utils";
       inputs.hyprlang.follows = "hyprland/hyprlang";
     };
+    hyprsession = {
+      url = "github:joshurtree/hyprsession";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
 
     # Wayland ecosystem
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     noctaliav4 = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.noctalia-qs.inputs.systems.follows = "nix-systems";
       inputs.noctalia-qs.inputs.treefmt-nix.follows = "treefmt-nix";
     };
-
     noctaliav5 = {
       url = "github:noctalia-dev/noctalia/cachix";
       #inputs.nixpkgs.follows = "nixpkgs";

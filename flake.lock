@@ -515,6 +515,29 @@
         "type": "github"
       }
     },
+    "hyprsession": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767553580,
+        "narHash": "sha256-8mYThyeRJDVgfxsE082BXkaEqShWksexCTP+WVI2bKw=",
+        "owner": "joshurtree",
+        "repo": "hyprsession",
+        "rev": "364ccba80bd07f2f2e9a00bcf12b943809f35474",
+        "type": "github"
+      },
+      "original": {
+        "owner": "joshurtree",
+        "repo": "hyprsession",
+        "type": "github"
+      }
+    },
     "hyprtoolkit": {
       "inputs": {
         "aquamarine": [
@@ -1041,6 +1064,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "hyprsession": "hyprsession",
         "nix-alien": "nix-alien",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nix-index-database": "nix-index-database",
