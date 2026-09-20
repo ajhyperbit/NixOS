@@ -5,10 +5,10 @@
     })
   ];
 
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     hyprsession
     # inputs.hyprsession.packages.${pkgs.system}.hyprsession
-    ];
+  ];
 
   home-manager.users.ajhyperbit = {
     home.file = {

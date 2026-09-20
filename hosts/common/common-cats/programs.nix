@@ -6,9 +6,6 @@
   username,
   ...
 }:
-let
-  nhArgs = "--keep-since 7d --keep 5 --optimise";
-in
 {
   options = {
     common.programs.enable = lib.mkOption {
