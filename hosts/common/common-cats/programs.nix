@@ -65,11 +65,6 @@ in
 
       nh = {
         enable = true;
-        clean = {
-          enable = true;
-          extraArgs = nhArgs;
-          dates = "monthly";
-        };
         flake = "/home/${username}/NixOS-Hyprland";
       };
 
