@@ -24,7 +24,8 @@
     #v5
     programs.noctalia = {
       enable = true;
-      # settings = builtins.fromJSON (builtins.readFile ./config/noctalia.json)
+      systemd.enable = true;
+      settings = ./config/noctalia-config.toml;
     };
   };
 }

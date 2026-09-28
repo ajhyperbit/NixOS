@@ -2,6 +2,36 @@
 order = [ "default" ]
 
     [bar.default]
+    center = [ "workspaces" ]
+    concave_edge_corners = false
+    end = [
+        "tray",
+        "spacer_4",
+        "notifications",
+        "spacer_5",
+        "clipboard",
+        "spacer_5",
+        "network",
+        "bluetooth",
+        "volume",
+        "spacer_5",
+        "brightness",
+        "battery",
+        "control-center",
+        "spacer_5",
+        "session",
+        "spacer_5"
+    ]
+    margin_ends = 0
+    radius = 0
+    scale = 1.7500000186264515
+    start = [ "clock", "spacer_2", "media", "spacer_3", "launcher", "wallpaper" ]
+    thickness = 45
+
+        [bar.default.monitor.DP-2]
+        scale = 1.5000000149011612
+
+[calendar]
 
 [control_center.calendar]
 show_week_numbers = true
@@ -20,11 +50,13 @@ widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@DP-2", "lock
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 196.0
+    box_width = 810.0
     cx = 1280.0
     cy = 1317.0
     output = "DP-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = 0.0
     type = "login_box"
 
@@ -32,16 +64,26 @@ widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@DP-2", "lock
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
         show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 196.0
+    box_width = 810.0
     cx = 576.0
     cy = 525.0
     output = "DP-2"
+    placement_height = 648.0
+    placement_width = 1152.0
     rotation = 0.0
     type = "login_box"
 
@@ -49,16 +91,26 @@ widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@DP-2", "lock
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
         show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 196.0
+    box_width = 810.0
     cx = 1280.0
     cy = 1317.0
     output = "DP-3"
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = 0.0
     type = "login_box"
 
@@ -66,15 +118,59 @@ widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@DP-2", "lock
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
         show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
-[theme.templates]
-enable_builtin_templates = false
+[theme]
+builtin = "Noctalia"
+mode = "dark"
+source = "builtin"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    enable_builtin_templates = false
 
 [wallpaper]
 enabled = false
 
 [weather]
+enabled = false
+
+[widget.battery]
+enabled = false
+
+[widget.bluetooth]
+enabled = false
+
+[widget.clock]
+format = "{:%I:%M %p}"
+
+[widget.network]
+enabled = false
+
+[widget.spacer_2]
+type = "spacer"
+
+[widget.spacer_3]
+length = 10
+type = "spacer"
+
+[widget.spacer_4]
+length = 15
+type = "spacer"
+
+[widget.spacer_5]
+length = 12
+type = "spacer"
+
+[widget.wallpaper]
 enabled = false
