@@ -79,6 +79,7 @@
   environment.systemPackages = with pkgs; [
     ddclient
     btop-rocm
+    amdgpu_top
     #vintagestory
   ];
 
