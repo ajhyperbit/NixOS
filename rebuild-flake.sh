@@ -141,7 +141,7 @@ if [ "$reswitch" != "test" ] && [ "$reswitch" != "build" ]; then
     git tag Gen-$hostname-$current_tag-$hash$dirty
 
     printf "Last tag: %s\n" "$last_tag"
-	
+
     # choose "y" "Do you want to push the tag Gen-"${hostname}"-"${current_tag}"-"${hash}${dirty}"? [(Y)es/(N)o/(Q)uit] (Default: Yes): " "git push origin tag Gen-$host-$current_tag-$hash$dirty"
   fi
 fi
