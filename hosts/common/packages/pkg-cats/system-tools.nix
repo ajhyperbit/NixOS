@@ -47,6 +47,7 @@
 
         # ── Disk & Storage ────────────────────────────────────────────────────────
         btrfs-progs # Btrfs filesystem utilities (balance, scrub, snapshot, etc.)
+        btrfs-assistant #GUI btrfs tools
         parted # Command-line disk partition manipulation
         gparted # GTK GUI disk partition editor
         gsmartcontrol # GUI for SMART disk health data inspection
