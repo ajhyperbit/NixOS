@@ -29,16 +29,43 @@
     { device = "/dev/disk/by-uuid/5b448087-dd9e-4631-9c8c-39851229c1b6"; }
   ];
 
-  fileSystems."/run/media/${username}/SATA_SSD" = {
-    device = "/dev/disk/by-uuid/c879995c-386a-42c2-bc3b-8d02a03c61de";
-    fsType = "ext4";
+  fileSystems."/run/media/${username}/SATA-SSD" = {
+    device = "/dev/disk/by-uuid/b36101b6-e9e1-459d-869a-348b5ba52c29";
+    fsType = "btrfs";
     options = [
       # If you don't have this options attribute, it'll default to "defaults"
       # boot options for fstab. Search up fstab mount options you can use
       "users" # Allows any user to mount and unmount
       "nofail" # Prevent system from failing if this drive doesn't mount
       "exec" # Permit execution of binaries and other executable files
+      "subvol=sata-ssd"
+      "compress=zstd:3"
+      "space_cache=v2"
     ];
+  };
+
+  fileSystems."/run/media/${username}/SATA-SSD-snapshots" = {
+    device = "/dev/disk/by-uuid/b36101b6-e9e1-459d-869a-348b5ba52c29";
+    fsType = "btrfs";
+    options = [
+      "users"
+      "nofail"
+      "exec"
+      "subvol=sata-ssd-snapshots"
+      "space_cache=v2"
+    ];
+  };
+
+  services.btrbk.instances."sata-ssd" = {
+    onCalendar = "daily";
+    settings = {
+      snapshot_preserve_min = "30d";
+      snapshot_preserve = "6m";
+      volume."/run/media/${username}/SATA-SSD" = {
+        subvolume = ".";
+        snapshot_dir = "/run/media/${username}/SATA-SSD-snapshots";
+      };
+    };
   };
 
   fileSystems."/run/media/${username}/DATA" = {
