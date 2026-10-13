@@ -23,8 +23,5 @@ nix-locate -p gcc float.h | grep /nix/store/9ds850ifd4jwcccpp3v14818kk74ldf2-gcc
 ----------------------------------------
 duperemove commands:
 
-#duperemove-max
-sudo duperemove --hashfile="/run/media/ajhyperbit/Archive-max/.hashes.db" --exclude "/run/media/ajhyperbit/Archive-max/.hashes.db" -rdh /run/media/ajhyperbit/Archive-max
-
-#duperemove-typical
-sudo duperemove --hashfile="/run/media/ajhyperbit/Archive-typical/.hashes.db" --exclude "/run/media/ajhyperbit/Archive-typical/.hashes.db" -rdh /run/media/ajhyperbit/Archive-typical
+#duperemove
+sudo duperemove --hashfile="/run/media/ajhyperbit/Archive/.hashes.db" --exclude "/run/media/ajhyperbit/Archive/.hashes.db" -rdh /run/media/ajhyperbit/Archive

@@ -24,7 +24,7 @@
     #v5
     programs.noctalia = {
       enable = true;
-      systemd.enable = true;
+      # systemd.enable = true;
       settings = ./config/noctalia-config.toml;
     };
   };
