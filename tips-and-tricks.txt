@@ -25,3 +25,5 @@ duperemove commands:
 
 #duperemove
 sudo duperemove --hashfile="/run/media/ajhyperbit/Archive/.hashes.db" --exclude "/run/media/ajhyperbit/Archive/.hashes.db" -rdh /run/media/ajhyperbit/Archive
+
+sudo duperemove --hashfile="/run/media/ajhyperbit/SATA-SSD/.hashes.db" --exclude "/run/media/ajhyperbit/SATA-SSD/.hashes.db" -rdh /run/media/ajhyperbit/SATA-SSD
