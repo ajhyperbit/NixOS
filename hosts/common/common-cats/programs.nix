@@ -104,6 +104,7 @@
           proton-ge-bin
         ];
         #gamescopeSession.enable = true;
+        extest.enable = true;
       };
       gamescope = {
         enable = true;
