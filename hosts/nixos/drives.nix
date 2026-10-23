@@ -41,6 +41,7 @@
       "subvol=sata-ssd"
       "compress=zstd:3"
       "space_cache=v2"
+      "x-gvfs-trash"
     ];
   };
 
@@ -78,6 +79,7 @@
       "users"
       "nofail"
       "exec"
+      "x-gvfs-trash"
     ];
   };
 
@@ -117,6 +119,7 @@
       "users"
       "nofail"
       "exec"
+      "x-gvfs-trash"
     ];
   };
 
