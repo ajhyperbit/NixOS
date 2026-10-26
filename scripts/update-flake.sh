@@ -16,6 +16,7 @@ fi
 #Nothing changed, nothing to commit
 if git diff --cached --quiet; then
   printf "flake.lock unchanged, nothing to commit.\n"
+  # shellcheck disable=SC2317
   return 0 2>/dev/null || exit 0
 fi
 
