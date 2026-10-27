@@ -12,7 +12,7 @@
     # import the home manager modules
     imports = [
       inputs.noctaliav4.homeModules.default
-      inputs.noctaliav5.homeModules.default
+      # inputs.noctaliav5.homeModules.default
     ];
 
     #v4
@@ -22,10 +22,10 @@
     };
 
     #v5
-    programs.noctalia = {
-      enable = true;
-      # systemd.enable = true;
-      settings = ./config/noctalia-config.toml;
-    };
+    # programs.noctalia = {
+    #   enable = true;
+    #   # systemd.enable = true;
+    #   settings = ./config/noctalia-config.toml;
+    # };
   };
 }
