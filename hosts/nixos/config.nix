@@ -215,6 +215,8 @@
     };
   };
 
+  nix.settings.max-jobs = 2;
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   # Microcode
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
