@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, username ... }: {
   nixpkgs.overlays = [
     (final: _prev: {
       hyprsession = final.callPackage ./pkgs/hyprsession.nix { };
@@ -10,7 +10,7 @@
     # inputs.hyprsession.packages.${pkgs.system}.hyprsession
   ];
 
-  home-manager.users.ajhyperbit = {
+  home-manager.users.${username} = {
     home.file = {
       ".local/share/hyprsession/open-default/exec.conf".source = ./config/exec.conf;
       ".local/share/hyprsession/open-default/clients.conf".source = ./config/clients.json;

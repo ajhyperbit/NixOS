@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  username,
   ...
 }:
 let
@@ -89,11 +90,11 @@ in
         enable = config.webhost.enableDirectIPHosting.enable || config.webhost.domainSSH.enable;
         environment = lib.mkMerge [
           (lib.mkIf config.webhost.domainSSH.enable {
-            CONFIG_FILEPATH = "/home/ajhyperbit/private/cloudflare/ddns-updater/config.json";
+            CONFIG_FILEPATH = "/home/${username}/private/cloudflare/ddns-updater/config.json";
             DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
           })
           (lib.mkIf (!config.webhost.domainSSH.enable) {
-            CONFIG_FILEPATH = "/home/ajhyperbit/private/porkbun/ddns-updater/config.json";
+            CONFIG_FILEPATH = "/home/${username}/private/porkbun/ddns-updater/config.json";
             DDNS_UPDATER_DATA_PATH = "/var/lib/ddns-updater";
           })
         ];

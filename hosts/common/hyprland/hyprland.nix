@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   imports = [
     #./temp-hyprland.nix
     ./hyprsession/hyprsession.nix
@@ -42,7 +42,7 @@
     HYPRCURSOR_THEME = "rose-pine-hyprcursor";
   };
 
-  home-manager.users.ajhyperbit = {
+  home-manager.users.${username} = {
     home.file."NixOS-Hyprland/hosts/common/hyprland/hl.meta.lua".source =
       "${pkgs.hyprland}/share/hypr/stubs/hl.meta.lua";
   };

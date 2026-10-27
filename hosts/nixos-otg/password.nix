@@ -1,6 +1,6 @@
 { username, ... }: {
   lib.mkMerge = {
-    users.users.ajhyperbit = {
+    users.users.${username} = {
       hashedPasswordFile = "/home/${username}/private/hashedpassword.txt";
     };
   };
