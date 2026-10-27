@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   username,
   ...
 }:
@@ -13,5 +12,5 @@
     enable = false;
     source = "./config/ironbar/style.css";
     target = "ironbar/style.css";
-  }
+  };
 }
