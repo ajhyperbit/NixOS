@@ -1,11 +1,15 @@
 let {
     $menu = { type = "menu" label = "󱓞" }
-    $workspaces = { type = "workspaces" }
+    $workspaces = 
+    {
+        type = "workspaces" 
+        hidden = [ "special:special" "special:magic" "special:S-term" ]
+    }
     $launcher = { type = "launcher" truncate.mode = "end" truncate.max_length = 30 }
 
     $music = { type = "music" player_type = "mpd" }
     $battery = { type = "battery" show_if = "ls /sys/class/power_supply/ | grep --quiet '^BAT'" }
-    $sys_info = { type = "sys_info" format = [ " {uptime}" "CPU: {cpu_percent}%" "RAM: {memory_percent}%"] interval.cpu = 1 }
+    $sys_info = { type = "sys_info" format = [ "   {uptime}" "CPU: {cpu_percent}%" "RAM: {memory_percent}%"] interval.cpu = 1 }
     $clipboard = { type = "clipboard" max_items = 5 truncate.mode = "end" truncate.length = 30 }
     $volume = { type = "volume" }
     $tray = { type = "tray" }
