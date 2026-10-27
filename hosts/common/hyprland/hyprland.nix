@@ -1,4 +1,9 @@
-{ pkgs, username, ... }: {
+{
+  pkgs,
+  username,
+  ...
+}:
+{
   imports = [
     #./temp-hyprland.nix
     ./hyprsession/hyprsession.nix
