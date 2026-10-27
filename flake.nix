@@ -72,17 +72,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctaliav4 = {
-      url = "github:noctalia-dev/noctalia/legacy-v4";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.noctalia-qs.inputs.systems.follows = "nix-systems";
-      inputs.noctalia-qs.inputs.treefmt-nix.follows = "treefmt-nix";
-    };
+    # noctaliav4 = {
+    #   url = "github:noctalia-dev/noctalia/legacy-v4";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.noctalia-qs.inputs.systems.follows = "nix-systems";
+    #   inputs.noctalia-qs.inputs.treefmt-nix.follows = "treefmt-nix";
+    # };
 
-    noctaliav5 = {
-      url = "github:noctalia-dev/noctalia/cachix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # noctaliav5 = {
+    #   url = "github:noctalia-dev/noctalia/cachix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Theming
     stylix = {
@@ -183,7 +183,8 @@
             ./hosts/${host}/virtualization.nix
             ./hosts/common/common-module.nix
             ./hosts/common/packages/default.nix
-            ./hosts/common/hyprland/noctalia/noctalia.nix
+            # ./hosts/common/hyprland/noctalia/noctalia.nix
+            ./hosts/common/hyprland/ironbar/ironbar.nix
             ./hosts/common/users.nix
             ./hosts/common/fonts.nix
             ./hosts/common/audio.nix
