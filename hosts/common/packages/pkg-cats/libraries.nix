@@ -53,6 +53,7 @@
         libportal # XDG portal convenience library
         service-wrapper # Wrapper for running commands as systemd services
         librsvg # Small library to render SVG images to Cairo surfaces
+        libva-utils #Collection of utilities and examples for VA-API
       ];
     };
   };
