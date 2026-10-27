@@ -1,4 +1,4 @@
-{ pkgs, username ... }: {
+{ pkgs, username, ... }: {
   nixpkgs.overlays = [
     (final: _prev: {
       hyprsession = final.callPackage ./pkgs/hyprsession.nix { };
