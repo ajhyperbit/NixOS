@@ -8,9 +8,18 @@
     ironbar
   ];
 
-  home-manager.users.${username}.xdg.configFile."ironbar-css" = {
-    enable = false;
-    source = "./config/ironbar/style.css";
-    target = "ironbar/style.css";
+  home-manager.users.${username} = {
+    home.file = {
+      ".config/ironbar/config.corn" = {
+        enable = true;
+        source = ./config/ironbar.corn;
+        force = true;
+      };
+      ".config/ironbar/style.css" = {
+        enable = true;
+        source = ./config/style.css;
+        force = true;
+      };
+    };
   };
 }
