@@ -109,7 +109,8 @@ if command -v nh >/dev/null 2>&1; then
   if [ -z "$args" ]; then
     nh os "$reswitch" -H "$host" |& tee nixos-switch.log
   else
-    nh os "$reswitch" -H "$host" "$args" |& tee nixos-switch.log
+    # shellcheck disable=SC2086
+    nh os "$reswitch" -H "$host" $args |& tee nixos-switch.log
   fi
 elif command -v nom >/dev/null 2>&1 && command -v unbuffer >/dev/null 2>&1; then
   sudo unbuffer nixos-rebuild "$reswitch" --upgrade --show-trace --flake .#"$host" --log-format internal-json |& tee nixos-switch.log | nom --json
