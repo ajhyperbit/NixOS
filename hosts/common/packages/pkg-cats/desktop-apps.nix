@@ -96,10 +96,10 @@
         swappy # Wayland screenshot annotation and editing tool
 
         # ── Hyprland & Wayland Shell ──────────────────────────────────────────────
-        (pkgs.waybar.overrideAttrs (oldAttrs: {
-          # Wayland status bar with experimental modules enabled
-          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-        }))
+        # (pkgs.waybar.overrideAttrs (oldAttrs: {
+        #   # Wayland status bar with experimental modules enabled
+        #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+        # }))
         dunst # Lightweight notification daemon
         swaynotificationcenter # Notification center panel for Sway/Hyprland
         libnotify # Library and CLI for sending desktop notifications
