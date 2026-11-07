@@ -82,5 +82,17 @@
         '';
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      clamav
+      lynis
+      vulnix
+    ];
+
+    services.clamav = {
+      daemon.enable = true;
+      updater.enable = true;
+    };
+
   };
 }
