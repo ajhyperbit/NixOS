@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  username,
   ...
 }:
 let
@@ -30,21 +29,19 @@ in
         and registers them as Steam extra compatibility packages.
       '';
     };
+
+    packages.proton-Packages.packages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [ ];
+      description = "Custom Proton packages built from the proton-versions directory.";
+    };
   };
 
   config = lib.mkIf config.packages.proton-Packages.enable {
     nixpkgs.overlays = [ proton-ge-overlay ];
 
-    programs.steam.extraCompatPackages = map (name: pkgs.${name}) (lib.attrNames protonPackages);
+    packages.proton-Packages.packages = map (name: pkgs.${name}) (lib.attrNames protonPackages);
 
-    home-manager.users.${username}.xdg.configFile = lib.mapAttrs' (
-      name: _:
-      let
-        pkg = pkgs.${name};
-      in
-      lib.nameValuePair "heroic/tools/proton/${pkg.version}" {
-        source = pkg.steamcompattool;
-      }
-    ) protonPackages;
+    programs.steam.extraCompatPackages = config.packages.proton-Packages.packages;
   };
 }
