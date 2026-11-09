@@ -100,6 +100,9 @@
           libkrb5
           keyutils
         ];
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin
+        ];
         #gamescopeSession.enable = true;
         extest.enable = true;
       };
