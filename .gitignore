@@ -9,3 +9,4 @@ result
 disko.html
 *.decrypted~secrets.*
 hosts/common/hyprland/hl.meta.lua
+testing-files/*
