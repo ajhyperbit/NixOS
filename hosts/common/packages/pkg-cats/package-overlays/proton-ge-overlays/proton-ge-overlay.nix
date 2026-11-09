@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  username,
   ...
 }:
 let
@@ -35,5 +36,15 @@ in
     nixpkgs.overlays = [ proton-ge-overlay ];
 
     programs.steam.extraCompatPackages = map (name: pkgs.${name}) (lib.attrNames protonPackages);
+
+    home-manager.users.${username}.xdg.configFile = lib.mapAttrs' (
+      name: _:
+      let
+        pkg = pkgs.${name};
+      in
+      lib.nameValuePair "heroic/tools/proton/${pkg.version}" {
+        source = pkg.steamcompattool;
+      }
+    ) protonPackages;
   };
 }
