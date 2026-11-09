@@ -37,6 +37,7 @@
         fusee-nano # Fusée Gelée payload injector for Nintendo Switch hacking
         theclicker # Auto-clicker
         limo # General purpose mod manager with support for the NexusMods API and LOOT
+        heroic # Native GOG, Epic, and Amazon Games Launcher
 
         # ── Communication ─────────────────────────────────────────────────────────
         (discord.override {
