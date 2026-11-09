@@ -7,7 +7,7 @@
 let
   protonPkgs = config.packages.proton-Packages.packages;
   toolsDir = "/home/${username}/.config/heroic/tools/proton";
-  paths = map (pkg: "${toolsDir}/${pkg.version}/files/bin/wine") protonPkgs;
+  paths = map (pkg: "${toolsDir}/${pkg.version}/proton") protonPkgs;
 in
 {
   environment.systemPackages = [ pkgs.heroic ];
