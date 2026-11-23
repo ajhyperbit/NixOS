@@ -65,6 +65,7 @@
         filezilla # Cross-platform FTP, FTPS, and SFTP client
         putty # SSH and serial terminal emulator
         remmina # Remote desktop client supporting RDP, VNC, and SSH
+        iperf # Tool to measure IP bandwidth using UDP or TCP
       ];
     };
   };
