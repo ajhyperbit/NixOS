@@ -7,7 +7,25 @@
 let
   protonPkgs = config.packages.proton-Packages.packages;
   toolsDir = "/home/${username}/.config/heroic/tools/proton";
-  paths = map (pkg: "${toolsDir}/${pkg.version}/proton") protonPkgs;
+
+  # Local to this file; pkgs.proton-ge-bin is untouched everywhere else.
+  heroicLatest = pkgs.proton-ge-bin.overrideAttrs {
+    steamDisplayName = "GE-Proton-latest";
+  };
+
+  entries =
+    (map (pkg: {
+      name = pkg.version;
+      inherit pkg;
+    }) protonPkgs)
+    ++ [
+      {
+        name = "GE-Proton-latest";
+        pkg = heroicLatest;
+      }
+    ];
+
+  paths = map (e: "${toolsDir}/${e.name}/proton") entries;
 in
 {
   environment.systemPackages = [ pkgs.heroic ];
@@ -15,11 +33,11 @@ in
   home-manager.users.${username} = { lib, ... }: {
     xdg.configFile = lib.listToAttrs (
       map (
-        pkg:
-        lib.nameValuePair "heroic/tools/proton/${pkg.version}" {
-          source = pkg.steamcompattool;
+        e:
+        lib.nameValuePair "heroic/tools/proton/${e.name}" {
+          source = e.pkg.steamcompattool;
         }
-      ) protonPkgs
+      ) entries
     );
 
     home.activation.heroicWinePaths = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
