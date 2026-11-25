@@ -50,5 +50,7 @@
   home-manager.users.${username} = {
     home.file."NixOS-Hyprland/hosts/common/hyprland/hl.meta.lua".source =
       "${pkgs.hyprland}/share/hypr/stubs/hl.meta.lua";
+
+    services.hyprpolkitagent.enable = true;
   };
 }

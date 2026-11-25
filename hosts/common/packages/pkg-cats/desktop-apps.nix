@@ -110,7 +110,6 @@
         pyprland # Python-based plugin host for Hyprland extensions
         hypridle # Idle management daemon for Hyprland (lock/DPMS)
         hyprcursor # Cursor theme engine for Hyprland
-        hyprpolkitagent # Polkit authentication agent for Hyprland
         wlogout # Wayland logout and session action menu
         wallust # Generate color schemes from wallpapers
         yad # Yet Another Dialog — GTK dialog builder for shell scripts
