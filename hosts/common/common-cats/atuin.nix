@@ -6,5 +6,5 @@
     ];
     daemon.enable = false;
   };
-  environment.etc."atuin/config.toml".text = "";
+  # environment.etc."atuin/config.toml".text = "";
 }
