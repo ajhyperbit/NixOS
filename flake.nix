@@ -256,6 +256,7 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               python3Minimal
+              lua5_4
             ];
           };
         }
